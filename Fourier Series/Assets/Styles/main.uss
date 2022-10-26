@@ -1,0 +1,9 @@
+#SceneButtons Button {
+    font-size: 256%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+    padding-right: 10px;
+    padding-left: 10px;
+}
