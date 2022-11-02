@@ -507,9 +507,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 611720033}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d66f6f5cf73dca4b8affca27d95b8ec, type: 3}
+  m_Script: {fileID: 11500000, guid: c0ba1af58194949798c9ad6e8f096ebf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultLineMaterial: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  OriginLabel: {fileID: 367564741}
+  topPlot: {fileID: 1476381984}
+  bottomPlot: {fileID: 1447247067}
+  eqnText: {fileID: 0}
+  _magSlider: {fileID: 0}
+  _freqSlider: {fileID: 0}
+  _phaseSlider: {fileID: 0}
+  _mag: 0
+  _freq: 0
+  _phase: 0
 --- !u!1 &695636287
 GameObject:
   m_ObjectHideFlags: 0
