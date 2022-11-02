@@ -22,9 +22,9 @@ public class MainMenu : MonoBehaviour
     }
 
 
-    public void SimpleFFT()
+    public void PlayGame()
     {
-        SceneManager.LoadScene("SimpleFFT");
+        SceneManager.LoadScene("PlayGame");
     }
 
 
