@@ -228,7 +228,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -510,12 +510,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d66f6f5cf73dca4b8affca27d95b8ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultLineMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
-  OriginLabel: {fileID: 367564741}
-  topPlot: {fileID: 1476381984}
-  bottomPlot: {fileID: 1447247067}
-  _anchorpts: []
-  _anchorObjTemplate: {fileID: 1129000813}
 --- !u!1 &695636287
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,15 +539,15 @@ RectTransform:
   m_GameObject: {fileID: 695636287}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1808367335}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 320, y: -440}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -160, y: -200}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &695636289
@@ -760,7 +754,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8d5750f0e8f2fe408ce81ae2fadf2b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tfplot: {fileID: 611720035}
 --- !u!61 &1129000817
 BoxCollider2D:
   m_ObjectHideFlags: 0
