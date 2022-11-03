@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CustomFuncApproxScene.unity
     guid: ca25d05647bed494d9840b965c9ca12e
+  - enabled: 1
+    path: Assets/Scenes/Home.unity
+    guid: cdcb03a68fde30f059cea1aecd200ddb
   m_configObjects: {}
