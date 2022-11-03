@@ -109,7 +109,7 @@ public class Convolution : MonoBehaviour
         _func1.positionCount = 5;  // need at least 2
         for (int i = 0; i < 5; i++)
         {
-            _func1.SetPosition(i, ToScreenCoords(new Vector2(0.2 * i, 1 * i)));
+            _func1.SetPosition(i, ToScreenCoords(new Vector2(0.2f * i, 1f * i)));
         }
 
     }
@@ -117,9 +117,9 @@ public class Convolution : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for (float i = 0; i < 5; i++)
+        for (int i = 0; i < 5f; i++)
         {
-            _func1.SetPosition(i, ToScreenCoords(new Vector2(i * 0.1, Random.Range(-1, 2))));
+            _func1.SetPosition(i, ToScreenCoords(new Vector2(i * 0.1f, Random.Range(-1, 2))));
         }
 
         //topPlot.Update();
