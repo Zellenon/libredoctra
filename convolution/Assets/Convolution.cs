@@ -75,6 +75,7 @@ public class Convolution : MonoBehaviour
 
         topPlotsWidth = (_width / 2) - 0.2f;
         topPlotsHeight =  _height / 2;
+
        
 
         
@@ -86,6 +87,8 @@ public class Convolution : MonoBehaviour
         topPlot.CreateGrid(xTopLeftPlot, yTopLeftPlot, topPlotsWidth, topPlotsHeight, Color.grey, defaultLineMaterial);
 
         topRightPlot.CreateGrid(xTopRightPlot, yTopRightPlot, topPlotsWidth, topPlotsHeight, Color.grey, defaultLineMaterial);
+
+        bottomPlot.CreateGrid(0,-_height/2, _width- 0.2f, _height/1.5f,Color.grey, defaultLineMaterial);
         //OriginLabel.gameObject.SetActive(false);
 
 
