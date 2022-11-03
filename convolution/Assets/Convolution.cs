@@ -101,26 +101,27 @@ public class Convolution : MonoBehaviour
         GameObject lineContainer = new GameObject("Func1");
         lineContainer.transform.SetParent(transform, false);
 
-        Color plotColor = Color.red;
+        Color plotLeftColor = Color.red;
         _func1 = lineContainer.AddComponent<LineRenderer>();
         _func1.material = defaultLineMaterial;
         _func1.useWorldSpace = true;
         _func1.startWidth = 0.2f;
         _func1.endWidth = 0.2f;
-        _func1.startColor = plotColor;
-        _func1.endColor = plotColor;
+        _func1.startColor = plotLeftColor;
+        _func1.endColor = plotLeftColor;
         _func1.positionCount = 5;  // need at least 2
 
 
         GameObject lineContainer2 = new GameObject("Func2");
         lineContainer2.transform.SetParent(transform, false);
+        Color plotRightColor = Color.green;
         _func2 = lineContainer2.AddComponent<LineRenderer>();
         _func2.material = defaultLineMaterial;
         _func2.useWorldSpace = true;
         _func2.startWidth = 0.2f;
         _func2.endWidth = 0.2f;
-        _func2.startColor = plotColor;
-        _func2.endColor = plotColor;
+        _func2.startColor = plotRightColor;
+        _func2.endColor = plotRightColor;
         _func2.positionCount = 5;  // need at least 2
 
 
