@@ -95,7 +95,7 @@ public class Convolution : MonoBehaviour
         _xscale = 1.1f / (2 * _width);
         _yscale = 0.2f;
 
-        GameObject lineContainer = new GameObject("Custom Function");
+        GameObject lineContainer = new GameObject("Func1");
         lineContainer.transform.SetParent(transform, false);
 
         Color plotColor = Color.red;
