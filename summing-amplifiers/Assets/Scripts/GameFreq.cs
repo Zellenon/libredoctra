@@ -12,7 +12,7 @@ public class GameFreq : MonoBehaviour
     [SerializeField] private Material defaultLineMaterial;
     [SerializeField] private TextMeshPro OriginLabel;
     [SerializeField] private PlotObj topPlot, bottomPlot;
-    [SerializeField] private EquationText eqnText;
+    //[SerializeField] private EquationText eqnText;
     [SerializeField] private Slider _magSlider, _freqSlider, _phaseSlider;
     private float x01, y01, w1, h1, x02, y02, w2, h2;
 
@@ -26,15 +26,16 @@ public class GameFreq : MonoBehaviour
 
     void Awake()
     {
-        float ymax = Camera.main.orthographicSize;
-        float xmax = ymax * Screen.width / Screen.height;
+        float ymax = 4f; //Camera.main.orthographicSize;
+        float xmax = 3f; //ymax * Screen.width / Screen.height;
         Debug.LogFormat("xmax: {0}, ymax: {1}", xmax, ymax);
 
         // we will ue the top left quadrant of the screen
         float xymargin = 0.5f;
 
-        x01 = 0; y01 = 2f / 3f * ymax - 0.3f;
+        x01 = 0 ; y01 = 2f / 3f * ymax - 0.3f;
         w1 = xmax - xymargin; h1 = ymax / 3f - xymargin;
+
         x02 = 0; y02 = -1f / 3f * ymax - 0.3f;
         w2 = xmax - xymargin; h2 = ymax * 2f / 3f - xymargin;
 
@@ -45,11 +46,11 @@ public class GameFreq : MonoBehaviour
 
         _mag = 1.5f; _freq = 1.1f; _phase = 0;
 
-        topPlot.CreateGrids(x01, y01, w1, h1, 1f, 1f, 1.1f * (_tmax / w1), 1.5f * (_mag / h1), Color.grey, defaultLineMaterial, OriginLabel, true, true);
-        bottomPlot.CreateGrids(x02, y02, w2, h2, 1f, 1f, 1f, 1f, Color.grey, defaultLineMaterial, OriginLabel, true, false);
+        topPlot.CreateGrids(x01, y01, w1, h1, 1f, 1f, 1.1f * (_tmax / w1), 1.5f * (_mag / h1), Color.yellow, defaultLineMaterial, OriginLabel, true, true);
+        bottomPlot.CreateGrids(x02, y02, w2, h2, 1f, 1f, 1f, 1f, Color.yellow, defaultLineMaterial, OriginLabel, true, false);
         OriginLabel.gameObject.SetActive(false);
 
-        GameFunc();
+        CreateFuncPlot();
         CreateFFTPlot();
 
     }
@@ -66,7 +67,10 @@ public class GameFreq : MonoBehaviour
     }
 
 
-  
+    // Update is called once per frame
+    void Update()
+    {        
+    }
 
 
     public void UpdateSineParams(float val = 0)
@@ -77,13 +81,13 @@ public class GameFreq : MonoBehaviour
         _phase = _phaseSlider.value * 3f * Mathf.PI / 180f;
         UpdateFuncPoints();
         UpdateFFTPoints();
-        eqnText.updateEquationText(_mag, _freq, _phase * 180 / Mathf.PI);
+        //eqnText.updateEquationText(_mag, _freq, _phase * 180 / Mathf.PI);
     }
 
 
 
 
-    private void GameFunc()
+    private void CreateFuncPlot()
     {
         _funcpts = new Vector2[Nfft];
         const float twoPI = 2 * Mathf.PI;
