@@ -119,7 +119,7 @@ public class Convolution : MonoBehaviour
     {
         for (int i = 0; i < 5f; i++)
         {
-            _func1.SetPosition(i, ToScreenCoords(new Vector2(i * 0.1f, Random.Range(-1, 2))));
+            _func1.SetPosition(i, ToScreenCoords(new Vector2(i * 0.1f, Random.Range(0, 10) / 5f - 1)));
         }
 
         //topPlot.Update();
