@@ -39,12 +39,12 @@ public class Convolution : MonoBehaviour
     public float _mag, _freq, _phase;
 
     private List<Vector2> _func1pts = new List<Vector2>();
-    private List<Vector2> _funct2pts = new List<Vector2>();
-    private List<Vector2> _funct3pts = new List<Vector2>();
+    private List<Vector2> _func2pts = new List<Vector2>();
+    private List<Vector2> _func3pts = new List<Vector2>();
 
     //private Vector2[] _func1pts, _funct2pts, _resultpts;
 
-    private LineRenderer _func1, _funt2, _result;
+    private LineRenderer _func1, _func2, _result;
 
 
 
@@ -112,6 +112,21 @@ public class Convolution : MonoBehaviour
         _func1.positionCount = 5;  // need at least 2
 
 
+        GameObject lineContainer2 = new GameObject("Func2");
+        lineContainer2.transform.SetParent(transform, false);
+        _func2 = lineContainer2.AddComponent<LineRenderer>();
+        _func2.material = defaultLineMaterial;
+        _func2.useWorldSpace = true;
+        _func2.startWidth = 0.2f;
+        _func2.endWidth = 0.2f;
+        _func2.startColor = plotColor;
+        _func2.endColor = plotColor;
+        _func2.positionCount = 5;  // need at least 2
+
+
+
+
+
         //Sample sawtooth wave
         _func1pts.Add(new Vector3(((xTopLeftPlot-(topPlotsWidth/2))),(yTopLeftPlot),0.0f));
         _func1pts.Add(new Vector3((xTopLeftPlot),(yTopLeftPlot),0.0f));
@@ -119,10 +134,22 @@ public class Convolution : MonoBehaviour
         _func1pts.Add(new Vector3(((xTopLeftPlot+(topPlotsWidth/2))),(yTopLeftPlot),0.0f));
         _func1pts.Add(new Vector3(((xTopLeftPlot+(topPlotsWidth))),(yTopLeftPlot),0.0f));
 
+        //Sample sawtooth wave
+        _func2pts.Add(new Vector3(((xTopRightPlot-(topPlotsWidth/2))),(yTopRightPlot),0.0f));
+        _func2pts.Add(new Vector3((xTopRightPlot),(yTopRightPlot),0.0f));
+        _func2pts.Add(new Vector3((xTopRightPlot),(yTopRightPlot+(topPlotsHeight/2)),0.0f));
+        _func2pts.Add(new Vector3(((xTopRightPlot+(topPlotsWidth/2))),(yTopRightPlot),0.0f));
+        _func2pts.Add(new Vector3(((xTopRightPlot+(topPlotsWidth))),(yTopRightPlot),0.0f));
 
-        for (int i = 0; i < 5; i++)
+
+        for (int i = 0; i < _func1pts.Count; i++)
         {
             _func1.SetPosition(i, _func1pts[i]);
+        }
+
+        for (int i = 0; i < _func2pts.Count; i++)
+        {
+            _func2.SetPosition(i, _func2pts[i]);
         }
 
     }
@@ -130,9 +157,13 @@ public class Convolution : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < 5f; i++)
+        for (int i = 0; i < _func1pts.Count; i++)
         {
             _func1.SetPosition(i, _func1pts[i]);
+        }
+        for (int i = 0; i < _func2pts.Count; i++)
+        {
+            _func2.SetPosition(i, _func2pts[i]);
         }
 
         //topPlot.Update();
@@ -144,4 +175,9 @@ public class Convolution : MonoBehaviour
         return (new Vector3(-_width + funccoords.x / _xscale, funccoords.y / _yscale));
     }
 
+    void UpdatePoints (){
+        //TODO make a funt that loops through the functpts lists and setpositions them all. this funct can then be called once at awake and
+        //then once every update for less clutter
+
+    }
 }
