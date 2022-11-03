@@ -56,12 +56,12 @@ public class Convolution : MonoBehaviour
         float xymargin = 0.5f;
 
 
-         xtlp = 0; 
-         ytlp = (1f / 3f) * ymax - 0.3f;
+        xtlp = 0; 
+        ytlp = (1f / 3f) * ymax - 0.3f;
         // w2 = xmax - xymargin; h2 = ymax * 2f / 3f - xymargin;
 
-         xtrp = 0; 
-         ytrp = 2f / 3f * ymax - 0.3f;
+        xtrp = 0; 
+        ytrp = 2f / 3f * ymax - 0.3f;
         // w1 = xmax - xymargin; h1 = ymax / 3f - xymargin;
 
         Nfft = 1024;
