@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/MainManu.uss?fileID=7433441132597879392&amp;guid=c30bc174dc409b47496c9c3034aaf7ed&amp;type=3#MainManu" />
+    <ui:VisualElement style="height: 100%; width: 100%; align-items: center; justify-content: center; background-color: rgb(63, 62, 62);">
+        <ui:VisualElement style="height: 80%; width: 40%; align-items: center; justify-content: space-around;">
+            <ui:Label text="Amplifier Combinator" display-tooltip-when-elided="true" style="font-size: 120%; background-color: rgb(38, 38, 38); border-top-left-radius: 20px; border-bottom-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; padding-left: 2%; padding-right: 2%; padding-top: 2%; padding-bottom: 2%; flex-wrap: wrap; max-width: none; flex-basis: auto; color: rgb(217, 215, 215);" />
+            <ui:Button text="Use the Mixer" display-tooltip-when-elided="true" name="Game1" class="button" />
+            <ui:Button text="Play the Game" display-tooltip-when-elided="true" name="Game2" class="button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
