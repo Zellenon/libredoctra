@@ -1,4 +1,4 @@
-using System;
+// using System;
 using System.Collections;
 using System.Collections.Generic;
 using Complex = System.Numerics.Complex;
@@ -12,6 +12,8 @@ public class Convolution : MonoBehaviour
 
 
     [SerializeField] private Material defaultLineMaterial;
+    [SerializeField] private Material lineMaterial;
+
     [SerializeField] private TextMeshPro OriginLabel;
     [SerializeField] private PlotObj topPlot, topRightPlot, bottomPlot;
     // [SerializeField] private EquationText eqnText;
@@ -28,6 +30,7 @@ public class Convolution : MonoBehaviour
     public float _funct1mag, _funct1freq,
     _funct2mag, _funct2freq;
 
+    private float _width, _height, _xscale, _yscale;
 
 
     private int Nfft, Nfreq;
@@ -37,46 +40,51 @@ public class Convolution : MonoBehaviour
 
     private Vector2[] _func1pts, _funct2pts, _resultpts;
 
-    //private LineRenderer _func1, _funt2, _result;
-    
-    
-
-    void Awake(){
-        
-        float ymax = Camera.main.orthographicSize;
-        float xmax = ymax*Camera.main.aspect;
-        
-        ymax = ymax - 0.5f;
-        xmax = xmax - 0.5f;
+    private LineRenderer _func1, _funt2, _result;
 
 
-        Debug.LogFormat("xmax: {0}, ymax: {1}", xmax, ymax);
+
+    void Awake()
+    {
+
+        _height = Camera.main.orthographicSize;
+        _width = _height * Camera.main.aspect;
+
+        _height = _height - 0.5f;
+        _width = _width - 0.5f;
+        _xscale = 1.1f / (2 * _width);
+        _yscale = 0.2f;
+
+
+
+        Debug.LogFormat("_width: {0}, _height: {1}", _width, _height);
 
         // we will ue the top left quadrant of the screen
         float xymargin = 0.5f;
 
 
-        xtlp = 0; 
-        ytlp = (1f / 3f) * ymax - 0.3f;
-        // w2 = xmax - xymargin; h2 = ymax * 2f / 3f - xymargin;
+        xtlp = 0;
+        ytlp = (1f / 3f) * _height - 0.3f;
+        // w2 = _width - xymargin; h2 = _height * 2f / 3f - xymargin;
 
-        xtrp = 0; 
-        ytrp = 2f / 3f * ymax - 0.3f;
-        // w1 = xmax - xymargin; h1 = ymax / 3f - xymargin;
+        xtrp = 0;
+        ytrp = 2f / 3f * _height - 0.3f;
+        // w1 = _width - xymargin; h1 = _height / 3f - xymargin;
 
         Nfft = 1024;
         _tmax = 5f;
-        _Fs = Nfft/(2 * _tmax); // sampling rate
+        _Fs = Nfft / (2 * _tmax); // sampling rate
         Nfreq = 50;    // how many harmonics to display
 
         _mag = 1.5f; _freq = 1.1f; _phase = 0;
 
-        
-        
-        topPlot.CreateGrid(-xmax/2, ymax/2, (xmax/2)-0.2f, ymax/2, Color.grey, defaultLineMaterial);
 
-        topRightPlot.CreateGrid(xmax/2, ymax/2, (xmax/2) - 0.2f, ymax/2, Color.grey, defaultLineMaterial);
+
+        topPlot.CreateGrid(-_width / 2, _height / 2, (_width / 2) - 0.2f, _height / 2, Color.grey, defaultLineMaterial);
+
+        topRightPlot.CreateGrid(_width / 2, _height / 2, (_width / 2) - 0.2f, _height / 2, Color.grey, defaultLineMaterial);
         //OriginLabel.gameObject.SetActive(false);
+
 
     }
 
@@ -84,17 +92,43 @@ public class Convolution : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        _xscale = 1.1f / (2 * _width);
+        _yscale = 0.2f;
+
+        GameObject lineContainer = new GameObject("Custom Function");
+        lineContainer.transform.SetParent(transform, false);
+
+        Color plotColor = Color.red;
+        _func1 = lineContainer.AddComponent<LineRenderer>();
+        _func1.material = lineMaterial;
+        _func1.useWorldSpace = true;
+        _func1.startWidth = 0.2f;
+        _func1.endWidth = 0.2f;
+        _func1.startColor = plotColor;
+        _func1.endColor = plotColor;
+        _func1.positionCount = 5;  // need at least 2
+        for (int i = 0; i < 5; i++)
+        {
+            _func1.SetPosition(i, ToScreenCoords(new Vector2(0.2 * i, 1 * i)));
+        }
+
     }
 
     // Update is called once per frame
     void Update()
-    {   
-        
-        
+    {
+        for (float i = 0; i < 5; i++)
+        {
+            _func1.SetPosition(i, ToScreenCoords(new Vector2(i * 0.1, Random.Range(-1, 2))));
+        }
+
         //topPlot.Update();
-        
+
     }
 
-    
+    Vector2 ToScreenCoords(Vector2 funccoords)
+    {
+        return (new Vector3(-_width + funccoords.x / _xscale, funccoords.y / _yscale));
+    }
+
 }
