@@ -32,13 +32,17 @@ public class Convolution : MonoBehaviour
 
     private float _width, _height, _xscale, _yscale;
 
+    private float xTopLeftPlot, yTopLeftPlot, xTopRightPlot, yTopRightPlot, topPlotsWidth, topPlotsHeight;
 
     private int Nfft, Nfreq;
     private float _Fs, _tmax;
     public float _mag, _freq, _phase;
 
+    private List<Vector2> _func1pts = new List<Vector2>();
+    private List<Vector2> _funct2pts = new List<Vector2>();
+    private List<Vector2> _funct3pts = new List<Vector2>();
 
-    private Vector2[] _func1pts, _funct2pts, _resultpts;
+    //private Vector2[] _func1pts, _funct2pts, _resultpts;
 
     private LineRenderer _func1, _funt2, _result;
 
@@ -59,30 +63,29 @@ public class Convolution : MonoBehaviour
 
         Debug.LogFormat("_width: {0}, _height: {1}", _width, _height);
 
-        // we will ue the top left quadrant of the screen
+        
         float xymargin = 0.5f;
 
 
-        xtlp = 0;
-        ytlp = (1f / 3f) * _height - 0.3f;
-        // w2 = _width - xymargin; h2 = _height * 2f / 3f - xymargin;
+        xTopLeftPlot = - _width / 2;
+        yTopLeftPlot =  _height / 2;
+        
+        xTopRightPlot = _width / 2;
+        yTopRightPlot =  _height / 2;
 
-        xtrp = 0;
-        ytrp = 2f / 3f * _height - 0.3f;
-        // w1 = _width - xymargin; h1 = _height / 3f - xymargin;
+        topPlotsWidth = (_width / 2) - 0.2f;
+        topPlotsHeight =  _height / 2;
+       
 
-        Nfft = 1024;
-        _tmax = 5f;
-        _Fs = Nfft / (2 * _tmax); // sampling rate
-        Nfreq = 50;    // how many harmonics to display
+        
 
-        _mag = 1.5f; _freq = 1.1f; _phase = 0;
-
+        
 
 
-        topPlot.CreateGrid(-_width / 2, _height / 2, (_width / 2) - 0.2f, _height / 2, Color.grey, defaultLineMaterial);
 
-        topRightPlot.CreateGrid(_width / 2, _height / 2, (_width / 2) - 0.2f, _height / 2, Color.grey, defaultLineMaterial);
+        topPlot.CreateGrid(xTopLeftPlot, yTopLeftPlot, topPlotsWidth, topPlotsHeight, Color.grey, defaultLineMaterial);
+
+        topRightPlot.CreateGrid(xTopRightPlot, yTopRightPlot, topPlotsWidth, topPlotsHeight, Color.grey, defaultLineMaterial);
         //OriginLabel.gameObject.SetActive(false);
 
 
@@ -107,9 +110,19 @@ public class Convolution : MonoBehaviour
         _func1.startColor = plotColor;
         _func1.endColor = plotColor;
         _func1.positionCount = 5;  // need at least 2
+
+
+        //Sample sawtooth wave
+        _func1pts.Add(new Vector3(((xTopLeftPlot-(topPlotsWidth/2))),(yTopLeftPlot),0.0f));
+        _func1pts.Add(new Vector3((xTopLeftPlot),(yTopLeftPlot),0.0f));
+        _func1pts.Add(new Vector3((xTopLeftPlot),(yTopLeftPlot+(topPlotsHeight/2)),0.0f));
+        _func1pts.Add(new Vector3(((xTopLeftPlot+(topPlotsWidth/2))),(yTopLeftPlot),0.0f));
+        _func1pts.Add(new Vector3(((xTopLeftPlot+(topPlotsWidth))),(yTopLeftPlot),0.0f));
+
+
         for (int i = 0; i < 5; i++)
         {
-            _func1.SetPosition(i, ToScreenCoords(new Vector2(0.2f * i, 1f * i)));
+            _func1.SetPosition(i, _func1pts[i]);
         }
 
     }
@@ -119,7 +132,7 @@ public class Convolution : MonoBehaviour
     {
         for (int i = 0; i < 5f; i++)
         {
-            _func1.SetPosition(i, ToScreenCoords(new Vector2(i * 0.1f, Random.Range(0, 10) / 5f - 1)));
+            _func1.SetPosition(i, _func1pts[i]);
         }
 
         //topPlot.Update();
