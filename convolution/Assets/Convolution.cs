@@ -100,7 +100,7 @@ public class Convolution : MonoBehaviour
 
         Color plotColor = Color.red;
         _func1 = lineContainer.AddComponent<LineRenderer>();
-        _func1.material = lineMaterial;
+        _func1.material = defaultLineMaterial;
         _func1.useWorldSpace = true;
         _func1.startWidth = 0.2f;
         _func1.endWidth = 0.2f;
