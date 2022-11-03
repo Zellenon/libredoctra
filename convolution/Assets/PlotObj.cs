@@ -23,6 +23,7 @@ public class PlotObj : MonoBehaviour
         lr = GetComponent<LineRenderer>();
         lr.material = new Material(Shader.Find("Sprites/Default"));
         lr.widthMultiplier = 0.2f;
+        
     }
     
 
