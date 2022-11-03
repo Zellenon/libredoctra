@@ -485,6 +485,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd16b219ca3f1414b9b4bb83352a52d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _x0: 0
+  _y0: 0
+  _width: 0
+  _height: 0
+  lr: {fileID: 0}
+  _axisColor: {r: 0, g: 0, b: 0, a: 0}
+  defaultLineMat: {fileID: 0}
 --- !u!1 &1656319237
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,6 +606,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultLineMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  lineMaterial: {fileID: 0}
   OriginLabel: {fileID: 0}
   topPlot: {fileID: 644039738}
   topRightPlot: {fileID: 868538237}
