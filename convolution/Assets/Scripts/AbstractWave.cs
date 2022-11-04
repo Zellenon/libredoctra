@@ -8,7 +8,9 @@ public abstract class AbstractWave : MonoBehaviour
     protected float _freq;
     protected bool _isReversed;
 
-    public AbstractWave(amp, freq, isReversed) {
+    public AbstractWave(float amp, float freq,
+    bool isReversed)
+    {
         _amp = amp;
         _freq = freq;
         _isReversed = isReversed;
@@ -16,14 +18,17 @@ public abstract class AbstractWave : MonoBehaviour
 
     public abstract float get(int i);
 
-    public void isReversed(bool isReversed) {
+    public void isReversed(bool isReversed)
+    {
         _isReversed = isReversed;
     }
 
-    public void frequency(float freq) {
+    public void frequency(float freq)
+    {
         _freq = freq;
     }
-    public void amplitute(float amp) {
+    public void amplitute(float amp)
+    {
         _amp = amp;
     }
 
