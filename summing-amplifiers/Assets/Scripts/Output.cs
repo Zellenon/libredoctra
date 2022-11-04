@@ -48,7 +48,7 @@ public class Output : MonoBehaviour
         float xymargin = 0.5f;
 
         x01 = 6; 
-        y01 = 0.05f / 3f * ymax - 0.3f;
+        y01 = 0.03f / 3f * ymax - 0.3f;//0.05f / 3f * ymax - 0.3f;
         w1 = xmax - xymargin; 
         h1 = ymax / 3f - xymargin;
 

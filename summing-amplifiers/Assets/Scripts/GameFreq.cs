@@ -11,14 +11,15 @@ public class GameFreq : MonoBehaviour
 {
     [SerializeField] private Material defaultLineMaterial;
     [SerializeField] private TextMeshPro OriginLabel;
-    [SerializeField] private PlotObj topPlot, bottomPlot;
+    [SerializeField] private PlotObj  bottomPlot;
     //[SerializeField] private EquationText eqnText;
-    [SerializeField] private Slider _magSlider, _freqSlider, _phaseSlider;
+    //[SerializeField] private Slider _magSlider, _freqSlider, _phaseSlider;
     private float x01, y01, w1, h1, x02, y02, w2, h2;
 
     private int Nfft, Nfreq;
     private float _Fs, _tmax;
     public float _mag, _freq, _phase;
+
     private Vector2[] _funcpts, _fftpts;
 
     private LineRenderer _funclr, _fftlr;
@@ -33,10 +34,9 @@ public class GameFreq : MonoBehaviour
         // we will ue the top left quadrant of the screen
         float xymargin = 0.5f;
 
-        x01 = 0 ; y01 = 2f / 3f * ymax - 0.3f;
-        w1 = xmax - xymargin; h1 = ymax / 3f - xymargin;
 
-        x02 = 0; y02 = -1f / 3f * ymax - 0.3f;
+        x02 = -5; 
+        y02 = 0.001f / 4f * ymax - 3f;
         w2 = xmax - xymargin; h2 = ymax * 2f / 3f - xymargin;
 
         Nfft = 1024;
@@ -46,11 +46,11 @@ public class GameFreq : MonoBehaviour
 
         _mag = 1.5f; _freq = 1.1f; _phase = 0;
 
-        topPlot.CreateGrids(x01, y01, w1, h1, 1f, 1f, 1.1f * (_tmax / w1), 1.5f * (_mag / h1), Color.yellow, defaultLineMaterial, OriginLabel, true, true);
+       // topPlot.CreateGrids(x01, y01, w1, h1, 1f, 1f, 1.1f * (_tmax / w1), 1.5f * (_mag / h1), Color.yellow, defaultLineMaterial, OriginLabel, true, true);
         bottomPlot.CreateGrids(x02, y02, w2, h2, 1f, 1f, 1f, 1f, Color.yellow, defaultLineMaterial, OriginLabel, true, false);
         OriginLabel.gameObject.SetActive(false);
 
-        CreateFuncPlot();
+        //CreateFuncPlot();
         CreateFFTPlot();
 
     }
@@ -58,6 +58,7 @@ public class GameFreq : MonoBehaviour
 
 
     // Start is called before the first frame update
+    /*
     void Start()
     {
         _magSlider.onValueChanged.AddListener(UpdateSineParams);
@@ -65,6 +66,7 @@ public class GameFreq : MonoBehaviour
         _phaseSlider.onValueChanged.AddListener(UpdateSineParams);
         UpdateSineParams();
     }
+    */
 
 
     // Update is called once per frame
@@ -73,49 +75,11 @@ public class GameFreq : MonoBehaviour
     }
 
 
-    public void UpdateSineParams(float val = 0)
-    {
-        // ignore function argument, so we can reuse same function for all sliders
-        _mag = _magSlider.value * 0.1f;
-        _freq = _freqSlider.value * 0.1f;
-        _phase = _phaseSlider.value * 3f * Mathf.PI / 180f;
-        UpdateFuncPoints();
-        UpdateFFTPoints();
-        //eqnText.updateEquationText(_mag, _freq, _phase * 180 / Mathf.PI);
-    }
 
 
 
 
-    private void CreateFuncPlot()
-    {
-        _funcpts = new Vector2[Nfft];
-        const float twoPI = 2 * Mathf.PI;
 
-        for (int k=0; k<Nfft; k++)
-        {
-            float tval = Mathf.Lerp(-_tmax, _tmax, k/((float) Nfft-1));
-            _funcpts[k].x = tval;
-            _funcpts[k].y = _mag * Mathf.Cos( twoPI * _freq * tval + _phase );
-        }
-
-
-        GameObject lrContainer = new GameObject("Function Plot");
-        lrContainer.transform.SetParent(transform, false);
-        _funclr = lrContainer.AddComponent<LineRenderer>();
-        _funclr.positionCount = Nfft;
-
-        _funclr.material = defaultLineMaterial;
-        _funclr.useWorldSpace = true;
-        _funclr.startWidth = 0.05f;
-        _funclr.endWidth = 0.05f;
-        _funclr.startColor = Color.yellow;
-        _funclr.endColor = Color.yellow;
-
-        for (int k=0; k<Nfft; k++)
-            _funclr.SetPosition(k, topPlot.ToScreenCoords(_funcpts[k]));
-
-    }
 
 
     private void CreateFFTPlot()
@@ -169,7 +133,7 @@ public class GameFreq : MonoBehaviour
 
     }
 
-
+/*
     public void UpdateFuncPoints()
     {
         const float twoPI = 2 * Mathf.PI;
@@ -185,7 +149,7 @@ public class GameFreq : MonoBehaviour
             _funclr.SetPosition(k, topPlot.ToScreenCoords(_funcpts[k]));
     }
 
-
+*/
     public void UpdateFFTPoints()
     {
         Complex[] samples = new Complex[Nfft];
