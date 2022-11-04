@@ -1,13 +1,30 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
 using System;
 
-using TMPro;
-
-public class wave : MonoBehaviour
+public abstract class AbstractWave : MonoBehaviour
 {
+    protected float _amp;
+    protected float _freq;
+    protected bool _isReversed;
+
+    public AbstractWave(amp, freq, isReversed) {
+        _amp = amp;
+        _freq = freq;
+        _isReversed = isReversed;
+    }
+
+    public abstract float get(int i);
+
+    public void isReversed(bool isReversed) {
+        _isReversed = isReversed;
+    }
+
+    public void frequency(float freq) {
+        _freq = freq;
+    }
+    public void amplitute(float amp) {
+        _amp = amp;
+    }
 
 }
