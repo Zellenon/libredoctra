@@ -15,17 +15,11 @@ public class wave : MonoBehaviour
     
     // Defined as a list so we can create line shapes with different points
     private List<Vector3> points = new List<Vector3>();
-    private GameObject topPlot;
 
-    [SerializeField] LineRenderer lr;
-    [SerializeField] private Color _axisColor;
-    [SerializeField] Material defaultLineMat;
+    
     
 
     void Awake(){
-        lr = GetComponent<LineRenderer>();
-        lr.material = new Material(Shader.Find("Sprites/Default"));
-        lr.widthMultiplier = 0.2f;
         
         
     }
@@ -33,6 +27,11 @@ public class wave : MonoBehaviour
     public void CreateGrid(float x0, float y0, float width, float height, Color axisColor, Material lineMaterial){
         
     }
+
+    // public List<Vector2> triangleWave(){
+    //     this.points.Clear();
+    //     //this.points.add (new Vector3((),(),0.0f));
+    // }
 
     // Start is called before the first frame update
     void Start()

@@ -43,6 +43,9 @@ public class Convolution : MonoBehaviour
     private List<Vector2> _func3pts = new List<Vector2>();
     private List<Vector2> _func4pts = new List<Vector2>();
 
+    private GameObject lineContainer;
+    public Transform _funct1position;
+    
     //private Vector2[] _func1pts, _funct2pts, _resultpts;
 
     private LineRenderer _func1, _func2,_func3, _func4;
@@ -77,14 +80,6 @@ public class Convolution : MonoBehaviour
         topPlotsWidth = (_width / 2) - 0.2f;
         topPlotsHeight =  _height / 2;
 
-       
-
-        
-
-        
-
-
-
         topPlot.CreateGrid(xTopLeftPlot, yTopLeftPlot, topPlotsWidth, topPlotsHeight, Color.grey, defaultLineMaterial);
 
         topRightPlot.CreateGrid(xTopRightPlot, yTopRightPlot, topPlotsWidth, topPlotsHeight, Color.grey, defaultLineMaterial);
@@ -102,9 +97,9 @@ public class Convolution : MonoBehaviour
         _xscale = 1.1f / (2 * _width);
         _yscale = 0.2f;
 
-        GameObject lineContainer = new GameObject("Func1");
+        lineContainer = new GameObject("Func1");
         lineContainer.transform.SetParent(transform, false);
-
+        //lineContainer.position
         Color plotLeftColor = Color.red;
         _func1 = lineContainer.AddComponent<LineRenderer>();
         _func1.material = defaultLineMaterial;
@@ -114,6 +109,14 @@ public class Convolution : MonoBehaviour
         _func1.startColor = plotLeftColor;
         _func1.endColor = plotLeftColor;
         _func1.positionCount = 5;  // need at least 2
+
+        
+
+        //GameObject lineContainer1_Result = new GameObject("Func1_Result");
+        //lineContainer1_Result.transform.SetParent(lineContainer.transform);
+         //= lineContainer3.AddComponent<LineRenderer>();
+
+
 
 
         GameObject lineContainer2 = new GameObject("Func2");
@@ -127,6 +130,8 @@ public class Convolution : MonoBehaviour
         _func2.startColor = plotRightColor;
         _func2.endColor = plotRightColor;
         _func2.positionCount = 5;  // need at least 2
+
+
 
         GameObject lineContainer3 = new GameObject("Func3");
         lineContainer3.transform.SetParent(transform, false);
@@ -152,8 +157,6 @@ public class Convolution : MonoBehaviour
         _func4.startColor = plotRightColor;
         _func4.endColor = plotRightColor;
         _func4.positionCount = 5;  // need at least 2
-
-
 
 
         //Sample sawtooth wave
@@ -192,6 +195,8 @@ public class Convolution : MonoBehaviour
             _func1.SetPosition(i, _func1pts[i]);
         }
 
+        
+
         for (int i = 0; i < _func2pts.Count; i++)
         {
             _func2.SetPosition(i, _func2pts[i]);
@@ -206,15 +211,21 @@ public class Convolution : MonoBehaviour
             _func4.SetPosition(i, _func4pts[i]);
         }
 
+        //lineContainer.transform.position = new Vector3(0, 0, 0);
+        BakeLineDebuger(lineContainer);
     }
 
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < _func1pts.Count; i++)
-        {
-            _func1.SetPosition(i, _func1pts[i]);
-        }
+
+        
+
+       // Func1.transform.Translate(1, 1, 1);
+        // for (int i = 0; i < _func1pts.Count; i++)
+        // {
+        //     _func1.SetPosition(i, _func1pts[i]);
+        // }
         for (int i = 0; i < _func2pts.Count; i++)
         {
             _func2.SetPosition(i, _func2pts[i]);
@@ -243,5 +254,19 @@ public class Convolution : MonoBehaviour
         //TODO make a funt that loops through the functpts lists and setpositions them all. this funct can then be called once at awake and
         //then once every update for less clutter
 
+    }
+
+    public static void BakeLineDebuger(GameObject lineObj)
+    {
+        var lineRenderer = lineObj.GetComponent<LineRenderer>();
+        var meshFilter = lineObj.AddComponent<MeshFilter>();
+        Mesh mesh = new Mesh();
+        lineRenderer.BakeMesh(mesh);
+        meshFilter.sharedMesh = mesh;
+ 
+        var meshRenderer = lineObj.AddComponent<MeshRenderer>();
+        meshRenderer.sharedMaterial = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
+        
+        GameObject.Destroy(lineRenderer);
     }
 }
