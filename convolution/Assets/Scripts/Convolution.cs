@@ -43,6 +43,7 @@ public class Convolution : MonoBehaviour
     private List<Vector2> _func3pts = new List<Vector2>();
     private List<Vector2> _func4pts = new List<Vector2>();
 
+
     private GameObject lineContainer;
     public Transform _funct1position;
     
@@ -70,13 +71,14 @@ public class Convolution : MonoBehaviour
         
         float xymargin = 0.5f;
 
-
+        //Center points for the background grid topPlots
         xTopLeftPlot = - _width / 2;
         yTopLeftPlot =  _height / 2;
         
         xTopRightPlot = _width / 2;
         yTopRightPlot =  _height / 2;
 
+        //height and width of topplots
         topPlotsWidth = (_width / 2) - 0.2f;
         topPlotsHeight =  _height / 2;
 
@@ -102,15 +104,17 @@ public class Convolution : MonoBehaviour
         //lineContainer.position
         Color plotLeftColor = Color.red;
         _func1 = lineContainer.AddComponent<LineRenderer>();
-        _func1.material = defaultLineMaterial;
-        _func1.useWorldSpace = true;
-        _func1.startWidth = 0.2f;
-        _func1.endWidth = 0.2f;
-        _func1.startColor = plotLeftColor;
-        _func1.endColor = plotLeftColor;
-        _func1.positionCount = 5;  // need at least 2
+        // _func1.material = defaultLineMaterial;
+        // _func1.useWorldSpace = true;
+        // _func1.startWidth = 0.2f;
+        // _func1.endWidth = 0.2f;
+        // _func1.startColor = plotLeftColor;
+        // _func1.endColor = plotLeftColor;
+        // _func1.positionCount = 5;  // need at least 2
 
-        
+        SetWavePoints(lineContainer, Color.red, "blank");
+
+        lineContainer.transform.position = new Vector3(10, 0, 5);
 
         //GameObject lineContainer1_Result = new GameObject("Func1_Result");
         //lineContainer1_Result.transform.SetParent(lineContainer.transform);
@@ -123,14 +127,8 @@ public class Convolution : MonoBehaviour
         lineContainer2.transform.SetParent(transform, false);
         Color plotRightColor = Color.green;
         _func2 = lineContainer2.AddComponent<LineRenderer>();
-        _func2.material = defaultLineMaterial;
-        _func2.useWorldSpace = true;
-        _func2.startWidth = 0.2f;
-        _func2.endWidth = 0.2f;
-        _func2.startColor = plotRightColor;
-        _func2.endColor = plotRightColor;
-        _func2.positionCount = 5;  // need at least 2
-
+        
+        SetWavePoints(lineContainer2, plotRightColor, "blank");
 
 
         GameObject lineContainer3 = new GameObject("Func3");
@@ -159,12 +157,12 @@ public class Convolution : MonoBehaviour
         _func4.positionCount = 5;  // need at least 2
 
 
-        //Sample sawtooth wave
-        _func1pts.Add(new Vector3(((xTopLeftPlot-(topPlotsWidth/2))),(yTopLeftPlot),0.0f));
-        _func1pts.Add(new Vector3((xTopLeftPlot),(yTopLeftPlot),0.0f));
-        _func1pts.Add(new Vector3((xTopLeftPlot),(yTopLeftPlot+(topPlotsHeight/2)),0.0f));
-        _func1pts.Add(new Vector3(((xTopLeftPlot+(topPlotsWidth/2))),(yTopLeftPlot),0.0f));
-        _func1pts.Add(new Vector3(((xTopLeftPlot+(topPlotsWidth))),(yTopLeftPlot),0.0f));
+        // //Sample sawtooth wave
+        // _func1pts.Add(new Vector3(((xTopLeftPlot-(topPlotsWidth/2))),(yTopLeftPlot),0.0f));
+        // _func1pts.Add(new Vector3((xTopLeftPlot),(yTopLeftPlot),0.0f));
+        // _func1pts.Add(new Vector3((xTopLeftPlot),(yTopLeftPlot+(topPlotsHeight/2)),0.0f));
+        // _func1pts.Add(new Vector3(((xTopLeftPlot+(topPlotsWidth/2))),(yTopLeftPlot),0.0f));
+        // _func1pts.Add(new Vector3(((xTopLeftPlot+(topPlotsWidth))),(yTopLeftPlot),0.0f));
 
         //Sample sawtooth wave
         _func2pts.Add(new Vector3(((xTopRightPlot-(topPlotsWidth/2))),(yTopRightPlot),0.0f));
@@ -190,11 +188,11 @@ public class Convolution : MonoBehaviour
         _func4pts.Add(new Vector3((-(xTopRightPlot+(topPlotsWidth))),(-_height/2),0.0f));
 
 
-        for (int i = 0; i < _func1pts.Count; i++)
-        {
-            _func1.SetPosition(i, _func1pts[i]);
-        }
-
+        // for (int i = 0; i < _func1pts.Count; i++)
+        // {
+        //     _func1.SetPosition(i, _func1pts[i]);
+        // }
+        
         
 
         for (int i = 0; i < _func2pts.Count; i++)
@@ -212,7 +210,7 @@ public class Convolution : MonoBehaviour
         }
 
         //lineContainer.transform.position = new Vector3(0, 0, 0);
-        BakeLineDebuger(lineContainer);
+       // BakeLineDebuger(lineContainer);
     }
 
     // Update is called once per frame
@@ -250,12 +248,9 @@ public class Convolution : MonoBehaviour
         return (new Vector3(-_width + funccoords.x / _xscale, funccoords.y / _yscale));
     }
 
-    void UpdatePoints (){
-        //TODO make a funt that loops through the functpts lists and setpositions them all. this funct can then be called once at awake and
-        //then once every update for less clutter
 
-    }
-
+    //A static function that transforms a gameobj with a Linerenderer into a gameobj with a mesh of the Linerenderer. This allows us
+    // to use gamobj.transform to move our linerenderer "images" around
     public static void BakeLineDebuger(GameObject lineObj)
     {
         var lineRenderer = lineObj.GetComponent<LineRenderer>();
@@ -268,5 +263,34 @@ public class Convolution : MonoBehaviour
         meshRenderer.sharedMaterial = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
         
         GameObject.Destroy(lineRenderer);
+    }
+
+    public void SetWavePoints(GameObject lineObj, Color color, string waveType){
+        var lineRenderer = lineObj.GetComponent<LineRenderer>();
+
+
+        lineRenderer.material = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
+        lineRenderer.useWorldSpace = true;
+        lineRenderer.startWidth = 0.2f;
+        lineRenderer.endWidth = 0.2f;
+        lineRenderer.startColor = color;
+        lineRenderer.endColor = color;
+        lineRenderer.positionCount = 5;
+
+        List<Vector2> pointsList = new List<Vector2>();
+
+        pointsList.Add(new Vector3((-_width/2),(0),0.0f));
+        pointsList.Add(new Vector3((0),(0),0.0f));
+        pointsList.Add(new Vector3((0),(_height/2),0.0f));
+        pointsList.Add(new Vector3((_width/2),(0),0.0f));
+        pointsList.Add(new Vector3((_width-0.02f),(0),0.0f));
+
+        for (int i = 0; i < pointsList.Count; i++)
+        {
+            lineRenderer.SetPosition(i, pointsList[i]);
+        }
+
+        BakeLineDebuger(lineObj);
+
     }
 }
