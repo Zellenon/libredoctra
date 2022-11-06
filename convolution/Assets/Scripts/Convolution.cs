@@ -112,49 +112,37 @@ public class Convolution : MonoBehaviour
         // _func1.endColor = plotLeftColor;
         // _func1.positionCount = 5;  // need at least 2
 
-        SetWavePoints(lineContainer, Color.red, "blank");
+        SetWavePoints(lineContainer, plotLeftColor, "blank");
 
-        lineContainer.transform.position = new Vector3(10, 0, 5);
-
+        lineContainer.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
+        //lineContainer.transform.position = new Vector3();
         //GameObject lineContainer1_Result = new GameObject("Func1_Result");
         //lineContainer1_Result.transform.SetParent(lineContainer.transform);
          //= lineContainer3.AddComponent<LineRenderer>();
 
 
 
-
+        //function 2 top
         GameObject lineContainer2 = new GameObject("Func2");
         lineContainer2.transform.SetParent(transform, false);
         Color plotRightColor = Color.green;
         _func2 = lineContainer2.AddComponent<LineRenderer>();
         
         SetWavePoints(lineContainer2, plotRightColor, "blank");
+        
 
 
+        //function1 bottom
         GameObject lineContainer3 = new GameObject("Func3");
         lineContainer3.transform.SetParent(transform, false);
-        
         _func3 = lineContainer3.AddComponent<LineRenderer>();
-        _func3.material = defaultLineMaterial;
-        _func3.useWorldSpace = true;
-        _func3.startWidth = 0.2f;
-        _func3.endWidth = 0.2f;
-        _func3.startColor = plotLeftColor;
-        _func3.endColor = plotLeftColor;
-        _func3.positionCount = 5;  // need at least 2
+        SetWavePoints(lineContainer3, plotLeftColor, "blank");
 
-
+        //function2 bottom
         GameObject lineContainer4 = new GameObject("Func4");
         lineContainer4.transform.SetParent(transform, false);
-        
         _func4 = lineContainer4.AddComponent<LineRenderer>();
-        _func4.material = defaultLineMaterial;
-        _func4.useWorldSpace = true;
-        _func4.startWidth = 0.2f;
-        _func4.endWidth = 0.2f;
-        _func4.startColor = plotRightColor;
-        _func4.endColor = plotRightColor;
-        _func4.positionCount = 5;  // need at least 2
+        SetWavePoints(lineContainer4, plotRightColor, "blank");
 
 
         // //Sample sawtooth wave
@@ -165,27 +153,15 @@ public class Convolution : MonoBehaviour
         // _func1pts.Add(new Vector3(((xTopLeftPlot+(topPlotsWidth))),(yTopLeftPlot),0.0f));
 
         //Sample sawtooth wave
-        _func2pts.Add(new Vector3(((xTopRightPlot-(topPlotsWidth/2))),(yTopRightPlot),0.0f));
-        _func2pts.Add(new Vector3((xTopRightPlot),(yTopRightPlot),0.0f));
-        _func2pts.Add(new Vector3((xTopRightPlot),(yTopRightPlot+(topPlotsHeight/2)),0.0f));
-        _func2pts.Add(new Vector3(((xTopRightPlot+(topPlotsWidth/2))),(yTopRightPlot),0.0f));
-        _func2pts.Add(new Vector3(((xTopRightPlot+(topPlotsWidth))),(yTopRightPlot),0.0f));
+        // _func2pts.Add(new Vector3(((xTopRightPlot-(topPlotsWidth/2))),(yTopRightPlot),0.0f));
+        // _func2pts.Add(new Vector3((xTopRightPlot),(yTopRightPlot),0.0f));
+        // _func2pts.Add(new Vector3((xTopRightPlot),(yTopRightPlot+(topPlotsHeight/2)),0.0f));
+        // _func2pts.Add(new Vector3(((xTopRightPlot+(topPlotsWidth/2))),(yTopRightPlot),0.0f));
+        // _func2pts.Add(new Vector3(((xTopRightPlot+(topPlotsWidth))),(yTopRightPlot),0.0f));
 
 
         //Sample sawtooth wave
-        _func3pts.Add(new Vector3(_width+((xTopLeftPlot-(topPlotsWidth/2))),(-_height/2),0.0f));
-        _func3pts.Add(new Vector3(_width+(xTopLeftPlot),(-_height/2),0.0f));
-        _func3pts.Add(new Vector3(_width+(xTopLeftPlot),(-_height/2+(topPlotsHeight/2)),0.0f));
-        _func3pts.Add(new Vector3(_width+((xTopLeftPlot+(topPlotsWidth/2))),(-_height/2),0.0f));
-        _func3pts.Add(new Vector3(_width+((xTopLeftPlot+(topPlotsWidth))),(-_height/2),0.0f));
-
-
-        //reverse sawtooth wave
-        _func4pts.Add(new Vector3((-(xTopRightPlot-(topPlotsWidth/2))),(-_height/2),0.0f));
-        _func4pts.Add(new Vector3((-xTopRightPlot),(-_height/2),0.0f));
-        _func4pts.Add(new Vector3((-xTopRightPlot),(-_height/2+(topPlotsHeight/2)),0.0f));
-        _func4pts.Add(new Vector3((-(xTopRightPlot+(topPlotsWidth/2))),(-_height/2),0.0f));
-        _func4pts.Add(new Vector3((-(xTopRightPlot+(topPlotsWidth))),(-_height/2),0.0f));
+       
 
 
         // for (int i = 0; i < _func1pts.Count; i++)
@@ -195,20 +171,12 @@ public class Convolution : MonoBehaviour
         
         
 
-        for (int i = 0; i < _func2pts.Count; i++)
-        {
-            _func2.SetPosition(i, _func2pts[i]);
-        }
+        // for (int i = 0; i < _func2pts.Count; i++)
+        // {
+        //     _func2.SetPosition(i, _func2pts[i]);
+        // }
 
-        for (int i = 0; i < _func3pts.Count; i++)
-        {
-            _func3.SetPosition(i, _func3pts[i]);
-        }
-        for (int i = 0; i < _func4pts.Count; i++)
-        {
-            _func4.SetPosition(i, _func4pts[i]);
-        }
-
+        
         //lineContainer.transform.position = new Vector3(0, 0, 0);
        // BakeLineDebuger(lineContainer);
     }
@@ -218,26 +186,18 @@ public class Convolution : MonoBehaviour
     {
 
         
-
+        //SetWavePoints(lineContainer, Color.red, "blank");
        // Func1.transform.Translate(1, 1, 1);
         // for (int i = 0; i < _func1pts.Count; i++)
         // {
         //     _func1.SetPosition(i, _func1pts[i]);
         // }
-        for (int i = 0; i < _func2pts.Count; i++)
-        {
-            _func2.SetPosition(i, _func2pts[i]);
-        }
+        // for (int i = 0; i < _func2pts.Count; i++)
+        // {
+        //     _func2.SetPosition(i, _func2pts[i]);
+        // }
 
-        for (int i = 0; i < _func3pts.Count; i++)
-        {
-            _func3.SetPosition(i, _func3pts[i]);
-        }
-
-        for (int i = 0; i < _func4pts.Count; i++)
-        {
-            _func4.SetPosition(i, _func4pts[i]);
-        }
+        
 
         //topPlot.Update();
 
