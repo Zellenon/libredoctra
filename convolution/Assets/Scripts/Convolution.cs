@@ -46,7 +46,7 @@ public class Convolution : MonoBehaviour
     private List<Vector2> _func4pts = new List<Vector2>();
 
 
-    private GameObject lineContainer;
+    private GameObject lineContainer,lineContainer2,lineContainer3,lineContainer4;
     public Transform _funct1position;
     
     //private Vector2[] _func1pts, _funct2pts, _resultpts;
@@ -56,6 +56,8 @@ public class Convolution : MonoBehaviour
     //these variables will refer to the relative x position of the functions as they are being convolved together
     private float funct1xPos, funct2xPos;
 
+    private int interval = 1; 
+    private float nextTime = 0;
 
 
     void Awake()
@@ -91,7 +93,7 @@ public class Convolution : MonoBehaviour
 
         topRightPlot.CreateGrid(xTopRightPlot, yTopRightPlot, topPlotsWidth, topPlotsHeight, Color.grey, defaultLineMaterial);
 
-        bottomPlot.CreateGrid(0,-_height/2, _width- 0.2f, _height/1.5f,Color.grey, defaultLineMaterial);
+        bottomPlot.CreateGrid(0,0, _width- 0.2f, _height/1.5f,Color.grey, defaultLineMaterial);
         //OriginLabel.gameObject.SetActive(false);
 
 
@@ -104,36 +106,22 @@ public class Convolution : MonoBehaviour
         _xscale = 1.1f / (2 * _width);
         _yscale = 0.2f;
 
+
+        // function 1 top
         lineContainer = new GameObject("Func1");
         lineContainer.transform.SetParent(transform, false);
-        //lineContainer.position
         Color plotLeftColor = Color.red;
         _func1 = lineContainer.AddComponent<LineRenderer>();
-        // _func1.material = defaultLineMaterial;
-        // _func1.useWorldSpace = true;
-        // _func1.startWidth = 0.2f;
-        // _func1.endWidth = 0.2f;
-        // _func1.startColor = plotLeftColor;
-        // _func1.endColor = plotLeftColor;
-        // _func1.positionCount = 5;  // need at least 2
-
         makeWave(lineContainer, plotLeftColor, "Sine");
 
         lineContainer.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
         lineContainer.transform.position = new Vector3((-_width/2f),(_height/2f),0f);
 
-        // lineContainer.AddComponent("MeshFilter");
-        // lineContainer.AddComponent("MeshRenderer");
-        // var mesh : Mesh = GetComponent(MeshFilter).mesh;
-        // mesh.Clear();
-        // mesh.vertices = [new Vector3(0,0,0),new Vector3(0,1,0),new Vector3(1, 1, 0)];
-        // mesh.uv = [new Vector2 (0, 0), new Vector2 (0, 1), new Vector2 (1, 1)];
-        // mesh.triangles = [0, 1, 2];
-
+       
 
 
         //function 2 top
-        GameObject lineContainer2 = new GameObject("Func2");
+        lineContainer2 = new GameObject("Func2");
         lineContainer2.transform.SetParent(transform, false);
         Color plotRightColor = Color.green;
         _func2 = lineContainer2.AddComponent<LineRenderer>();
@@ -144,60 +132,50 @@ public class Convolution : MonoBehaviour
 
 
         //function1 bottom
-        GameObject lineContainer3 = new GameObject("Func3");
+        lineContainer3 = new GameObject("Func3");
         lineContainer3.transform.SetParent(transform, false);
         _func3 = lineContainer3.AddComponent<LineRenderer>();
-        makeWave(lineContainer3, plotLeftColor, "Sine", 0);
+        makeWave(lineContainer3, plotLeftColor, "Sine");
         lineContainer3.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
-        lineContainer3.transform.position = new Vector3((0),(-_height/2f),0f);
+        lineContainer3.transform.position = new Vector3((0),(0),0f);
 
         //function2 bottom
-        GameObject lineContainer4 = new GameObject("Func4");
+        lineContainer4 = new GameObject("Func4");
         lineContainer4.transform.SetParent(transform, false);
         _func4 = lineContainer4.AddComponent<LineRenderer>();
-        makeWave(lineContainer4, plotRightColor, "Boxcar",0);
+        makeWave(lineContainer4, plotRightColor, "Boxcar");
         lineContainer4.transform.localScale = new Vector3(-0.5f, 0.5f, 0f);
-        lineContainer4.transform.position = new Vector3((0),(-_height/2f),0f);
+        lineContainer4.transform.position = new Vector3((0),(0),0f);
 
-        // //Sample sawtooth wave
-        // _func1pts.Add(new Vector3(((xTopLeftPlot-(topPlotsWidth/2))),(yTopLeftPlot),0.0f));
-        // _func1pts.Add(new Vector3((xTopLeftPlot),(yTopLeftPlot),0.0f));
-        // _func1pts.Add(new Vector3((xTopLeftPlot),(yTopLeftPlot+(topPlotsHeight/2)),0.0f));
-        // _func1pts.Add(new Vector3(((xTopLeftPlot+(topPlotsWidth/2))),(yTopLeftPlot),0.0f));
-        // _func1pts.Add(new Vector3(((xTopLeftPlot+(topPlotsWidth))),(yTopLeftPlot),0.0f));
-
-        //Sample sawtooth wave
-        // _func2pts.Add(new Vector3(((xTopRightPlot-(topPlotsWidth/2))),(yTopRightPlot),0.0f));
-        // _func2pts.Add(new Vector3((xTopRightPlot),(yTopRightPlot),0.0f));
-        // _func2pts.Add(new Vector3((xTopRightPlot),(yTopRightPlot+(topPlotsHeight/2)),0.0f));
-        // _func2pts.Add(new Vector3(((xTopRightPlot+(topPlotsWidth/2))),(yTopRightPlot),0.0f));
-        // _func2pts.Add(new Vector3(((xTopRightPlot+(topPlotsWidth))),(yTopRightPlot),0.0f));
-
-
-        //Sample sawtooth wave
+        
        
-
-
-        // for (int i = 0; i < _func1pts.Count; i++)
-        // {
-        //     _func1.SetPosition(i, _func1pts[i]);
-        // }
-        
-        
-
-        // for (int i = 0; i < _func2pts.Count; i++)
-        // {
-        //     _func2.SetPosition(i, _func2pts[i]);
-        // }
-
-        
-        //lineContainer.transform.position = new Vector3(0, 0, 0);
-       // BakeLineDebuger(lineContainer);
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (Time.time >= nextTime) {
+ 
+            
+            //lineContainer3.transform.position = new Vector3((0),(-_height/2f),0f);
+            lineContainer4.transform.position = new Vector3((nextTime),(0),0f);
+            //var oldMeshFilter = lC.GetComponent<MeshFilter>();
+            // var oldLineRenderer = lineContainer4.GetComponent<LineRenderer>();
+            // Destroy(oldWaveMesh);
+            // Destroy(oldMeshFilter);
+            // Destroy(oldLineRenderer);
+            // // _func1 = lineContainer4.AddComponent<LineRenderer>();
+            // makeWave(lineContainer4, Color.green, "Boxcar",0);
+            // lineContainer4.transform.localScale = new Vector3(-0.5f, 0.5f, 0f);
+            // lineContainer4.transform.position = new Vector3((0),(-_height/2f),0f);
+ 
+            nextTime += interval; 
+ 
+        }
+
+        
+        
 
         
         //makeWave(lineContainer, Color.red, "blank");
@@ -345,6 +323,8 @@ public class Convolution : MonoBehaviour
         AbstractWave wave;
         var lineRenderer = lineObj.GetComponent<LineRenderer>();
         int n = 400;
+
+
 
         lineRenderer.material = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
         lineRenderer.useWorldSpace = true;
