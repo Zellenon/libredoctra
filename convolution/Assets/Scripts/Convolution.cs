@@ -144,7 +144,7 @@ public class Convolution : MonoBehaviour
         _func3 = lineContainer3.AddComponent<LineRenderer>();
         SetWavePoints(lineContainer3, plotLeftColor, "blank");
         lineContainer3.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
-        lineContainer3.transform.position = new Vector3((_width/2f),(-_height/2f),0f);
+        lineContainer3.transform.position = new Vector3((0),(-_height/2f),0f);
 
         //function2 bottom
         GameObject lineContainer4 = new GameObject("Func4");
@@ -152,7 +152,7 @@ public class Convolution : MonoBehaviour
         _func4 = lineContainer4.AddComponent<LineRenderer>();
         SetWavePoints(lineContainer4, plotRightColor, "blank");
         lineContainer4.transform.localScale = new Vector3(-0.5f, 0.5f, 0f);
-        lineContainer4.transform.position = new Vector3((-_width/2f),(-_height/2f),0f);
+        lineContainer4.transform.position = new Vector3((0),(-_height/2f),0f);
 
         // //Sample sawtooth wave
         // _func1pts.Add(new Vector3(((xTopLeftPlot-(topPlotsWidth/2))),(yTopLeftPlot),0.0f));
