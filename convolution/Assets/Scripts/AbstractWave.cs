@@ -16,7 +16,7 @@ public abstract class AbstractWave : MonoBehaviour
     //     _isReversed = isReversed;
     // }
 
-    public abstract float get(int i);
+    public abstract float get(float i);
 
     public void isReversed(bool isReversed)
     {
