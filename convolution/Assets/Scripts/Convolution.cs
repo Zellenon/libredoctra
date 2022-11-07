@@ -248,7 +248,7 @@ public class Convolution : MonoBehaviour
         lineRenderer.endWidth = 0.2f;
         lineRenderer.startColor = color;
         lineRenderer.endColor = color;
-        lineRenderer.positionCount = n;
+        
         
         
 
@@ -268,6 +268,7 @@ public class Convolution : MonoBehaviour
         switch (waveType) {
              
         case "sawToothEx":
+            lineRenderer.positionCount = 5;
             pointsList.Add(new Vector3((-_width/2),(0),0.0f));
             pointsList.Add(new Vector3((0),(0),0.0f));
             pointsList.Add(new Vector3((0),(_height/2),0.0f));
@@ -276,6 +277,7 @@ public class Convolution : MonoBehaviour
             break;
  
         case "sawTooth":
+            lineRenderer.positionCount = n;
             wave = new Boxcar();
             for (int i = 0; i < n; ++i){
             pointsList.Add(new Vector3(xList[i],wave.get(xList[i]),0.0f));
