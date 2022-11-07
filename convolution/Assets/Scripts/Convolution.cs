@@ -163,22 +163,7 @@ public class Convolution : MonoBehaviour
         }
 
         
-        
-        //makeWave(lineContainer, Color.red, "blank");
-=======
-        //SetWavePoints(lineContainer, Color.red, "blank");
->>>>>>> 868dfbf (pre-change formatting)
-       // Func1.transform.Translate(1, 1, 1);
-        // for (int i = 0; i < _func1pts.Count; i++)
-        // {
-        //     _func1.SetPosition(i, _func1pts[i]);
-        // }
-        // for (int i = 0; i < _func2pts.Count; i++)
-        // {
-        //     _func2.SetPosition(i, _func2pts[i]);
-        // }
-
-        //topPlot.Update();
+     
     }
 
     Vector2 ToScreenCoords(Vector2 funccoords)
@@ -214,15 +199,10 @@ public class Convolution : MonoBehaviour
         lineRenderer.endWidth = 0.2f;
         lineRenderer.startColor = color;
         lineRenderer.endColor = color;
-<<<<<<< HEAD
-        
+
+
         //The scaled value for which to increment the functions x value
         float incrementValue = _width/400;
-=======
->>>>>>> 868dfbf (pre-change formatting)
-
-
-
         
         //                    [Game Screen]
         ///////////////////////////////////////////////////////
