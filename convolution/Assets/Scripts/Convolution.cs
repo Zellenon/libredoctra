@@ -249,7 +249,24 @@ public class Convolution : MonoBehaviour
         lineRenderer.startColor = color;
         lineRenderer.endColor = color;
         
+        //The scaled value for which to increment the functions x value
         float incrementValue = _width/400;
+        //The scaled minimum x value for the function; In this case we want our lines to have a length of 1/4 the screen
+        //                    [Game Screen]
+        ///////////////////////////////////////////////////////
+        //                         |                         //
+        //                         |                         //
+        //                         |                         //
+        // (-_width/2,0)           |                    (_width/2,0)
+        //  |                      |                        |//
+        //  v                      |                        V//
+        // ------------------------+-------------------------//
+        //                         |                         //
+        //                         |                         //
+        //                         |                         //
+        //                         |                         //
+        //                         |                         //
+        ///////////////////////////////////////////////////////
         float xScaled = -_width/2;
 
         var xList = new List<float>(n);
