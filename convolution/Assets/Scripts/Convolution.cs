@@ -9,8 +9,6 @@ using TMPro;
 
 public class Convolution : MonoBehaviour
 {
-
-
     [SerializeField] private Material defaultLineMaterial;
     [SerializeField] private Material lineMaterial;
 
@@ -27,8 +25,6 @@ public class Convolution : MonoBehaviour
     xtrp, ytrp, wtrp, htrp,
     xbp, ybp, wbp, hbp;
 
-
-    
     public float _funct1mag, _funct1freq,
     _funct2mag, _funct2freq;
 
@@ -59,7 +55,6 @@ public class Convolution : MonoBehaviour
     private int interval = 1; 
     private float nextTime = 0;
 
-
     void Awake()
     {
 
@@ -71,11 +66,8 @@ public class Convolution : MonoBehaviour
         _xscale = 1.1f / (2 * _width);
         _yscale = 0.2f;
 
-
-
         Debug.LogFormat("_width: {0}, _height: {1}", _width, _height);
 
-        
         float xymargin = 0.5f;
 
         //Center points for the background grid topPlots
@@ -95,8 +87,6 @@ public class Convolution : MonoBehaviour
 
         bottomPlot.CreateGrid(0,0, _width- 0.2f, _height/1.5f,Color.grey, defaultLineMaterial);
         //OriginLabel.gameObject.SetActive(false);
-
-
     }
 
 
@@ -117,7 +107,7 @@ public class Convolution : MonoBehaviour
         lineContainer.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
         lineContainer.transform.position = new Vector3((-_width/2f),(_height/2f),0f);
 
-       
+     
 
 
         //function 2 top
@@ -129,7 +119,6 @@ public class Convolution : MonoBehaviour
         makeWave(lineContainer2, plotRightColor, "Boxcar");
         lineContainer2.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
         lineContainer2.transform.position = new Vector3((_width/2f),(_height/2f),0f);
-
 
         //function1 bottom
         lineContainer3 = new GameObject("Func3");
@@ -145,9 +134,8 @@ public class Convolution : MonoBehaviour
         _func4 = lineContainer4.AddComponent<LineRenderer>();
         makeWave(lineContainer4, plotRightColor, "Boxcar");
         lineContainer4.transform.localScale = new Vector3(-0.5f, 0.5f, 0f);
-        lineContainer4.transform.position = new Vector3((0),(0),0f);
+        lineContainer4.transform.position = new Vector3((0),(-_height/2f),0f);
 
-        
        
     }
 
@@ -176,9 +164,10 @@ public class Convolution : MonoBehaviour
 
         
         
-
-        
         //makeWave(lineContainer, Color.red, "blank");
+=======
+        //SetWavePoints(lineContainer, Color.red, "blank");
+>>>>>>> 868dfbf (pre-change formatting)
        // Func1.transform.Translate(1, 1, 1);
         // for (int i = 0; i < _func1pts.Count; i++)
         // {
@@ -189,17 +178,13 @@ public class Convolution : MonoBehaviour
         //     _func2.SetPosition(i, _func2pts[i]);
         // }
 
-        
-
         //topPlot.Update();
-
     }
 
     Vector2 ToScreenCoords(Vector2 funccoords)
     {
         return (new Vector3(-_width + funccoords.x / _xscale, funccoords.y / _yscale));
     }
-
 
     //A static function that transforms a gameobj with a Linerenderer into a gameobj with a mesh of the Linerenderer. This allows us
     // to use gamobj.transform to move our linerenderer "images" around
@@ -229,9 +214,12 @@ public class Convolution : MonoBehaviour
         lineRenderer.endWidth = 0.2f;
         lineRenderer.startColor = color;
         lineRenderer.endColor = color;
+<<<<<<< HEAD
         
         //The scaled value for which to increment the functions x value
         float incrementValue = _width/400;
+=======
+>>>>>>> 868dfbf (pre-change formatting)
 
 
 
@@ -265,9 +253,6 @@ public class Convolution : MonoBehaviour
         //A list of Vecter2s to store both the xy points we want linerenderer to connect
         List<Vector2> pointsList = new List<Vector2>();
 
-
-        
-         
         // passing string "str" in
         // switch statement
         switch (waveType) {
@@ -408,16 +393,11 @@ public class Convolution : MonoBehaviour
             break;
         }
 
-
-
-        
-
         for (int i = 0; i < pointsList.Count; i++)
         {
             lineRenderer.SetPosition(i, pointsList[i]);
         }
 
         BakeLineDebuger(lineObj);
-
     }
 }
