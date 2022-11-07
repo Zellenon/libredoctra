@@ -2,10 +2,9 @@ using System;
 using UnityEngine;
 using System;
 
-public class Dirac : AbstractWave {
-
+public class Sawtooth : AbstractWave {
 
     public override float get(float i) {
-        if (i == 0) return 1f; else return 0f;
+        return ((i/_freq) % 1) * _amp;
     }
 }
