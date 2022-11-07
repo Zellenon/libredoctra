@@ -114,7 +114,7 @@ public class Convolution : MonoBehaviour
         // _func1.endColor = plotLeftColor;
         // _func1.positionCount = 5;  // need at least 2
 
-        SetWavePoints(lineContainer, plotLeftColor, "blank");
+        SetWavePoints(lineContainer, plotLeftColor, "sawToothEx");
 
         lineContainer.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
         lineContainer.transform.position = new Vector3((-_width/2f),(_height/2f),0f);
@@ -135,7 +135,7 @@ public class Convolution : MonoBehaviour
         Color plotRightColor = Color.green;
         _func2 = lineContainer2.AddComponent<LineRenderer>();
         
-        SetWavePoints(lineContainer2, plotRightColor, "blank");
+        SetWavePoints(lineContainer2, plotRightColor, "sawTooth");
         lineContainer2.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
         lineContainer2.transform.position = new Vector3((_width/2f),(_height/2f),0f);
 
@@ -144,7 +144,7 @@ public class Convolution : MonoBehaviour
         GameObject lineContainer3 = new GameObject("Func3");
         lineContainer3.transform.SetParent(transform, false);
         _func3 = lineContainer3.AddComponent<LineRenderer>();
-        SetWavePoints(lineContainer3, plotLeftColor, "blank");
+        SetWavePoints(lineContainer3, plotLeftColor, "sawToothEx");
         lineContainer3.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
         lineContainer3.transform.position = new Vector3((0),(-_height/2f),0f);
 
@@ -152,7 +152,7 @@ public class Convolution : MonoBehaviour
         GameObject lineContainer4 = new GameObject("Func4");
         lineContainer4.transform.SetParent(transform, false);
         _func4 = lineContainer4.AddComponent<LineRenderer>();
-        SetWavePoints(lineContainer4, plotRightColor, "blank");
+        SetWavePoints(lineContainer4, plotRightColor, "sawToothEx");
         lineContainer4.transform.localScale = new Vector3(-0.5f, 0.5f, 0f);
         lineContainer4.transform.position = new Vector3((0),(-_height/2f),0f);
 
