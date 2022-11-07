@@ -115,10 +115,14 @@ public class Convolution : MonoBehaviour
         SetWavePoints(lineContainer, plotLeftColor, "blank");
 
         lineContainer.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
-        //lineContainer.transform.position = new Vector3();
-        //GameObject lineContainer1_Result = new GameObject("Func1_Result");
-        //lineContainer1_Result.transform.SetParent(lineContainer.transform);
-         //= lineContainer3.AddComponent<LineRenderer>();
+
+        // lineContainer.AddComponent("MeshFilter");
+        // lineContainer.AddComponent("MeshRenderer");
+        // var mesh : Mesh = GetComponent(MeshFilter).mesh;
+        // mesh.Clear();
+        // mesh.vertices = [new Vector3(0,0,0),new Vector3(0,1,0),new Vector3(1, 1, 0)];
+        // mesh.uv = [new Vector2 (0, 0), new Vector2 (0, 1), new Vector2 (1, 1)];
+        // mesh.triangles = [0, 1, 2];
 
 
 
@@ -163,7 +167,7 @@ public class Convolution : MonoBehaviour
         //Sample sawtooth wave
        
 
-
+        
         // for (int i = 0; i < _func1pts.Count; i++)
         // {
         //     _func1.SetPosition(i, _func1pts[i]);
