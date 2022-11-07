@@ -249,13 +249,14 @@ public class Convolution : MonoBehaviour
         lineRenderer.startColor = color;
         lineRenderer.endColor = color;
         
-        
-        
+        float incrementValue = _width/400;
+        float xScaled = -_width/2;
 
         var xList = new List<float>(n);
 
         for (int i = 0; i < n; ++i){
-            xList.Add(i*(_width)/(n));
+            
+            xList.Add(xScaled+(i*incrementValue));
         }
 
         List<Vector2> pointsList = new List<Vector2>();
