@@ -147,7 +147,7 @@ public class Convolution : MonoBehaviour
         GameObject lineContainer3 = new GameObject("Func3");
         lineContainer3.transform.SetParent(transform, false);
         _func3 = lineContainer3.AddComponent<LineRenderer>();
-        makeWave(lineContainer3, plotLeftColor, "Boxcar", 0);
+        makeWave(lineContainer3, plotLeftColor, "Sine", 0);
         lineContainer3.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
         lineContainer3.transform.position = new Vector3((0),(-_height/2f),0f);
 
