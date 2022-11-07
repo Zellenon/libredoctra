@@ -27,6 +27,8 @@ public class Convolution : MonoBehaviour
     xtrp, ytrp, wtrp, htrp,
     xbp, ybp, wbp, hbp;
 
+
+    
     public float _funct1mag, _funct1freq,
     _funct2mag, _funct2freq;
 
@@ -235,8 +237,10 @@ public class Convolution : MonoBehaviour
     }
 
     public void SetWavePoints(GameObject lineObj, Color color, string waveType){
-        var lineRenderer = lineObj.GetComponent<LineRenderer>();
 
+        AbstractWave wave;
+        var lineRenderer = lineObj.GetComponent<LineRenderer>();
+        int n = 400;
 
         lineRenderer.material = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
         lineRenderer.useWorldSpace = true;
@@ -244,15 +248,48 @@ public class Convolution : MonoBehaviour
         lineRenderer.endWidth = 0.2f;
         lineRenderer.startColor = color;
         lineRenderer.endColor = color;
-        lineRenderer.positionCount = 5;
+        lineRenderer.positionCount = n;
+        
+        
+
+        var xList = new List<float>(n);
+
+        for (int i = 0; i < n; ++i){
+            xList.Add(i*(_width)/(n));
+        }
 
         List<Vector2> pointsList = new List<Vector2>();
 
-        pointsList.Add(new Vector3((-_width/2),(0),0.0f));
-        pointsList.Add(new Vector3((0),(0),0.0f));
-        pointsList.Add(new Vector3((0),(_height/2),0.0f));
-        pointsList.Add(new Vector3((_width/2),(0),0.0f));
-        pointsList.Add(new Vector3((_width-0.02f),(0),0.0f));
+
+        
+         
+        // passing string "str" in
+        // switch statement
+        switch (waveType) {
+             
+        case "sawToothEx":
+            pointsList.Add(new Vector3((-_width/2),(0),0.0f));
+            pointsList.Add(new Vector3((0),(0),0.0f));
+            pointsList.Add(new Vector3((0),(_height/2),0.0f));
+            pointsList.Add(new Vector3((_width/2),(0),0.0f));
+            pointsList.Add(new Vector3((_width-0.02f),(0),0.0f));
+            break;
+ 
+        case "sawTooth":
+            wave = new Boxcar();
+            for (int i = 0; i < n; ++i){
+            pointsList.Add(new Vector3(xList[i],wave.get(xList[i]),0.0f));
+            }
+            break;
+ 
+        default:
+            
+            break;
+        }
+
+
+
+        
 
         for (int i = 0; i < pointsList.Count; i++)
         {
