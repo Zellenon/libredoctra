@@ -114,7 +114,7 @@ public class Convolution : MonoBehaviour
         // _func1.endColor = plotLeftColor;
         // _func1.positionCount = 5;  // need at least 2
 
-        SetWavePoints(lineContainer, plotLeftColor, "sawToothEx");
+        SetWavePoints(lineContainer, plotLeftColor, "Boxcar");
 
         lineContainer.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
         lineContainer.transform.position = new Vector3((-_width/2f),(_height/2f),0f);
@@ -135,7 +135,7 @@ public class Convolution : MonoBehaviour
         Color plotRightColor = Color.green;
         _func2 = lineContainer2.AddComponent<LineRenderer>();
         
-        SetWavePoints(lineContainer2, plotRightColor, "sawTooth");
+        SetWavePoints(lineContainer2, plotRightColor, "Boxcar");
         lineContainer2.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
         lineContainer2.transform.position = new Vector3((_width/2f),(_height/2f),0f);
 
@@ -144,7 +144,7 @@ public class Convolution : MonoBehaviour
         GameObject lineContainer3 = new GameObject("Func3");
         lineContainer3.transform.SetParent(transform, false);
         _func3 = lineContainer3.AddComponent<LineRenderer>();
-        SetWavePoints(lineContainer3, plotLeftColor, "sawToothEx");
+        SetWavePoints(lineContainer3, plotLeftColor, "Boxcar");
         lineContainer3.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
         lineContainer3.transform.position = new Vector3((0),(-_height/2f),0f);
 
@@ -152,7 +152,7 @@ public class Convolution : MonoBehaviour
         GameObject lineContainer4 = new GameObject("Func4");
         lineContainer4.transform.SetParent(transform, false);
         _func4 = lineContainer4.AddComponent<LineRenderer>();
-        SetWavePoints(lineContainer4, plotRightColor, "sawToothEx");
+        SetWavePoints(lineContainer4, plotRightColor, "Boxcar");
         lineContainer4.transform.localScale = new Vector3(-0.5f, 0.5f, 0f);
         lineContainer4.transform.position = new Vector3((0),(-_height/2f),0f);
 
@@ -251,7 +251,10 @@ public class Convolution : MonoBehaviour
         
         //The scaled value for which to increment the functions x value
         float incrementValue = _width/400;
-        //The scaled minimum x value for the function; In this case we want our lines to have a length of 1/4 the screen
+
+
+
+        
         //                    [Game Screen]
         ///////////////////////////////////////////////////////
         //                         |                         //
@@ -266,8 +269,11 @@ public class Convolution : MonoBehaviour
         //                         |                         //
         //                         |                         //
         ///////////////////////////////////////////////////////
+        //The scaled minimum x value for the function; In this case we want our lines to have a length of 1/4 the screen
         float xScaled = -_width/2;
 
+
+        //A list to stor our new scaled xvalues
         var xList = new List<float>(n);
 
         for (int i = 0; i < n; ++i){
@@ -275,6 +281,7 @@ public class Convolution : MonoBehaviour
             xList.Add(xScaled+(i*incrementValue));
         }
 
+        //A list of Vecter2s to store both the xy points we want linerenderer to connect
         List<Vector2> pointsList = new List<Vector2>();
 
 
@@ -293,9 +300,18 @@ public class Convolution : MonoBehaviour
             pointsList.Add(new Vector3((_width-0.02f),(0),0.0f));
             break;
  
-        case "sawTooth":
+        case "Boxcar":
             lineRenderer.positionCount = n;
             wave = new Boxcar();
+            for (int i = 0; i < n; ++i){
+            pointsList.Add(new Vector3(xList[i],wave.get(xList[i]),0.0f));
+            }
+            break;
+        case "Sine":
+
+            //CURRENTLY NOT WORKING need to fix
+            lineRenderer.positionCount = n;
+            wave = new Sine();
             for (int i = 0; i < n; ++i){
             pointsList.Add(new Vector3(xList[i],wave.get(xList[i]),0.0f));
             }
