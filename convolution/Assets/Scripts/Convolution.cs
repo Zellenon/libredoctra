@@ -53,6 +53,9 @@ public class Convolution : MonoBehaviour
 
     private LineRenderer _func1, _func2,_func3, _func4;
 
+    //these variables will refer to the relative x position of the functions as they are being convolved together
+    private float funct1xPos, funct2xPos;
+
 
 
     void Awake()
@@ -114,7 +117,7 @@ public class Convolution : MonoBehaviour
         // _func1.endColor = plotLeftColor;
         // _func1.positionCount = 5;  // need at least 2
 
-        SetWavePoints(lineContainer, plotLeftColor, "Sine");
+        makeWave(lineContainer, plotLeftColor, "Sine");
 
         lineContainer.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
         lineContainer.transform.position = new Vector3((-_width/2f),(_height/2f),0f);
@@ -135,7 +138,7 @@ public class Convolution : MonoBehaviour
         Color plotRightColor = Color.green;
         _func2 = lineContainer2.AddComponent<LineRenderer>();
         
-        SetWavePoints(lineContainer2, plotRightColor, "Boxcar");
+        makeWave(lineContainer2, plotRightColor, "Boxcar");
         lineContainer2.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
         lineContainer2.transform.position = new Vector3((_width/2f),(_height/2f),0f);
 
@@ -144,7 +147,7 @@ public class Convolution : MonoBehaviour
         GameObject lineContainer3 = new GameObject("Func3");
         lineContainer3.transform.SetParent(transform, false);
         _func3 = lineContainer3.AddComponent<LineRenderer>();
-        SetWavePoints(lineContainer3, plotLeftColor, "Boxcar");
+        makeWave(lineContainer3, plotLeftColor, "Boxcar", 0);
         lineContainer3.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
         lineContainer3.transform.position = new Vector3((0),(-_height/2f),0f);
 
@@ -152,7 +155,7 @@ public class Convolution : MonoBehaviour
         GameObject lineContainer4 = new GameObject("Func4");
         lineContainer4.transform.SetParent(transform, false);
         _func4 = lineContainer4.AddComponent<LineRenderer>();
-        SetWavePoints(lineContainer4, plotRightColor, "Boxcar");
+        makeWave(lineContainer4, plotRightColor, "Boxcar",0);
         lineContainer4.transform.localScale = new Vector3(-0.5f, 0.5f, 0f);
         lineContainer4.transform.position = new Vector3((0),(-_height/2f),0f);
 
@@ -197,7 +200,7 @@ public class Convolution : MonoBehaviour
     {
 
         
-        //SetWavePoints(lineContainer, Color.red, "blank");
+        //makeWave(lineContainer, Color.red, "blank");
        // Func1.transform.Translate(1, 1, 1);
         // for (int i = 0; i < _func1pts.Count; i++)
         // {
@@ -236,7 +239,7 @@ public class Convolution : MonoBehaviour
         GameObject.Destroy(lineRenderer);
     }
 
-    public void SetWavePoints(GameObject lineObj, Color color, string waveType){
+    public void makeWave(GameObject lineObj, Color color, string waveType){
 
         AbstractWave wave;
         var lineRenderer = lineObj.GetComponent<LineRenderer>();
@@ -271,6 +274,107 @@ public class Convolution : MonoBehaviour
         ///////////////////////////////////////////////////////
         //The scaled minimum x value for the function; In this case we want our lines to have a length of 1/4 the screen
         float xScaled = -_width/2;
+
+
+        //A list to stor our new scaled xvalues
+        var xList = new List<float>(n);
+
+        for (int i = 0; i < n; ++i){
+            
+            xList.Add(xScaled+(i*incrementValue));
+        }
+
+        //A list of Vecter2s to store both the xy points we want linerenderer to connect
+        List<Vector2> pointsList = new List<Vector2>();
+
+
+        
+         
+        // passing string "str" in
+        // switch statement
+        switch (waveType) {
+             
+        case "sawToothEx":
+            lineRenderer.positionCount = 5;
+            pointsList.Add(new Vector3((-_width/2),(0),0.0f));
+            pointsList.Add(new Vector3((0),(0),0.0f));
+            pointsList.Add(new Vector3((0),(_height/2),0.0f));
+            pointsList.Add(new Vector3((_width/2),(0),0.0f));
+            pointsList.Add(new Vector3((_width-0.02f),(0),0.0f));
+            break;
+ 
+        case "Boxcar":
+            lineRenderer.positionCount = n;
+            wave = new Boxcar();
+            for (int i = 0; i < n; ++i){
+            pointsList.Add(new Vector3(xList[i],wave.get(xList[i]),0.0f));
+            }
+            break;
+        case "Sine":
+
+            //NEEDS UPDATE to include freq and amp from input
+            lineRenderer.positionCount = n;
+            wave = new Sine();
+            wave.frequency(1);
+            wave.amplitute(1);
+            for (int i = 0; i < n; ++i){
+            pointsList.Add(new Vector3(xList[i],wave.get(xList[i]),0.0f));
+            }
+            break;
+ 
+        default:
+            
+            break;
+        }
+
+
+
+        
+
+        for (int i = 0; i < pointsList.Count; i++)
+        {
+            lineRenderer.SetPosition(i, pointsList[i]);
+        }
+
+        BakeLineDebuger(lineObj);
+
+    }
+
+    public void makeWave(GameObject lineObj, Color color, string waveType, float xPos){
+
+        AbstractWave wave;
+        var lineRenderer = lineObj.GetComponent<LineRenderer>();
+        int n = 400;
+
+        lineRenderer.material = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
+        lineRenderer.useWorldSpace = true;
+        lineRenderer.startWidth = 0.2f;
+        lineRenderer.endWidth = 0.2f;
+        lineRenderer.startColor = color;
+        lineRenderer.endColor = color;
+        
+        //The scaled value for which to increment the functions x value
+        float incrementValue = _width/400;
+
+
+
+        
+        //                    [Game Screen]
+        ///////////////////////////////////////////////////////
+        //                         |                         //
+        //                         |                         //
+        // (-_width/2,0)           |                    (_width/2,0)
+        //  |                      |                        |//
+        //  v                      |                        V//
+        // ------------------------+-------------------------//
+        //                         |                         //
+        //                         |                         //
+        //                         |                         //
+        //                         |                         //
+        //                         |                         //
+        ///////////////////////////////////////////////////////
+        //The scaled minimum x value for the function; In this case we want our lines to have a length of 1/4 the screen
+        float xScaled = xPos;
 
 
         //A list to stor our new scaled xvalues
