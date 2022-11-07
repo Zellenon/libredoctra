@@ -114,7 +114,7 @@ public class Convolution : MonoBehaviour
         // _func1.endColor = plotLeftColor;
         // _func1.positionCount = 5;  // need at least 2
 
-        SetWavePoints(lineContainer, plotLeftColor, "Boxcar");
+        SetWavePoints(lineContainer, plotLeftColor, "Sine");
 
         lineContainer.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
         lineContainer.transform.position = new Vector3((-_width/2f),(_height/2f),0f);
@@ -309,9 +309,11 @@ public class Convolution : MonoBehaviour
             break;
         case "Sine":
 
-            //CURRENTLY NOT WORKING need to fix
+            //NEEDS UPDATE to include freq and amp from input
             lineRenderer.positionCount = n;
             wave = new Sine();
+            wave.frequency(1);
+            wave.amplitute(1);
             for (int i = 0; i < n; ++i){
             pointsList.Add(new Vector3(xList[i],wave.get(xList[i]),0.0f));
             }
