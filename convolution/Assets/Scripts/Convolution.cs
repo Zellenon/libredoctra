@@ -115,6 +115,7 @@ public class Convolution : MonoBehaviour
         SetWavePoints(lineContainer, plotLeftColor, "blank");
 
         lineContainer.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
+        lineContainer.transform.position = new Vector3((-_width/2f),(_height/2f),0f);
 
         // lineContainer.AddComponent("MeshFilter");
         // lineContainer.AddComponent("MeshRenderer");
@@ -133,7 +134,8 @@ public class Convolution : MonoBehaviour
         _func2 = lineContainer2.AddComponent<LineRenderer>();
         
         SetWavePoints(lineContainer2, plotRightColor, "blank");
-        
+        lineContainer2.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
+        lineContainer2.transform.position = new Vector3((_width/2f),(_height/2f),0f);
 
 
         //function1 bottom
@@ -141,13 +143,16 @@ public class Convolution : MonoBehaviour
         lineContainer3.transform.SetParent(transform, false);
         _func3 = lineContainer3.AddComponent<LineRenderer>();
         SetWavePoints(lineContainer3, plotLeftColor, "blank");
+        lineContainer3.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
+        lineContainer3.transform.position = new Vector3((_width/2f),(-_height/2f),0f);
 
         //function2 bottom
         GameObject lineContainer4 = new GameObject("Func4");
         lineContainer4.transform.SetParent(transform, false);
         _func4 = lineContainer4.AddComponent<LineRenderer>();
         SetWavePoints(lineContainer4, plotRightColor, "blank");
-
+        lineContainer4.transform.localScale = new Vector3(-0.5f, 0.5f, 0f);
+        lineContainer4.transform.position = new Vector3((-_width/2f),(-_height/2f),0f);
 
         // //Sample sawtooth wave
         // _func1pts.Add(new Vector3(((xTopLeftPlot-(topPlotsWidth/2))),(yTopLeftPlot),0.0f));
@@ -167,7 +172,7 @@ public class Convolution : MonoBehaviour
         //Sample sawtooth wave
        
 
-        
+
         // for (int i = 0; i < _func1pts.Count; i++)
         // {
         //     _func1.SetPosition(i, _func1pts[i]);
