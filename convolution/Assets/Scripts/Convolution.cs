@@ -52,9 +52,12 @@ public class Convolution : MonoBehaviour
     //these variables will refer to the relative x position of the functions as they are being convolved together
     private float funct1xPos, funct2xPos;
 
+<<<<<<< HEAD
     private int interval = 1; 
     private float nextTime = 0;
 
+=======
+>>>>>>> 868dfbf (pre-change formatting)
     void Awake()
     {
 
@@ -107,9 +110,19 @@ public class Convolution : MonoBehaviour
         lineContainer.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
         lineContainer.transform.position = new Vector3((-_width/2f),(_height/2f),0f);
 
+<<<<<<< HEAD
      
 
 
+=======
+        // lineContainer.AddComponent("MeshFilter");
+        // lineContainer.AddComponent("MeshRenderer");
+        // var mesh : Mesh = GetComponent(MeshFilter).mesh;
+        // mesh.Clear();
+        // mesh.vertices = [new Vector3(0,0,0),new Vector3(0,1,0),new Vector3(1, 1, 0)];
+        // mesh.uv = [new Vector2 (0, 0), new Vector2 (0, 1), new Vector2 (1, 1)];
+        // mesh.triangles = [0, 1, 2];
+>>>>>>> 868dfbf (pre-change formatting)
         //function 2 top
         lineContainer2 = new GameObject("Func2");
         lineContainer2.transform.SetParent(transform, false);
@@ -136,12 +149,45 @@ public class Convolution : MonoBehaviour
         lineContainer4.transform.localScale = new Vector3(-0.5f, 0.5f, 0f);
         lineContainer4.transform.position = new Vector3((0),(-_height/2f),0f);
 
+<<<<<<< HEAD
        
+=======
+        // //Sample sawtooth wave
+        // _func1pts.Add(new Vector3(((xTopLeftPlot-(topPlotsWidth/2))),(yTopLeftPlot),0.0f));
+        // _func1pts.Add(new Vector3((xTopLeftPlot),(yTopLeftPlot),0.0f));
+        // _func1pts.Add(new Vector3((xTopLeftPlot),(yTopLeftPlot+(topPlotsHeight/2)),0.0f));
+        // _func1pts.Add(new Vector3(((xTopLeftPlot+(topPlotsWidth/2))),(yTopLeftPlot),0.0f));
+        // _func1pts.Add(new Vector3(((xTopLeftPlot+(topPlotsWidth))),(yTopLeftPlot),0.0f));
+
+        //Sample sawtooth wave
+        // _func2pts.Add(new Vector3(((xTopRightPlot-(topPlotsWidth/2))),(yTopRightPlot),0.0f));
+        // _func2pts.Add(new Vector3((xTopRightPlot),(yTopRightPlot),0.0f));
+        // _func2pts.Add(new Vector3((xTopRightPlot),(yTopRightPlot+(topPlotsHeight/2)),0.0f));
+        // _func2pts.Add(new Vector3(((xTopRightPlot+(topPlotsWidth/2))),(yTopRightPlot),0.0f));
+        // _func2pts.Add(new Vector3(((xTopRightPlot+(topPlotsWidth))),(yTopRightPlot),0.0f));
+
+        //Sample sawtooth wave
+       
+        // for (int i = 0; i < _func1pts.Count; i++)
+        // {
+        //     _func1.SetPosition(i, _func1pts[i]);
+        // }
+
+        // for (int i = 0; i < _func2pts.Count; i++)
+        // {
+        //     _func2.SetPosition(i, _func2pts[i]);
+        // }
+
+        
+        //lineContainer.transform.position = new Vector3(0, 0, 0);
+       // BakeLineDebuger(lineContainer);
+>>>>>>> 868dfbf (pre-change formatting)
     }
 
     // Update is called once per frame
     void Update()
     {
+<<<<<<< HEAD
 
         if (Time.time >= nextTime) {
  
@@ -164,6 +210,20 @@ public class Convolution : MonoBehaviour
 
         
      
+=======
+        //SetWavePoints(lineContainer, Color.red, "blank");
+       // Func1.transform.Translate(1, 1, 1);
+        // for (int i = 0; i < _func1pts.Count; i++)
+        // {
+        //     _func1.SetPosition(i, _func1pts[i]);
+        // }
+        // for (int i = 0; i < _func2pts.Count; i++)
+        // {
+        //     _func2.SetPosition(i, _func2pts[i]);
+        // }
+
+        //topPlot.Update();
+>>>>>>> 868dfbf (pre-change formatting)
     }
 
     Vector2 ToScreenCoords(Vector2 funccoords)
@@ -270,17 +330,12 @@ public class Convolution : MonoBehaviour
             break;
         }
 
-
-
-        
-
         for (int i = 0; i < pointsList.Count; i++)
         {
             lineRenderer.SetPosition(i, pointsList[i]);
         }
 
         BakeLineDebuger(lineObj);
-
     }
 
     public void makeWave(GameObject lineObj, Color color, string waveType, float xPos){
