@@ -87,6 +87,8 @@ public class Convolution : MonoBehaviour
 
         bottomPlot.CreateGrid(0,0, _width- 0.2f, _height/1.5f,Color.grey, defaultLineMaterial);
         //OriginLabel.gameObject.SetActive(false);
+        _doc = GetComponent<UIDocument>();
+        SetupButtonHandlers();
     }
 
 
