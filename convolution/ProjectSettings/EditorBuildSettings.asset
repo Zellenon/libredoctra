@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: b0a947a37c30a5a12b38a550ce4f7e7e
+  - enabled: 1
+    path: Assets/Scenes/ConvolutionTest.unity
+    guid: 9aa4a31febdce5b47995e014a24892f2
   m_configObjects: {}

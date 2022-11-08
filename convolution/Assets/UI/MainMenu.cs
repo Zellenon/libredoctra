@@ -7,17 +7,17 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     private UIDocument _doc;
-    private Button _mixerButton;
-    private Button _gameButton;
+    private Button _randomButton;
+    private Button _customButton;
 
     private void Awake()
     {
         _doc = GetComponent<UIDocument>();
-        _mixerButton = _doc.rootVisualElement.Q<Button>("Game1");
-        _gameButton = _doc.rootVisualElement.Q<Button>("Game2");
+        _randomButton = _doc.rootVisualElement.Q<Button>("Game1");
+        _customButton = _doc.rootVisualElement.Q<Button>("Game2");
 
-        _mixerButton.clicked += SinewaveFFT;
-        _gameButton.clicked += PlayGame;
+        _randomButton.clicked += PlayGame;
+        _customButton.clicked += CustomGame;
     }
 
     // Start is called before the first frame update
@@ -39,12 +39,12 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("PlayGame");
+        SceneManager.LoadScene("ConvolutionTest");
     }
 
 
-    public void SinewaveFFT()
+    public void CustomGame()
     {
-        SceneManager.LoadScene("SinewaveFFT");
+        SceneManager.LoadScene("CustomFuncApproxScene");
     }
 }

@@ -22,7 +22,7 @@ public class PlotObj : MonoBehaviour
     void Awake(){
         lr = GetComponent<LineRenderer>();
         lr.material = new Material(Shader.Find("Sprites/Default"));
-        lr.widthMultiplier = 0.2f;
+        lr.widthMultiplier = 0.1f;
         
     }
     
@@ -37,11 +37,13 @@ public class PlotObj : MonoBehaviour
 
     public void CreateGrid(float x0, float y0, float width, float height, Color axisColor, Material lineMaterial){
         
-        points.Add(new Vector3(((x0-width)),(y0),0.0f));
-        points.Add(new Vector3((x0),(y0),0.0f));
-        points.Add(new Vector3((x0),(y0+(height)),0.0f));
-        points.Add(new Vector3((x0),(y0),0.0f));
-        points.Add(new Vector3(((x0+width)),(y0),0.0f));
+
+        //create gridline points z axis determins overlap order with z axis pos going into the screen
+        points.Add(new Vector3(((x0-width)),(y0),1.0f));
+        points.Add(new Vector3((x0),(y0),1.0f));
+        points.Add(new Vector3((x0),(y0+(height)),1.0f));
+        points.Add(new Vector3((x0),(y0),1.0f));
+        points.Add(new Vector3(((x0+width)),(y0),1.0f));
 
         // Tell it to make it default line material
         lr.material = lineMaterial;
