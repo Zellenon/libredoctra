@@ -101,7 +101,7 @@ public class Convolution : MonoBehaviour
         lineContainer.transform.SetParent(transform, false);
         Color plotLeftColor = Color.red;
         _func1 = lineContainer.AddComponent<LineRenderer>();
-        makeWave(lineContainer, plotLeftColor, "Sine");
+        makeWave<Sine>(lineContainer, plotLeftColor);
 
         lineContainer.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
         lineContainer.transform.position = new Vector3((-_width/2f),(_height/2f),0f);
@@ -112,7 +112,7 @@ public class Convolution : MonoBehaviour
         Color plotRightColor = Color.green;
         _func2 = lineContainer2.AddComponent<LineRenderer>();
         
-        makeWave(lineContainer2, plotRightColor, "Boxcar");
+        makeWave<Boxcar>(lineContainer2, plotRightColor);
         lineContainer2.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
         lineContainer2.transform.position = new Vector3((_width/2f),(_height/2f),0f);
 
@@ -120,7 +120,7 @@ public class Convolution : MonoBehaviour
         lineContainer3 = new GameObject("Func3");
         lineContainer3.transform.SetParent(transform, false);
         _func3 = lineContainer3.AddComponent<LineRenderer>();
-        makeWave(lineContainer3, plotLeftColor, "Sine");
+        makeWave<Sine>(lineContainer3, plotLeftColor);
         lineContainer3.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
         lineContainer3.transform.position = new Vector3((0),(0),0f);
 
@@ -128,7 +128,7 @@ public class Convolution : MonoBehaviour
         lineContainer4 = new GameObject("Func4");
         lineContainer4.transform.SetParent(transform, false);
         _func4 = lineContainer4.AddComponent<LineRenderer>();
-        makeWave(lineContainer4, plotRightColor, "Boxcar");
+        makeWave<Boxcar>(lineContainer4, plotRightColor);
         lineContainer4.transform.localScale = new Vector3(-0.5f, 0.5f, 0f);
         lineContainer4.transform.position = new Vector3((0),(-_height/2f),0f);
     }
@@ -150,13 +150,29 @@ public class Convolution : MonoBehaviour
 
     private void RegisterHandler(Button button)
     {
-        button.RegisterCallback<ClickEvent>(LoadWaveCallback<Dirac>);
+        button.RegisterCallback<ClickEvent>(LoadWaveCallback);
     }
 
-    private void LoadWaveCallback<T>(ClickEvent evt) where T: AbstractWave
+    private void LoadWaveCallback(ClickEvent evt)
     {
         Button button = evt.currentTarget as Button;
-        string buttonID = button.name.Split("-")[1];
+        string waveType = button.name.Split("-")[0];
+        string plotName = button.name.Split("-")[1];
+
+        switch(waveType){
+        case "Dirac":
+            break;
+        case "Sawtooth":
+            break;
+        case "Echo":
+            break;
+        case "Boxcar":
+            break;
+        case "Triangle":
+            break;
+        case "Sine":
+            break;
+        }
         // string toggleName = "toggle" + buttonNumber;
         // Toggle toggle = rootVisualElement.Q<Toggle>(toggleName);
         Debug.Log("Button was clicked!");
@@ -183,12 +199,12 @@ public class Convolution : MonoBehaviour
         GameObject.Destroy(lineRenderer);
     }
 
-    public void makeWave(GameObject lineObj, Color color, string waveType){
+    public void makeWave<T>(GameObject lineObj, Color color) where T: AbstractWave, new(){
         float xScaled = -_width/2;
-        makeWave(lineObj, color, waveType, xScaled);
+        makeWave<T>(lineObj, color, xScaled);
     }
 
-    public void makeWave(GameObject lineObj, Color color, string waveType, float xPos){
+    public void makeWave<T>(GameObject lineObj, Color color, float xPos) where T: AbstractWave, new() {
 
         AbstractWave wave;
         var lineRenderer = lineObj.GetComponent<LineRenderer>();
@@ -233,37 +249,12 @@ public class Convolution : MonoBehaviour
         List<Vector2> pointsList = new List<Vector2>();
         // passing string "str" in
         // switch statement
-        switch (waveType) {
-        case "sawToothEx":
-            lineRenderer.positionCount = 5;
-            pointsList.Add(new Vector3((-_width/2),(0),0.0f));
-            pointsList.Add(new Vector3((0),(0),0.0f));
-            pointsList.Add(new Vector3((0),(_height/2),0.0f));
-            pointsList.Add(new Vector3((_width/2),(0),0.0f));
-            pointsList.Add(new Vector3((_width-0.02f),(0),0.0f));
-            break;
- 
-        case "Boxcar":
-            lineRenderer.positionCount = n;
-            wave = new Boxcar();
-            for (int i = 0; i < n; ++i){
+        lineRenderer.positionCount = n;
+        wave = new T();
+        wave.frequency(1);
+        wave.amplitute(1);
+        for (int i = 0; i < n; ++i){
             pointsList.Add(new Vector3(xList[i],wave.get(xList[i]),0.0f));
-            }
-            break;
-        case "Sine":
-
-            //NEEDS UPDATE to include freq and amp from input
-            lineRenderer.positionCount = n;
-            wave = new Sine();
-            wave.frequency(1);
-            wave.amplitute(1);
-            for (int i = 0; i < n; ++i){
-            pointsList.Add(new Vector3(xList[i],wave.get(xList[i]),0.0f));
-            }
-            break;
- 
-        default:
-            break;
         }
 
         for (int i = 0; i < pointsList.Count; i++)

@@ -2,21 +2,21 @@ using System;
 using UnityEngine;
 using System;
 
-public abstract class AbstractWave : MonoBehaviour
+public class AbstractWave : MonoBehaviour
 {
     protected float _amp;
     protected float _freq;
     protected bool _isReversed;
 
-    // public AbstractWave(float amp, float freq,
-    // bool isReversed)
-    // {
-    //     _amp = amp;
-    //     _freq = freq;
-    //     _isReversed = isReversed;
-    // }
+    public AbstractWave()
+    {
+        _amp = 1;
+        _freq = 1;
+        _isReversed = false;
+    }
 
-    public abstract float get(float i);
+
+    public virtual float get(float x) {return 0;}
 
     public void isReversed(bool isReversed)
     {
