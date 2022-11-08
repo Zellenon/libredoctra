@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Complex = System.Numerics.Complex;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEditor;
+using UnityEngine.UIElements;
 using TMPro;
-//using MathNet.Numerics.IntegralTransforms;
 
 public class Convolution : MonoBehaviour
 {
@@ -52,6 +52,8 @@ public class Convolution : MonoBehaviour
 
     private int interval = 1;
     private float nextTime = 0;
+
+    private UIDocument _doc;
 
     void Awake()
     {
@@ -138,6 +140,26 @@ public class Convolution : MonoBehaviour
             lineContainer4.transform.position = new Vector3((nextTime),(0),0f);
             nextTime += interval;
         }
+    }
+
+    private void SetupButtonHandlers()
+    {
+        var buttons = _doc.rootVisualElement.Query<Button>();
+        buttons.ForEach(RegisterHandler);
+    }
+
+    private void RegisterHandler(Button button)
+    {
+        button.RegisterCallback<ClickEvent>(LoadWaveCallback<Dirac>);
+    }
+
+    private void LoadWaveCallback<T>(ClickEvent evt) where T: AbstractWave
+    {
+        Button button = evt.currentTarget as Button;
+        string buttonID = button.name.Split("-")[1];
+        // string toggleName = "toggle" + buttonNumber;
+        // Toggle toggle = rootVisualElement.Q<Toggle>(toggleName);
+        Debug.Log("Button was clicked!");
     }
 
     Vector2 ToScreenCoords(Vector2 funccoords)

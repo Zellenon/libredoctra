@@ -4,38 +4,38 @@
         <ui:VisualElement name="Sidebar" style="height: 100%; width: 20%; justify-content: space-around; background-color: rgb(58, 58, 58);">
             <ui:VisualElement name="Buttons" style="justify-content: space-around;">
                 <ui:VisualElement name="DiracRow" style="flex-direction: row; justify-content: center; padding-left: 2%; padding-right: 2%; padding-top: 2%; padding-bottom: 2%;">
-                    <ui:Label text="Dirac" display-tooltip-when-elided="true" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
-                    <ui:Button text="A" display-tooltip-when-elided="true" name="AButton" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
-                    <ui:Button text="B" display-tooltip-when-elided="true" name="BButton" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
+                    <ui:Label text="Dirac" display-tooltip-when-elided="true" name="Label" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
+                    <ui:Button text="A" display-tooltip-when-elided="true" name="Dirac-A" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
+                    <ui:Button text="B" display-tooltip-when-elided="true" name="Dirac-B" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
                 </ui:VisualElement>
-                <ui:VisualElement name="DiracRow" style="flex-direction: row; justify-content: center; padding-left: 2%; padding-right: 2%; padding-top: 2%; padding-bottom: 2%;">
+                <ui:VisualElement name="BoxcarRow" style="flex-direction: row; justify-content: center; padding-left: 2%; padding-right: 2%; padding-top: 2%; padding-bottom: 2%;">
                     <ui:Label text="Boxcar" display-tooltip-when-elided="true" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
-                    <ui:Button text="A" display-tooltip-when-elided="true" name="AButton" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
-                    <ui:Button text="B" display-tooltip-when-elided="true" name="BButton" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
+                    <ui:Button text="A" display-tooltip-when-elided="true" name="Boxcar-A" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
+                    <ui:Button text="B" display-tooltip-when-elided="true" name="Boxcar-B" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
                 </ui:VisualElement>
-                <ui:VisualElement name="DiracRow" style="flex-direction: row; justify-content: center; padding-left: 2%; padding-right: 2%; padding-top: 2%; padding-bottom: 2%;">
+                <ui:VisualElement name="EchoRow" style="flex-direction: row; justify-content: center; padding-left: 2%; padding-right: 2%; padding-top: 2%; padding-bottom: 2%;">
                     <ui:Label text="Echo" display-tooltip-when-elided="true" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
-                    <ui:Button text="A" display-tooltip-when-elided="true" name="AButton" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
-                    <ui:Button text="B" display-tooltip-when-elided="true" name="BButton" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
+                    <ui:Button text="A" display-tooltip-when-elided="true" name="Echo-A" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
+                    <ui:Button text="B" display-tooltip-when-elided="true" name="Echo-B" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
                 </ui:VisualElement>
-                <ui:VisualElement name="DiracRow" style="flex-direction: row; justify-content: center; padding-left: 2%; padding-right: 2%; padding-top: 2%; padding-bottom: 2%;">
+                <ui:VisualElement name="SawToothRow" style="flex-direction: row; justify-content: center; padding-left: 2%; padding-right: 2%; padding-top: 2%; padding-bottom: 2%;">
                     <ui:Label text="Sawtooth" display-tooltip-when-elided="true" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
-                    <ui:Button text="A" display-tooltip-when-elided="true" name="AButton" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
-                    <ui:Button text="B" display-tooltip-when-elided="true" name="BButton" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
+                    <ui:Button text="A" display-tooltip-when-elided="true" name="SawTooth-A" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
+                    <ui:Button text="B" display-tooltip-when-elided="true" name="SawTooth-B" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
                 </ui:VisualElement>
-                <ui:VisualElement name="DiracRow" style="flex-direction: row; justify-content: center; padding-left: 2%; padding-right: 2%; padding-top: 2%; padding-bottom: 2%;">
+                <ui:VisualElement name="TriangleRow" style="flex-direction: row; justify-content: center; padding-left: 2%; padding-right: 2%; padding-top: 2%; padding-bottom: 2%;">
                     <ui:Label text="Triangle" display-tooltip-when-elided="true" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
-                    <ui:Button text="A" display-tooltip-when-elided="true" name="AButton" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
-                    <ui:Button text="B" display-tooltip-when-elided="true" name="BButton" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
+                    <ui:Button text="A" display-tooltip-when-elided="true" name="Triangle-A" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
+                    <ui:Button text="B" display-tooltip-when-elided="true" name="Triangle-B" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
                 </ui:VisualElement>
-                <ui:VisualElement name="DiracRow" style="flex-direction: row; justify-content: center; padding-left: 2%; padding-right: 2%; padding-top: 2%; padding-bottom: 2%;">
+                <ui:VisualElement name="SineRow" style="flex-direction: row; justify-content: center; padding-left: 2%; padding-right: 2%; padding-top: 2%; padding-bottom: 2%;">
                     <ui:Label text="Sine" display-tooltip-when-elided="true" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
-                    <ui:Button text="A" display-tooltip-when-elided="true" name="AButton" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
-                    <ui:Button text="B" display-tooltip-when-elided="true" name="BButton" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
+                    <ui:Button text="A" display-tooltip-when-elided="true" name="Sine-A" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
+                    <ui:Button text="B" display-tooltip-when-elided="true" name="Sine-B" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="Sliders">
-                <ui:Slider picking-mode="Ignore" label="Convolution" value="42" high-value="100" />
+                <ui:Slider picking-mode="Ignore" label="Convolution" value="42" high-value="100" name="Convolve" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
