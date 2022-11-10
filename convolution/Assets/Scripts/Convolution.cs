@@ -89,6 +89,8 @@ public class Convolution : MonoBehaviour
         //OriginLabel.gameObject.SetActive(false);
         _doc = GetComponent<UIDocument>();
         SetupButtonHandlers();
+        var slider = _doc.rootVisualElement.Query<Slider>().First();
+        slider.RegisterValueChangedCallback(ConvolveCallback);
     }
 
 
@@ -179,6 +181,10 @@ public class Convolution : MonoBehaviour
         // string toggleName = "toggle" + buttonNumber;
         // Toggle toggle = rootVisualElement.Q<Toggle>(toggleName);
         Debug.Log("Button was clicked!");
+    }
+
+    private void ConvolveCallback(ChangeEvent<float> evt) {
+        print(evt.newValue);
     }
 
     Vector2 ToScreenCoords(Vector2 funccoords)
