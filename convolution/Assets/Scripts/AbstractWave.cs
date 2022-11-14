@@ -32,4 +32,8 @@ public class AbstractWave : MonoBehaviour
         _amp = amp;
     }
 
+    public float convolve(AbstractWave other, float offset, float x) {
+        return this.get(x) * other.get(offset-x);
+    }
+
 }
