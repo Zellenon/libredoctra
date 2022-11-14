@@ -35,7 +35,7 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="Sliders">
-                <ui:Slider picking-mode="Ignore" label="Convolution" value="42" high-value="100" name="Convolve" />
+                <ui:Slider picking-mode="Ignore" label="Convolution" value="0" high-value="100" name="Convolve" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
