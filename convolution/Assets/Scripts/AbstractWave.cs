@@ -31,4 +31,8 @@ public class AbstractWave
         _amp = amp;
     }
 
+    public float convolve(AbstractWave other, float offset, float x) {
+        return get(x) * other.get(offset - x);
+    }
+
 }

@@ -228,7 +228,14 @@ public class Convolution : MonoBehaviour
 
     private void ConvolveCallback(ChangeEvent<float> evt) {
         print(evt.newValue);
-        lineContainer4.transform.position = new Vector3((evt.newValue/24),(0),0f);
+        int offset = (int) evt.newValue;
+        lineContainer4.transform.position = new Vector3((offset/48),(0),0f); // why 48?
+        float multiplier = MAX_X / STEPCOUNT;
+        float convsum = 0.0f;
+        for (int i = 0; i <= offset; i++) {
+            convsum = _waveA.convolve(_waveB, offset, i * multiplier);
+        }
+        print(convsum);
     }
 
     public void SetWaveA<T>() where T: AbstractWave, new(){
