@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
-using System;
 
-public class AbstractWave : MonoBehaviour
+public class AbstractWave
 {
     protected float _amp;
     protected float _freq;
