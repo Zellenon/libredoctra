@@ -201,7 +201,18 @@ public class Convolution : MonoBehaviour
     public static void BakeLineDebuger(GameObject lineObj)
     {
         var lineRenderer = lineObj.GetComponent<LineRenderer>();
-        var meshFilter = lineObj.AddComponent<MeshFilter>();
+        //var meshFilter = lineObj.AddComponent<MeshFilter>();
+
+        MeshFilter  meshFilter = gameObject.GetComponent<MeshFilter>();
+
+        if (meshFilter == null){
+            meshFilter = gameObject.AddComponent<MeshFilter>();
+        }
+
+        if (meshFilter == null){
+            meshFilter = gameObject.GetComponent<MeshFilter>();
+        }
+
         Mesh mesh = new Mesh();
         lineRenderer.BakeMesh(mesh);
         meshFilter.sharedMesh = mesh;
