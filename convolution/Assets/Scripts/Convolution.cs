@@ -139,6 +139,7 @@ public class Convolution : MonoBehaviour
         makeWave<Boxcar>(lineContainer4, plotRightColor);
         lineContainer4.transform.localScale = new Vector3(-0.5f, 0.5f, 0f);
         lineContainer4.transform.position = new Vector3((0),(-_height/2f),0f);
+        redrawGraphs();
     }
 
     // Update is called once per frame
