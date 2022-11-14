@@ -57,6 +57,8 @@ public class Convolution : MonoBehaviour
 
     private UIDocument _doc;
 
+    private AbstractWave _waveA, waveB;
+
     void Awake()
     {
 
@@ -193,6 +195,18 @@ public class Convolution : MonoBehaviour
         print(evt.newValue);
     }
 
+    private void SetWaveA<T>() where T: AbstractWave, new() {
+        _waveA = T();
+        _waveA.frequency(1);
+        _waveA.amplitude(1);
+    }
+
+    private void SetWaveB<T>() where T: AbstractWave, new() {
+        _waveB = T();
+        _waveB.frequency(1);
+        _waveB.amplitude(1);
+    }
+
     Vector2 ToScreenCoords(Vector2 funccoords)
     {
         return (new Vector3(-_width + funccoords.x / _xscale, funccoords.y / _yscale));
@@ -296,7 +310,7 @@ public class Convolution : MonoBehaviour
         lineRenderer.positionCount = STEPCOUNT;
         wave = new T();
         wave.frequency(1);
-        wave.amplitute(1);
+        wave.amplitude(1);
         for (int i = 0; i < STEPCOUNT; ++i){
             pointsList.Add(new Vector3(xList[i],wave.get(xList[i]),0.0f));
         }
