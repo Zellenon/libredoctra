@@ -58,7 +58,6 @@ public class Convolution : MonoBehaviour
 
     void Awake()
     {
-
         _height = Camera.main.orthographicSize;
         _width = _height * Camera.main.aspect;
 
@@ -87,7 +86,7 @@ public class Convolution : MonoBehaviour
         topRightPlot.CreateGrid(xTopRightPlot, yTopRightPlot, topPlotsWidth, topPlotsHeight, Color.grey, defaultLineMaterial);
 
         bottomPlot.CreateGrid(0,0, _width- 0.2f, _height/1.5f,Color.grey, defaultLineMaterial);
-        // OriginLabel.gameObject.SetActive(false);
+
         _doc = GetComponent<UIDocument>();
         SetupButtonHandlers();
         var slider = _doc.rootVisualElement.Query<Slider>().First();
@@ -172,14 +171,12 @@ public class Convolution : MonoBehaviour
             Destroy(lineContainer.GetComponent<MeshFilter>());
             Destroy(lineContainer3.GetComponent<MeshRenderer>());
             Destroy(lineContainer3.GetComponent<MeshFilter>());
-            // Destroy(lineObj.material);
         }
         if (lineContainer2.GetComponent<MeshRenderer>() != null){
             Destroy(lineContainer2.GetComponent<MeshRenderer>());
             Destroy(lineContainer2.GetComponent<MeshFilter>());
             Destroy(lineContainer4.GetComponent<MeshRenderer>());
             Destroy(lineContainer4.GetComponent<MeshFilter>());
-            // Destroy(lineObj.material);
         }
 
         switch(waveType){
@@ -266,27 +263,14 @@ public class Convolution : MonoBehaviour
         var lineRenderer = lineObj.GetComponent<LineRenderer>();
         
         // Unity Shenanagins not properly universally adding components without help
-        MeshFilter meshFilter = lineObj.GetComponent<MeshFilter>();
-
-        if (meshFilter == null){
-            meshFilter = lineObj.AddComponent<MeshFilter>();
-        }
-        if (meshFilter == null){
-            meshFilter = lineObj.GetComponent<MeshFilter>();
-        }
+        MeshFilter meshFilter = TrueGetComponent<MeshFilter>(lineObj);
 
         Mesh mesh = new Mesh();
         lineRenderer.BakeMesh(mesh);
         meshFilter.sharedMesh = mesh;
  
         // Unity Shenanagins not properly universally adding components without help
-        MeshRenderer meshRenderer = lineObj.GetComponent<MeshRenderer>();
-        if (meshRenderer == null){
-            meshRenderer = lineObj.AddComponent<MeshRenderer>();
-        }
-        if (meshRenderer == null){
-            meshRenderer = lineObj.GetComponent<MeshRenderer>();
-        }
+        MeshRenderer meshRenderer = TrueGetComponent<MeshRenderer>(lineObj);
 
         meshRenderer.sharedMaterial = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
         
@@ -443,5 +427,17 @@ public class Convolution : MonoBehaviour
             lineRenderer.SetPosition(i, pointsList[i]);
         }
         BakeLineDebuger(lineObj);
+    }
+
+    private static T TrueGetComponent<T>(GameObject obj) where T: Component {
+        T comp = obj.GetComponent<T>();
+
+        if (comp == null){
+            comp = obj.AddComponent<T>();
+        }
+        if (comp == null){
+            comp = obj.GetComponent<T>();
+        }
+        return comp;
     }
 }
