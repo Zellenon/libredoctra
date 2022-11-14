@@ -238,7 +238,7 @@ public class Convolution : MonoBehaviour
         lineRenderer.endColor = color;
         
         //The scaled value for which to increment the functions x value
-        float incrementValue = _width/400;
+        float incrementValue = _width/n;
 
         //                    [Game Screen]
         ///////////////////////////////////////////////////////
