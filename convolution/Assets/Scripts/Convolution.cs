@@ -167,28 +167,59 @@ public class Convolution : MonoBehaviour
         string waveType = button.name.Split("-")[0];
         string plotName = button.name.Split("-")[1];
 
+        bool isButtonA = plotName=="A";
+
         switch(waveType){
         case "Dirac":
+            if (isButtonA) {
+                SetWaveA<Dirac>();
+            } else {
+                SetWaveB<Dirac>();
+            }
             // makeWave<Dirac>(???, ???, ???);
             break;
         case "Sawtooth":
+            if (isButtonA) {
+                SetWaveA<Sawtooth>();
+            } else {
+                SetWaveB<Sawtooth>();
+            }
             break;
         case "Echo":
+            if (isButtonA) {
+                SetWaveA<Echo>();
+            } else {
+                SetWaveB<Echo>();
+            }
             break;
         case "Boxcar":
+            if (isButtonA) {
+                SetWaveA<Boxcar>();
+            } else {
+                SetWaveB<Boxcar>();
+            }
             if (plotName == "A"){
             lineContainer.AddComponent<LineRenderer>();
             makeWave<Boxcar>(lineContainer,Color.red);
             }
             break;
         case "Triangle":
+            if (isButtonA) {
+                SetWaveA<Triangle>();
+            } else {
+                SetWaveB<Triangle>();
+            }
             break;
         case "Sine":
+            if (isButtonA) {
+                SetWaveA<Sine>();
+            } else {
+                SetWaveB<Sine>();
+            }
             break;
         }
-        // string toggleName = "toggle" + buttonNumber;
-        // Toggle toggle = rootVisualElement.Q<Toggle>(toggleName);
-        Debug.Log("Button was clicked!");
+        redrawGraphs();
+        // Debug.Log("Button was clicked!");
     }
 
     private void ConvolveCallback(ChangeEvent<float> evt) {
@@ -201,10 +232,18 @@ public class Convolution : MonoBehaviour
         _waveA.amplitude(1);
     }
 
+    public void SetWaveA(AbstractWave wave) {
+        _waveA = wave;
+    }
+
     public void SetWaveB<T>() where T: AbstractWave, new(){
         _waveB = new T();
         _waveB.frequency(1);
         _waveB.amplitude(1);
+    }
+
+    public void SetWaveB(AbstractWave wave) {
+        _waveB = wave;
     }
 
     Vector2 ToScreenCoords(Vector2 funccoords)
@@ -244,6 +283,16 @@ public class Convolution : MonoBehaviour
         meshRenderer.sharedMaterial = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
         
         GameObject.Destroy(lineRenderer);
+    }
+
+    public void redrawGraphs() {
+        //Draw graph of wave A
+
+        //Draw graph of wave B
+
+        //Draw both lines in the mixing graph
+
+        //Draw line in the result graph
     }
 
     public void makeWave<T>(GameObject lineObj, Color color) where T: AbstractWave, new(){
