@@ -29,6 +29,8 @@ public class Convolution : MonoBehaviour
 
     private float _width, _height, _xscale, _yscale;
 
+    private const int STEPCOUNT = 400;
+
     private float xTopLeftPlot, yTopLeftPlot, xTopRightPlot, yTopRightPlot, topPlotsWidth, topPlotsHeight;
 
     private int Nfft, Nfreq;
@@ -239,7 +241,6 @@ public class Convolution : MonoBehaviour
 
         AbstractWave wave;
         var lineRenderer = lineObj.GetComponent<LineRenderer>();
-        int n = 400;
 
         lineRenderer.material = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
         lineRenderer.useWorldSpace = true;
@@ -249,7 +250,7 @@ public class Convolution : MonoBehaviour
         lineRenderer.endColor = color;
         
         //The scaled value for which to increment the functions x value
-        float incrementValue = _width/n;
+        float incrementValue = _width/STEPCOUNT;
 
         //                    [Game Screen]
         ///////////////////////////////////////////////////////
@@ -269,9 +270,9 @@ public class Convolution : MonoBehaviour
         float xScaled = xPos;
 
         //A list to stor our new scaled xvalues
-        var xList = new List<float>(n);
+        var xList = new List<float>(STEPCOUNT);
 
-        for (int i = 0; i < n; ++i){
+        for (int i = 0; i < STEPCOUNT; ++i){
             
             xList.Add(xScaled+(i*incrementValue));
         }
@@ -280,11 +281,11 @@ public class Convolution : MonoBehaviour
         List<Vector2> pointsList = new List<Vector2>();
         // passing string "str" in
         // switch statement
-        lineRenderer.positionCount = n;
+        lineRenderer.positionCount = STEPCOUNT;
         wave = new T();
         wave.frequency(1);
         wave.amplitute(1);
-        for (int i = 0; i < n; ++i){
+        for (int i = 0; i < STEPCOUNT; ++i){
             pointsList.Add(new Vector3(xList[i],wave.get(xList[i]),0.0f));
         }
 
