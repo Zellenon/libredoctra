@@ -195,14 +195,14 @@ public class Convolution : MonoBehaviour
         print(evt.newValue);
     }
 
-    private void SetWaveA<T>() where T: AbstractWave, new() {
-        _waveA = T();
+    public void SetWaveA<T>() where T: AbstractWave, new(){
+        _waveA = new T();
         _waveA.frequency(1);
         _waveA.amplitude(1);
     }
 
-    private void SetWaveB<T>() where T: AbstractWave, new() {
-        _waveB = T();
+    public void SetWaveB<T>() where T: AbstractWave, new(){
+        _waveB = new T();
         _waveB.frequency(1);
         _waveB.amplitude(1);
     }
