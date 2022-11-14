@@ -177,7 +177,6 @@ public class Convolution : MonoBehaviour
 
         bool isButtonA = plotName=="A";
 
-        if (isButtonA){
             if (lineContainer.GetComponent<MeshRenderer>() != null){
                 Destroy(lineContainer.GetComponent<MeshRenderer>());
                 Destroy(lineContainer.GetComponent<MeshFilter>());
@@ -185,8 +184,6 @@ public class Convolution : MonoBehaviour
                 Destroy(lineContainer3.GetComponent<MeshFilter>());
                 // Destroy(lineObj.material);
             }
-        }
-        else{
             if (lineContainer2.GetComponent<MeshRenderer>() != null){
                 Destroy(lineContainer2.GetComponent<MeshRenderer>());
                 Destroy(lineContainer2.GetComponent<MeshFilter>());
@@ -194,7 +191,6 @@ public class Convolution : MonoBehaviour
                 Destroy(lineContainer4.GetComponent<MeshFilter>());
                 // Destroy(lineObj.material);
             }
-        }
 
         switch(waveType){
         case "Dirac":
