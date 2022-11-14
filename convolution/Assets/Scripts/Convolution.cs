@@ -177,20 +177,20 @@ public class Convolution : MonoBehaviour
 
         bool isButtonA = plotName=="A";
 
-            if (lineContainer.GetComponent<MeshRenderer>() != null){
-                Destroy(lineContainer.GetComponent<MeshRenderer>());
-                Destroy(lineContainer.GetComponent<MeshFilter>());
-                Destroy(lineContainer3.GetComponent<MeshRenderer>());
-                Destroy(lineContainer3.GetComponent<MeshFilter>());
-                // Destroy(lineObj.material);
-            }
-            if (lineContainer2.GetComponent<MeshRenderer>() != null){
-                Destroy(lineContainer2.GetComponent<MeshRenderer>());
-                Destroy(lineContainer2.GetComponent<MeshFilter>());
-                Destroy(lineContainer4.GetComponent<MeshRenderer>());
-                Destroy(lineContainer4.GetComponent<MeshFilter>());
-                // Destroy(lineObj.material);
-            }
+        if (lineContainer.GetComponent<MeshRenderer>() != null){
+            Destroy(lineContainer.GetComponent<MeshRenderer>());
+            Destroy(lineContainer.GetComponent<MeshFilter>());
+            Destroy(lineContainer3.GetComponent<MeshRenderer>());
+            Destroy(lineContainer3.GetComponent<MeshFilter>());
+            // Destroy(lineObj.material);
+        }
+        if (lineContainer2.GetComponent<MeshRenderer>() != null){
+            Destroy(lineContainer2.GetComponent<MeshRenderer>());
+            Destroy(lineContainer2.GetComponent<MeshFilter>());
+            Destroy(lineContainer4.GetComponent<MeshRenderer>());
+            Destroy(lineContainer4.GetComponent<MeshFilter>());
+            // Destroy(lineObj.material);
+        }
 
         switch(waveType){
         case "Dirac":
