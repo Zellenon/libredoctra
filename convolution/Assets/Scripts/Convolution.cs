@@ -15,11 +15,7 @@ public class Convolution : MonoBehaviour
     [SerializeField] private TextMeshPro OriginLabel;
     [SerializeField] private PlotObj topPlot, topRightPlot, bottomPlot;
     // [SerializeField] private EquationText eqnText;
-    // [SerializeField] private Slider _magSlider, _freqSlider, _phaseSlider;
 
-    // xtlp - x-top-left-plot; ect for x,y,width,height
-    // top-right-plot; ect
-    // bottom-plot
     private float xtlp, ytlp, wtlp, htlp,
     xtrp, ytrp, wtrp, htrp,
     xbp, ybp, wbp, hbp;
@@ -45,8 +41,6 @@ public class Convolution : MonoBehaviour
 
     private GameObject lineContainer,lineContainer2,lineContainer3,lineContainer4;
     public Transform _funct1position;
-    
-    // private Vector2[] _func1pts, _funct2pts, _resultpts;
 
     private LineRenderer _func1, _func2,_func3, _func4;
 
@@ -100,7 +94,6 @@ public class Convolution : MonoBehaviour
         slider.RegisterValueChangedCallback(ConvolveCallback);
     }
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -149,7 +142,6 @@ public class Convolution : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         if (_redrawFlag) {
             redrawGraphs();
             _redrawFlag = false;
@@ -234,9 +226,7 @@ public class Convolution : MonoBehaviour
             }
             break;
         }
-        
         _redrawFlag = true;
-        // Debug.Log("Button was clicked!");
     }
 
     private void ConvolveCallback(ChangeEvent<float> evt) {
