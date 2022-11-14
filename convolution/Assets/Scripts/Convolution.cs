@@ -29,7 +29,7 @@ public class Convolution : MonoBehaviour
 
     private float _width, _height, _xscale, _yscale;
 
-    private const int STEPCOUNT = 400;
+    private const int STEPCOUNT = 200;
 
     private float xTopLeftPlot, yTopLeftPlot, xTopRightPlot, yTopRightPlot, topPlotsWidth, topPlotsHeight;
 
@@ -437,7 +437,7 @@ public class Convolution : MonoBehaviour
 
         for (int i = 0; i < STEPCOUNT; ++i){
 
-            xList.Add(xScaled+(i*incrementValue));
+            xList.Add(i*incrementValue);
         }
 
         // A list of Vecter2s to store both the xy points we want linerenderer to connect
