@@ -57,7 +57,7 @@ public class Convolution : MonoBehaviour
 
     private UIDocument _doc;
 
-    private AbstractWave _waveA, waveB;
+    private AbstractWave _waveA, _waveB;
 
     void Awake()
     {
