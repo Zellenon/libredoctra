@@ -174,7 +174,7 @@ public class Convolution : MonoBehaviour
         case "Boxcar":
             if (plotName == "A"){
             lineContainer.AddComponent<LineRenderer>();
-            makeWave<Boxcar>(lineContainer,plotLeftColor);
+            makeWave<Boxcar>(lineContainer,Color.red);
             }
             break;
         case "Triangle":
@@ -219,10 +219,10 @@ public class Convolution : MonoBehaviour
 
     public void makeWave<T>(GameObject lineObj, Color color, float xPos) where T: AbstractWave, new() {
 
-        if (lineObj.GetComponent<MeshRenderer>() =! null){
+        if (lineObj.GetComponent<MeshRenderer>() != null){
             Destroy(lineObj.GetComponent<MeshRenderer>());
             Destroy(lineObj.GetComponent<MeshFilter>());
-            Destroy(lineObj.material);
+            // Destroy(lineObj.material);
         }
 
 
