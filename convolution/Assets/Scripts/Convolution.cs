@@ -317,6 +317,10 @@ public class Convolution : MonoBehaviour
         makeWave(lineContainer2,Color.red, _waveB);
 
         // Draw both lines in the mixing graph
+        lineContainer3.AddComponent<LineRenderer>();
+        makeWave(lineContainer3,Color.red, _waveA);
+        lineContainer4.AddComponent<LineRenderer>();
+        makeWave(lineContainer4,Color.red, _waveB);
 
         // Draw line in the result graph
     }
