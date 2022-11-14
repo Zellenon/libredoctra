@@ -141,7 +141,7 @@ public class Convolution : MonoBehaviour
         _func4 = lineContainer4.AddComponent<LineRenderer>();
         makeWave<Boxcar>(lineContainer4, plotRightColor);
         lineContainer4.transform.localScale = new Vector3(-0.5f, 0.5f, 0f);
-        lineContainer4.transform.position = new Vector3((0),(-_height/2f),0f);
+        lineContainer4.transform.position = new Vector3((0),(0),0f);
 
         _redrawFlag = true;
     }
@@ -149,10 +149,7 @@ public class Convolution : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time >= nextTime) {
-            lineContainer4.transform.position = new Vector3((nextTime),(0),0f);
-            nextTime += interval;
-        }
+        
         if (_redrawFlag) {
             redrawGraphs();
             _redrawFlag = false;
@@ -244,6 +241,7 @@ public class Convolution : MonoBehaviour
 
     private void ConvolveCallback(ChangeEvent<float> evt) {
         print(evt.newValue);
+        lineContainer4.transform.position = new Vector3((evt.newValue/12f),(0),0f);
     }
 
     public void SetWaveA<T>() where T: AbstractWave, new(){
@@ -314,13 +312,13 @@ public class Convolution : MonoBehaviour
         // Draw graph of wave B
         if (_waveB == null) _waveB = new Boxcar();
         lineContainer2.AddComponent<LineRenderer>();
-        makeWave(lineContainer2,Color.red, _waveB);
+        makeWave(lineContainer2,Color.green, _waveB);
 
         // Draw both lines in the mixing graph
         lineContainer3.AddComponent<LineRenderer>();
         makeWave(lineContainer3,Color.red, _waveA);
         lineContainer4.AddComponent<LineRenderer>();
-        makeWave(lineContainer4,Color.red, _waveB);
+        makeWave(lineContainer4,Color.green, _waveB);
 
         // Draw line in the result graph
     }
