@@ -203,14 +203,14 @@ public class Convolution : MonoBehaviour
         var lineRenderer = lineObj.GetComponent<LineRenderer>();
         //var meshFilter = lineObj.AddComponent<MeshFilter>();
 
-        MeshFilter  meshFilter = gameObject.GetComponent<MeshFilter>();
+        MeshFilter  meshFilter = lineObj.GetComponent<MeshFilter>();
 
         if (meshFilter == null){
-            meshFilter = gameObject.AddComponent<MeshFilter>();
+            meshFilter = lineObj.AddComponent<MeshFilter>();
         }
 
         if (meshFilter == null){
-            meshFilter = gameObject.GetComponent<MeshFilter>();
+            meshFilter = lineObj.GetComponent<MeshFilter>();
         }
 
         Mesh mesh = new Mesh();
