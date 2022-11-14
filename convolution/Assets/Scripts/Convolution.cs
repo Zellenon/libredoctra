@@ -45,11 +45,11 @@ public class Convolution : MonoBehaviour
     private GameObject lineContainer,lineContainer2,lineContainer3,lineContainer4;
     public Transform _funct1position;
     
-    //private Vector2[] _func1pts, _funct2pts, _resultpts;
+    // private Vector2[] _func1pts, _funct2pts, _resultpts;
 
     private LineRenderer _func1, _func2,_func3, _func4;
 
-    //these variables will refer to the relative x position of the functions as they are being convolved together
+    // these variables will refer to the relative x position of the functions as they are being convolved together
     private float funct1xPos, funct2xPos;
 
     private int interval = 1;
@@ -74,14 +74,14 @@ public class Convolution : MonoBehaviour
 
         float xymargin = 0.5f;
 
-        //Center points for the background grid topPlots
+        // Center points for the background grid topPlots
         xTopLeftPlot = - _width / 2;
         yTopLeftPlot =  _height / 2;
         
         xTopRightPlot = _width / 2;
         yTopRightPlot =  _height / 2;
 
-        //height and width of topplots
+        // height and width of topplots
         topPlotsWidth = (_width / 2) - 0.2f;
         topPlotsHeight =  _height / 2;
 
@@ -90,7 +90,7 @@ public class Convolution : MonoBehaviour
         topRightPlot.CreateGrid(xTopRightPlot, yTopRightPlot, topPlotsWidth, topPlotsHeight, Color.grey, defaultLineMaterial);
 
         bottomPlot.CreateGrid(0,0, _width- 0.2f, _height/1.5f,Color.grey, defaultLineMaterial);
-        //OriginLabel.gameObject.SetActive(false);
+        // OriginLabel.gameObject.SetActive(false);
         _doc = GetComponent<UIDocument>();
         SetupButtonHandlers();
         var slider = _doc.rootVisualElement.Query<Slider>().First();
@@ -114,7 +114,7 @@ public class Convolution : MonoBehaviour
         lineContainer.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
         lineContainer.transform.position = new Vector3((-_width/2f),(_height/2f),0f);
 
-        //function 2 top
+        // function 2 top
         lineContainer2 = new GameObject("Func2");
         lineContainer2.transform.SetParent(transform, false);
         Color plotRightColor = Color.green;
@@ -124,7 +124,7 @@ public class Convolution : MonoBehaviour
         lineContainer2.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
         lineContainer2.transform.position = new Vector3((_width/2f),(_height/2f),0f);
 
-        //function1 bottom
+        // function1 bottom
         lineContainer3 = new GameObject("Func3");
         lineContainer3.transform.SetParent(transform, false);
         _func3 = lineContainer3.AddComponent<LineRenderer>();
@@ -132,7 +132,7 @@ public class Convolution : MonoBehaviour
         lineContainer3.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
         lineContainer3.transform.position = new Vector3((0),(0),0f);
 
-        //function2 bottom
+        // function2 bottom
         lineContainer4 = new GameObject("Func4");
         lineContainer4.transform.SetParent(transform, false);
         _func4 = lineContainer4.AddComponent<LineRenderer>();
@@ -176,7 +176,6 @@ public class Convolution : MonoBehaviour
             } else {
                 SetWaveB<Dirac>();
             }
-            // makeWave<Dirac>(???, ???, ???);
             break;
         case "Sawtooth":
             if (isButtonA) {
@@ -197,10 +196,6 @@ public class Convolution : MonoBehaviour
                 SetWaveA<Boxcar>();
             } else {
                 SetWaveB<Boxcar>();
-            }
-            if (plotName == "A"){
-            lineContainer.AddComponent<LineRenderer>();
-            makeWave<Boxcar>(lineContainer,Color.red);
             }
             break;
         case "Triangle":
@@ -251,13 +246,13 @@ public class Convolution : MonoBehaviour
         return (new Vector3(-_width + funccoords.x / _xscale, funccoords.y / _yscale));
     }
 
-    //A static function that transforms a gameobj with a Linerenderer into a gameobj with a mesh of the Linerenderer. This allows us
+    // A static function that transforms a gameobj with a Linerenderer into a gameobj with a mesh of the Linerenderer. This allows us
     // to use gamobj.transform to move our linerenderer "images" around
     public static void BakeLineDebuger(GameObject lineObj)
     {
         var lineRenderer = lineObj.GetComponent<LineRenderer>();
         
-        //Unity Shenanagins not properly universally adding components without help
+        // Unity Shenanagins not properly universally adding components without help
         MeshFilter meshFilter = lineObj.GetComponent<MeshFilter>();
 
         if (meshFilter == null){
@@ -271,7 +266,7 @@ public class Convolution : MonoBehaviour
         lineRenderer.BakeMesh(mesh);
         meshFilter.sharedMesh = mesh;
  
-        //Unity Shenanagins not properly universally adding components without help
+        // Unity Shenanagins not properly universally adding components without help
         MeshRenderer meshRenderer = lineObj.GetComponent<MeshRenderer>();
         if (meshRenderer == null){
             meshRenderer = lineObj.AddComponent<MeshRenderer>();
@@ -286,13 +281,19 @@ public class Convolution : MonoBehaviour
     }
 
     public void redrawGraphs() {
-        //Draw graph of wave A
+        // Draw graph of wave A
+        if (_waveA == null) _waveA = new Boxcar();
+        lineContainer.AddComponent<LineRenderer>();
+        makeWave(lineContainer,Color.red, _waveA);
 
-        //Draw graph of wave B
+        // Draw graph of wave B
+        if (_waveB == null) _waveB = new Boxcar();
+        lineContainer.AddComponent<LineRenderer>();
+        makeWave(lineContainer,Color.red, _waveB);
 
-        //Draw both lines in the mixing graph
+        // Draw both lines in the mixing graph
 
-        //Draw line in the result graph
+        // Draw line in the result graph
     }
 
     public void makeWave<T>(GameObject lineObj, Color color) where T: AbstractWave, new(){
@@ -319,7 +320,7 @@ public class Convolution : MonoBehaviour
         lineRenderer.startColor = color;
         lineRenderer.endColor = color;
         
-        //The scaled value for which to increment the functions x value
+        // The scaled value for which to increment the functions x value
         float incrementValue = _width/STEPCOUNT;
 
         //                    [Game Screen]
@@ -336,10 +337,10 @@ public class Convolution : MonoBehaviour
         //                         |                         //
         //                         |                         //
         ///////////////////////////////////////////////////////
-        //The scaled minimum x value for the function; In this case we want our lines to have a length of 1/4 the screen
+        // The scaled minimum x value for the function; In this case we want our lines to have a length of 1/4 the screen
         float xScaled = xPos;
 
-        //A list to stor our new scaled xvalues
+        // A list to stor our new scaled xvalues
         var xList = new List<float>(STEPCOUNT);
 
         for (int i = 0; i < STEPCOUNT; ++i){
@@ -347,7 +348,7 @@ public class Convolution : MonoBehaviour
             xList.Add(xScaled+(i*incrementValue));
         }
 
-        //A list of Vecter2s to store both the xy points we want linerenderer to connect
+        // A list of Vecter2s to store both the xy points we want linerenderer to connect
         List<Vector2> pointsList = new List<Vector2>();
         // passing string "str" in
         // switch statement
@@ -355,6 +356,71 @@ public class Convolution : MonoBehaviour
         wave = new T();
         wave.frequency(1);
         wave.amplitude(1);
+        for (int i = 0; i < STEPCOUNT; ++i){
+            pointsList.Add(new Vector3(xList[i],wave.get(xList[i]),0.0f));
+        }
+
+        for (int i = 0; i < pointsList.Count; i++)
+        {
+            lineRenderer.SetPosition(i, pointsList[i]);
+        }
+        BakeLineDebuger(lineObj);
+    }
+
+    public void makeWave(GameObject lineObj, Color color, AbstractWave wave) {
+        float xScaled = -_width/2;
+        makeWave(lineObj, color, wave, xScaled);
+    }
+
+    public void makeWave(GameObject lineObj, Color color, AbstractWave wave, float xPos) {
+
+        if (lineObj.GetComponent<MeshRenderer>() != null){
+            Destroy(lineObj.GetComponent<MeshRenderer>());
+            Destroy(lineObj.GetComponent<MeshFilter>());
+        }
+
+        var lineRenderer = lineObj.GetComponent<LineRenderer>();
+
+        lineRenderer.material = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
+        lineRenderer.useWorldSpace = true;
+        lineRenderer.startWidth = 0.2f;
+        lineRenderer.endWidth = 0.2f;
+        lineRenderer.startColor = color;
+        lineRenderer.endColor = color;
+
+        // The scaled value for which to increment the functions x value
+        float incrementValue = _width/STEPCOUNT;
+
+        //                    [Game Screen]
+        ///////////////////////////////////////////////////////
+        //                         |                         //
+        //                         |                         //
+        // (-_width/2,0)           |                    (_width/2,0)
+        //  |                      |                        |//
+        //  v                      |                        V//
+        // ------------------------+-------------------------//
+        //                         |                         //
+        //                         |                         //
+        //                         |                         //
+        //                         |                         //
+        //                         |                         //
+        ///////////////////////////////////////////////////////
+        // The scaled minimum x value for the function; In this case we want our lines to have a length of 1/4 the screen
+        float xScaled = xPos;
+
+        // A list to stor our new scaled xvalues
+        var xList = new List<float>(STEPCOUNT);
+
+        for (int i = 0; i < STEPCOUNT; ++i){
+
+            xList.Add(xScaled+(i*incrementValue));
+        }
+
+        // A list of Vecter2s to store both the xy points we want linerenderer to connect
+        List<Vector2> pointsList = new List<Vector2>();
+        // passing string "str" in
+        // switch statement
+        lineRenderer.positionCount = STEPCOUNT;
         for (int i = 0; i < STEPCOUNT; ++i){
             pointsList.Add(new Vector3(xList[i],wave.get(xList[i]),0.0f));
         }
