@@ -59,6 +59,8 @@ public class Convolution : MonoBehaviour
 
     private AbstractWave _waveA, _waveB;
 
+    private bool _redrawFlag;
+
     void Awake()
     {
 
@@ -139,7 +141,8 @@ public class Convolution : MonoBehaviour
         makeWave<Boxcar>(lineContainer4, plotRightColor);
         lineContainer4.transform.localScale = new Vector3(-0.5f, 0.5f, 0f);
         lineContainer4.transform.position = new Vector3((0),(-_height/2f),0f);
-        redrawGraphs();
+
+        _redrawFlag = true;
     }
 
     // Update is called once per frame
@@ -148,6 +151,10 @@ public class Convolution : MonoBehaviour
         if (Time.time >= nextTime) {
             lineContainer4.transform.position = new Vector3((nextTime),(0),0f);
             nextTime += interval;
+        }
+        if (_redrawFlag) {
+            redrawGraphs();
+            _redrawFlag = false;
         }
     }
 
@@ -214,7 +221,7 @@ public class Convolution : MonoBehaviour
             }
             break;
         }
-        redrawGraphs();
+        _redrawFlag = true;
         // Debug.Log("Button was clicked!");
     }
 
