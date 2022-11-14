@@ -177,6 +177,25 @@ public class Convolution : MonoBehaviour
 
         bool isButtonA = plotName=="A";
 
+        if (isButtonA){
+            if (lineContainer.GetComponent<MeshRenderer>() != null){
+                Destroy(lineContainer.GetComponent<MeshRenderer>());
+                Destroy(lineContainer.GetComponent<MeshFilter>());
+                Destroy(lineContainer3.GetComponent<MeshRenderer>());
+                Destroy(lineContainer3.GetComponent<MeshFilter>());
+                // Destroy(lineObj.material);
+            }
+        }
+        else{
+            if (lineContainer2.GetComponent<MeshRenderer>() != null){
+                Destroy(lineContainer2.GetComponent<MeshRenderer>());
+                Destroy(lineContainer2.GetComponent<MeshFilter>());
+                Destroy(lineContainer4.GetComponent<MeshRenderer>());
+                Destroy(lineContainer4.GetComponent<MeshFilter>());
+                // Destroy(lineObj.material);
+            }
+        }
+
         switch(waveType){
         case "Dirac":
             if (isButtonA) {
@@ -221,6 +240,7 @@ public class Convolution : MonoBehaviour
             }
             break;
         }
+        
         _redrawFlag = true;
         // Debug.Log("Button was clicked!");
     }
@@ -311,11 +331,7 @@ public class Convolution : MonoBehaviour
 
     public void makeWave<T>(GameObject lineObj, Color color, float xPos) where T: AbstractWave, new() {
 
-        if (lineObj.GetComponent<MeshRenderer>() != null){
-            Destroy(lineObj.GetComponent<MeshRenderer>());
-            Destroy(lineObj.GetComponent<MeshFilter>());
-            // Destroy(lineObj.material);
-        }
+        
 
 
         AbstractWave wave;
