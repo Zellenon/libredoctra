@@ -18,10 +18,10 @@
                     <ui:Button text="A" display-tooltip-when-elided="true" name="Echo-A" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
                     <ui:Button text="B" display-tooltip-when-elided="true" name="Echo-B" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
                 </ui:VisualElement>
-                <ui:VisualElement name="SawToothRow" style="flex-direction: row; justify-content: center; padding-left: 2%; padding-right: 2%; padding-top: 2%; padding-bottom: 2%;">
+                <ui:VisualElement name="SawtoothRow" style="flex-direction: row; justify-content: center; padding-left: 2%; padding-right: 2%; padding-top: 2%; padding-bottom: 2%;">
                     <ui:Label text="Sawtooth" display-tooltip-when-elided="true" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
-                    <ui:Button text="A" display-tooltip-when-elided="true" name="SawTooth-A" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
-                    <ui:Button text="B" display-tooltip-when-elided="true" name="SawTooth-B" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
+                    <ui:Button text="A" display-tooltip-when-elided="true" name="Sawtooth-A" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
+                    <ui:Button text="B" display-tooltip-when-elided="true" name="Sawtooth-B" class="waveButton" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="TriangleRow" style="flex-direction: row; justify-content: center; padding-left: 2%; padding-right: 2%; padding-top: 2%; padding-bottom: 2%;">
                     <ui:Label text="Triangle" display-tooltip-when-elided="true" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;" />
