@@ -228,7 +228,7 @@ public class Convolution : MonoBehaviour
 
     private void ConvolveCallback(ChangeEvent<float> evt) {
         print(evt.newValue);
-        lineContainer4.transform.position = new Vector3((evt.newValue/12f),(0),0f);
+        lineContainer4.transform.position = new Vector3((evt.newValue/24),(0),0f);
     }
 
     public void SetWaveA<T>() where T: AbstractWave, new(){
