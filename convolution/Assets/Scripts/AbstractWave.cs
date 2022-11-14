@@ -27,7 +27,7 @@ public class AbstractWave : MonoBehaviour
     {
         _freq = freq;
     }
-    public void amplitute(float amp)
+    public void amplitude(float amp)
     {
         _amp = amp;
     }
