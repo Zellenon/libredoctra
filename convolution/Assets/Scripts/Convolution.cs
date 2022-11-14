@@ -205,7 +205,7 @@ public class Convolution : MonoBehaviour
         var lineRenderer = lineObj.GetComponent<LineRenderer>();
         //var meshFilter = lineObj.AddComponent<MeshFilter>();
 
-        MeshFilter  meshFilter = lineObj.GetComponent<MeshFilter>();
+        MeshFilter meshFilter = lineObj.GetComponent<MeshFilter>();
 
         if (meshFilter == null){
             meshFilter = lineObj.AddComponent<MeshFilter>();
@@ -217,9 +217,21 @@ public class Convolution : MonoBehaviour
 
         Mesh mesh = new Mesh();
         lineRenderer.BakeMesh(mesh);
+    
         meshFilter.sharedMesh = mesh;
  
-        var meshRenderer = lineObj.AddComponent<MeshRenderer>();
+        //var meshRenderer = lineObj.AddComponent<MeshRenderer>();
+
+        MeshRenderer meshRenderer = lineObj.GetComponent<MeshRenderer>();
+
+        if (meshRenderer == null){
+            meshRenderer = lineObj.AddComponent<MeshRenderer>();
+        }
+
+        if (meshRenderer == null){
+            meshRenderer = lineObj.GetComponent<MeshRenderer>();
+        }
+
         meshRenderer.sharedMaterial = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
         
         GameObject.Destroy(lineRenderer);
