@@ -288,8 +288,8 @@ public class Convolution : MonoBehaviour
 
         // Draw graph of wave B
         if (_waveB == null) _waveB = new Boxcar();
-        lineContainer.AddComponent<LineRenderer>();
-        makeWave(lineContainer,Color.red, _waveB);
+        lineContainer2.AddComponent<LineRenderer>();
+        makeWave(lineContainer2,Color.red, _waveB);
 
         // Draw both lines in the mixing graph
 
