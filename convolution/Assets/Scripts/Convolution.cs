@@ -82,10 +82,10 @@ public class Convolution : MonoBehaviour
         topPlotsWidth = (_width / 2f) - 0.2f;
         topPlotsHeight =  _height / 2f;
 
-        xConvolveGraph = (-_width/4f) + xymargin
+        xConvolveGraph = (-_width/4f) + xymargin;
         YConvolveGraph = 0f;
-        convolveGraphWidth = _width*0.8f
-        convolveGraphHeight = _height/1.5f
+        convolveGraphWidth = _width*0.8f;
+        convolveGraphHeight = _height/1.5f;
 
         topPlot.CreateLGrid(xTopLeftPlot, yTopLeftPlot, topPlotsWidth, topPlotsHeight, Color.grey, defaultLineMaterial);
 
@@ -314,68 +314,7 @@ public class Convolution : MonoBehaviour
         // Draw line in the result graph
     }
 
-    public void makeWave<T>(GameObject lineObj, Color color) where T: AbstractWave, new(){
-        float xScaled = -_width/2;
-        makeWave<T>(lineObj, color, xScaled);
-    }
-
-    public void makeWave<T>(GameObject lineObj, Color color, float xPos) where T: AbstractWave, new() {
-        AbstractWave wave;
-        var lineRenderer = lineObj.GetComponent<LineRenderer>();
-
-        lineRenderer.material = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
-        lineRenderer.useWorldSpace = true;
-        lineRenderer.startWidth = 0.2f;
-        lineRenderer.endWidth = 0.2f;
-        lineRenderer.startColor = color;
-        lineRenderer.endColor = color;
-        
-        // The scaled value for which to increment the functions x value
-        float incrementValue = _width/STEPCOUNT;
-
-        //                    [Game Screen]
-        ///////////////////////////////////////////////////////
-        //                         |                         //
-        //                         |                         //
-        // (-_width/2,0)           |                    (_width/2,0)
-        //  |                      |                        |//
-        //  v                      |                        V//
-        // ------------------------+-------------------------//
-        //                         |                         //
-        //                         |                         //
-        //                         |                         //
-        //                         |                         //
-        //                         |                         //
-        ///////////////////////////////////////////////////////
-        // The scaled minimum x value for the function; In this case we want our lines to have a length of 1/4 the screen
-        float xScaled = xPos;
-
-        // A list to stor our new scaled xvalues
-        var xList = new List<float>(STEPCOUNT);
-
-        for (int i = 0; i < STEPCOUNT; ++i){
-            
-            xList.Add(xScaled+(i*incrementValue));
-        }
-
-        // A list of Vecter2s to store both the xy points we want linerenderer to connect
-        List<Vector2> pointsList = new List<Vector2>();
-        // passing string "str" in
-        // switch statement
-        lineRenderer.positionCount = STEPCOUNT;
-        wave = new T();
-        wave.frequency(1);
-        wave.amplitude(1);
-        for (int i = 0; i < STEPCOUNT; ++i){
-            pointsList.Add(new Vector3(xList[i],wave.get(xList[i]),0.0f));
-        }
-
-        for (int i = 0; i < pointsList.Count; i++)
-        {
-            lineRenderer.SetPosition(i, pointsList[i]);
-        }
-        BakeLineDebuger(lineObj);
-    }
+    
 
     public void makeWave(GameObject lineObj, Color color, AbstractWave wave) {
         float xScaled = -_width/2;
