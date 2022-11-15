@@ -85,7 +85,7 @@ public class Convolution : MonoBehaviour
 
         topRightPlot.CreateLGrid(xTopRightPlot, yTopRightPlot, topPlotsWidth, topPlotsHeight, Color.grey, defaultLineMaterial);
 
-        bottomPlot.CreateGrid(0,0, _width- 0.2f, _height/1.5f,Color.grey, defaultLineMaterial);
+        bottomPlot.CreateGrid(0,0, _width- 0.4f, _height/1.5f,Color.grey, defaultLineMaterial);
 
         _doc = GetComponent<UIDocument>();
         SetupButtonHandlers();
@@ -136,6 +136,7 @@ public class Convolution : MonoBehaviour
         lineContainer4.transform.position = new Vector3((0),(0),0f);
 
         _redrawFlag = true;
+        redrawGraphs();
     }
 
     // Update is called once per frame
