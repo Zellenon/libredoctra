@@ -26,7 +26,7 @@ public class Match_IF : MonoBehaviour
     }
     
     void ScaleSliderUpdate(float value){transform.localScale = new Vector2(0.304793f,value);}
-    void ShiftSliderUpdate(float value) {transform.localPosition = new Vector2(value,-1.91f);}
+    void ShiftSliderUpdate(float value) {transform.localPosition = new Vector2(value,-3.49f);}
    
 
     
