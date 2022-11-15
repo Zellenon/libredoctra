@@ -71,19 +71,19 @@ public class Convolution : MonoBehaviour
         float xymargin = 0.5f;
 
         // Center points for the background grid topPlots
-        xTopLeftPlot = - _width / 2;
+        xTopLeftPlot = - _width ;
         yTopLeftPlot =  _height / 2;
         
-        xTopRightPlot = _width / 2;
+        xTopRightPlot = 0+ xymargin;
         yTopRightPlot =  _height / 2;
 
         // height and width of topplots
         topPlotsWidth = (_width / 2) - 0.2f;
         topPlotsHeight =  _height / 2;
 
-        topPlot.CreateGrid(xTopLeftPlot, yTopLeftPlot, topPlotsWidth, topPlotsHeight, Color.grey, defaultLineMaterial);
+        topPlot.CreateLGrid(xTopLeftPlot, yTopLeftPlot, topPlotsWidth, topPlotsHeight, Color.grey, defaultLineMaterial);
 
-        topRightPlot.CreateGrid(xTopRightPlot, yTopRightPlot, topPlotsWidth, topPlotsHeight, Color.grey, defaultLineMaterial);
+        topRightPlot.CreateLGrid(xTopRightPlot, yTopRightPlot, topPlotsWidth, topPlotsHeight, Color.grey, defaultLineMaterial);
 
         bottomPlot.CreateGrid(0,0, _width- 0.2f, _height/1.5f,Color.grey, defaultLineMaterial);
 
@@ -107,7 +107,7 @@ public class Convolution : MonoBehaviour
         makeWave<Sine>(lineContainer, plotLeftColor);
 
         lineContainer.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
-        lineContainer.transform.position = new Vector3((-_width/2f),(_height/2f),0f);
+        lineContainer.transform.position = new Vector3((xTopLeftPlot),(yTopLeftPlot),0f);
 
         // function 2 top
         lineContainer2 = new GameObject("Func2");
@@ -117,7 +117,7 @@ public class Convolution : MonoBehaviour
         
         makeWave<Boxcar>(lineContainer2, plotRightColor);
         lineContainer2.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
-        lineContainer2.transform.position = new Vector3((_width/2f),(_height/2f),0f);
+        lineContainer2.transform.position = new Vector3((xTopRightPlot),(yTopRightPlot),0f);
 
         // function1 bottom
         lineContainer3 = new GameObject("Func3");

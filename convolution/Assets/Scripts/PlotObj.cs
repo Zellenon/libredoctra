@@ -64,6 +64,36 @@ public class PlotObj : MonoBehaviour
         lr.positionCount = points.Count;
 
     }
+    //Create a grid with the shape L instead of upsidedownT shape
+    public void CreateLGrid(float x0, float y0, float width, float height, Color axisColor, Material lineMaterial){
+
+        //create gridline points z axis determins overlap order with z axis pos going into the screen
+        
+        points.Add(new Vector3((x0),(y0),1.0f));
+        points.Add(new Vector3((x0),(y0+(height)),1.0f));
+        points.Add(new Vector3((x0),(y0),1.0f));
+        points.Add(new Vector3(((x0+width)),(y0),1.0f));
+
+        // Tell it to make it default line material
+        lr.material = lineMaterial;
+        
+        
+
+        // For whatever reason, Unity requires user to define a gradient instead of just telling it a solid color >:( .... so we create a gradient from one color to another
+        //      color (otherwise known as a solid color)
+        float alpha = 1.0f;
+        Gradient gradient = new Gradient();
+        gradient.SetKeys(
+            new GradientColorKey[] { new GradientColorKey(axisColor, 0.0f), new GradientColorKey(axisColor, 1.0f) },
+            new GradientAlphaKey[] { new GradientAlphaKey(alpha, 0.0f), new GradientAlphaKey(alpha, 1.0f) }
+        );
+        this.lr.colorGradient = gradient;
+        
+
+        lr.positionCount = points.Count;
+
+
+    }
 
     //not used yet
     public void CreateDottedLine(float x0, float y0, float x1, float y1, Color axisColor, Material lineMaterial){
