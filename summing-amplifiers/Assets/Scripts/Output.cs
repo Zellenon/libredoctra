@@ -11,7 +11,7 @@ public class Output : MonoBehaviour
 {
     [SerializeField] private Material defaultLineMaterial;
     [SerializeField] private TextMeshPro OriginLabel;
-    [SerializeField] private PlotObj topPlot;
+    [SerializeField] private PlotObj topPlot, bottomPlot;
     [SerializeField] private EquationText eqnText;
     private float x01, y01, w1, h1, x02, y02, w2, h2;
 
@@ -36,6 +36,7 @@ public class Output : MonoBehaviour
     private float freqSub=1;
 
     private GameObject lrContainer;
+    private GameObject lrContainerF;
 
 
     void Start()
@@ -48,9 +49,14 @@ public class Output : MonoBehaviour
         float xymargin = 0.5f;
 
         x01 = 6; 
-        y01 = 0.03f / 3f * ymax - 0.3f;//0.05f / 3f * ymax - 0.3f;
+        y01 = 1.5f / 3f * ymax - 0.3f;//0.05f / 3f * ymax - 0.3f;
         w1 = xmax - xymargin; 
         h1 = ymax / 3f - xymargin;
+
+        x02 = 6; 
+        y02 = -2f / 3f * ymax - 0.3f;
+        w2 = xmax - xymargin; h2 = ymax * 2f / 3f - xymargin;
+
 
         Nfft = 1024;
         _tmax = 5f;
@@ -62,6 +68,7 @@ public class Output : MonoBehaviour
         wave=GameObject.Find("MultiplyWaves");
 
         topPlot.CreateGrids(x01, y01, w1, h1, 1f, 1f, 1.1f * (_tmax / w1), 1.5f * (amp / h1), Color.grey, defaultLineMaterial, OriginLabel, true, true);
+        bottomPlot.CreateGrids(x02, y02, w2, h2, 1f, 1f, 1f, 1f, Color.yellow, defaultLineMaterial, OriginLabel, true, false);
         OriginLabel.gameObject.SetActive(false);
       
          
@@ -76,6 +83,17 @@ public class Output : MonoBehaviour
         _funclr.startColor = Color.yellow;
         _funclr.endColor = Color.yellow;
        
+       lrContainerF = new GameObject("FFT Plot");
+        lrContainerF.transform.SetParent(transform, false);
+        _fftlr = lrContainerF.AddComponent<LineRenderer>();
+        _fftlr.positionCount = 2 * Nfreq + 1;
+
+        _fftlr.material = defaultLineMaterial;
+        _fftlr.useWorldSpace = true;
+        _fftlr.startWidth = 0.05f;
+        _fftlr.endWidth = 0.05f;
+        _fftlr.startColor = Color.white;
+        _fftlr.endColor = Color.white;
    
 
     }
@@ -87,6 +105,7 @@ public class Output : MonoBehaviour
        
         
           CreateFuncPlot(); 
+          //CreateFFTPlot();
            
     }
 
@@ -124,9 +143,48 @@ public class Output : MonoBehaviour
         
         //eqnText.updateEquationText(amp2, freq2 * 180 / Mathf.PI);
 
+        
+
+    }
+/*
+     private void CreateFFTPlot()
+    {
+        Complex[] samples = new Complex[Nfft];
+        for (int k=0; k<Nfft; k++)
+            samples[k] = _funcpts[k].y;
+
+        // inplace bluestein FFT with default options
+        //Fourier.Forward(samples, FourierOptions.AsymmetricScaling);
+
+        _fftpts = new Vector2[2 * Nfreq + 1];
+        _fftpts[Nfreq].x = 0;   // index for DC
+        float maxyval = (float) samples[0].Magnitude;
+        _fftpts[Nfreq].y = maxyval;   // DC value
+       
+        for (int k=0; k<Nfreq; k++)
+        {    
+            _fftpts[Nfreq + 1 + k].x = (k + 1) / (2 * _tmax);
+            float mag = (float) samples[k + 1].Magnitude;
+            _fftpts[Nfreq + 1 + k].y = mag;
+            //added
+            //_fftpts[Nfreq + 1 + k].x = _funcpts[k].x;
+
+            if (mag > maxyval)
+                maxyval = mag; 
+        }
+        
+        bottomPlot.SetScaleXAxis(Nfreq/(2 * _tmax * w2), true);
+         bottomPlot.SetScaleYAxis(maxyval, false);
+        
+
+        for (int k=0; k<=Nfreq; k++)
+            _fftlr.SetPosition(k, bottomPlot.ToScreenCoords(_fftpts[k]));
+  
+        
+        
     }
 
-
+*/
  
 
 

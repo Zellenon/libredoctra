@@ -47,11 +47,12 @@ public class GameFreq : MonoBehaviour
         _mag = 1.5f; _freq = 1.1f; _phase = 0;
 
        // topPlot.CreateGrids(x01, y01, w1, h1, 1f, 1f, 1.1f * (_tmax / w1), 1.5f * (_mag / h1), Color.yellow, defaultLineMaterial, OriginLabel, true, true);
-        bottomPlot.CreateGrids(x02, y02, w2, h2, 1f, 1f, 1f, 1f, Color.yellow, defaultLineMaterial, OriginLabel, true, false);
-        OriginLabel.gameObject.SetActive(false);
+        bottomPlot.CreateGrids(x02, y02, 4f, 4f, 2f, 2f, 3f, 3f, Color.yellow, defaultLineMaterial, OriginLabel, false, false);
+        OriginLabel.gameObject.SetActive(true);
 
         //CreateFuncPlot();
         CreateFFTPlot();
+        //UpdateFFTPoints();
 
     }
 
@@ -73,13 +74,6 @@ public class GameFreq : MonoBehaviour
     void Update()
     {        
     }
-
-
-
-
-
-
-
 
 
     private void CreateFFTPlot()
@@ -113,7 +107,7 @@ public class GameFreq : MonoBehaviour
         }
 
         bottomPlot.SetScaleXAxis(Nfreq/(2 * _tmax * w2), true);
-        bottomPlot.SetScaleYAxis(maxyval/h2, false);
+       // bottomPlot.SetScaleYAxis(maxyval/h2, false);
 
 
         GameObject lrContainer = new GameObject("FFT Plot");
@@ -128,28 +122,11 @@ public class GameFreq : MonoBehaviour
         _fftlr.startColor = Color.green;
         _fftlr.endColor = Color.green;
 
-        for (int k=0; k<=2*Nfreq; k++)
+        for (int k=0; k<=1000; k++)
             _fftlr.SetPosition(k, bottomPlot.ToScreenCoords(_fftpts[k]));
 
     }
-
 /*
-    public void UpdateFuncPoints()
-    {
-        const float twoPI = 2 * Mathf.PI;
-
-        for (int k=0; k<Nfft; k++)
-        {
-            float tval = Mathf.Lerp(-_tmax, _tmax, k/((float) Nfft-1));
-            _funcpts[k].x = tval;
-            _funcpts[k].y = _mag * Mathf.Cos( twoPI * _freq * tval + _phase );
-        }
-
-        for (int k=0; k<Nfft; k++)
-            _funclr.SetPosition(k, topPlot.ToScreenCoords(_funcpts[k]));
-    }
-
-*/
     public void UpdateFFTPoints()
     {
         Complex[] samples = new Complex[Nfft];
@@ -164,11 +141,11 @@ public class GameFreq : MonoBehaviour
         _fftpts[Nfreq].x = 0;   // index for DC
         float maxyval = (float) samples[0].Magnitude;
         _fftpts[Nfreq].y = maxyval;   // DC value
-
+        
         for (int k=0; k<Nfreq; k++)
         {
             _fftpts[k].x = (k - Nfreq) / (2 * _tmax);
-            float mag = (float) samples[Nfft + k - Nfreq].Magnitude;
+             float mag = (float) samples[Nfft + k - Nfreq].Magnitude;
             _fftpts[k].y = mag;
             if (mag > maxyval)
                 maxyval = mag;
@@ -178,58 +155,19 @@ public class GameFreq : MonoBehaviour
             _fftpts[Nfreq + 1 + k].y = mag;
             if (mag > maxyval)
                 maxyval = mag;
+                
         }
 
         bottomPlot.SetScaleXAxis(Nfreq/(2 * _tmax * w2), true);
-        bottomPlot.SetScaleYAxis(maxyval/h2, false);
+        bottomPlot.SetScaleYAxis(12, false);
 
-        for (int k=0; k<=2*Nfreq; k++)
+        for (int k=0; k<=Nfreq; k++)
             _fftlr.SetPosition(k, bottomPlot.ToScreenCoords(_fftpts[k]));
+
+          //Debug.Debug.Log(mag);  
     }
 
 
-
-    public void InterpolateAnchorPoints(Vector2[] xypoints, Vector2[] anchorpoints)
-    {
-        // the vector xypoints should already contain x coordinates
-        // this function will fill in the corresponding y coordinates by linearly
-        // interpolating the two surrounding vectors in anchorpoints
-
-        int lindex, rindex;
-        float lxvalue, rxvalue, lyvalue, ryvalue;
-
-        rindex = 1;
-
-        for (int k=0; k<xypoints.Length; k++)
-        {
-            while (anchorpoints[rindex].x < xypoints[k].x)
-            {
-                if (rindex == anchorpoints.Length - 1)
-                    break;
-
-                rindex++;
-            }
-
-            lindex = rindex - 1;
-            lxvalue = anchorpoints[lindex].x;
-            rxvalue = anchorpoints[rindex].x;
-            lyvalue = anchorpoints[lindex].y;
-            ryvalue = anchorpoints[rindex].y;
-
-            float t = (xypoints[k].x - lxvalue)/(rxvalue - lxvalue);
-            xypoints[k].y = Mathf.Lerp(lyvalue, ryvalue, t);
-        }
-    }
-
-
-
-
-    void fft_test()
-    {
-        Complex[] samples = new Complex[16];
-
-        // inplace bluestein FFT with default options
-        Fourier.Forward(samples, FourierOptions.AsymmetricScaling);
-    }
+*/
 
 }
