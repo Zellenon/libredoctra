@@ -23,12 +23,12 @@ public class Convolution : MonoBehaviour
     public float _funct1mag, _funct1freq,
     _funct2mag, _funct2freq;
 
-    private float _width, _height, _xscale, _yscale;
+    private float _width, _height, _xscale, _yscale, xymargin;
 
     private const int STEPCOUNT = 200;
     private const float MAX_X = 2.0f;
 
-    private float xTopLeftPlot, yTopLeftPlot, xTopRightPlot, yTopRightPlot, topPlotsWidth, topPlotsHeight;
+    private float xTopLeftPlot, yTopLeftPlot, xTopRightPlot, yTopRightPlot, topPlotsWidth, topPlotsHeight,xConvolveGraph,YConvolveGraph, convolveGraphWidth, convolveGraphHeight;
 
     private int Nfft, Nfreq;
     private float _Fs, _tmax;
@@ -69,24 +69,29 @@ public class Convolution : MonoBehaviour
 
         Debug.LogFormat("_width: {0}, _height: {1}", _width, _height);
 
-        float xymargin = 0.5f;
+        xymargin = 0.5f;
 
         // Center points for the background grid topPlots
         xTopLeftPlot = - _width ;
-        yTopLeftPlot =  _height / 2;
+        yTopLeftPlot =  _height / 2f;
         
         xTopRightPlot = 0+ xymargin;
-        yTopRightPlot =  _height / 2;
+        yTopRightPlot =  _height / 2f;
 
         // height and width of topplots
-        topPlotsWidth = (_width / 2) - 0.2f;
-        topPlotsHeight =  _height / 2;
+        topPlotsWidth = (_width / 2f) - 0.2f;
+        topPlotsHeight =  _height / 2f;
+
+        xConvolveGraph = (-_width/4f) + xymargin
+        YConvolveGraph = 0f;
+        convolveGraphWidth = _width*0.8f
+        convolveGraphHeight = _height/1.5f
 
         topPlot.CreateLGrid(xTopLeftPlot, yTopLeftPlot, topPlotsWidth, topPlotsHeight, Color.grey, defaultLineMaterial);
 
         topRightPlot.CreateLGrid(xTopRightPlot, yTopRightPlot, topPlotsWidth, topPlotsHeight, Color.grey, defaultLineMaterial);
 
-        bottomPlot.CreateGrid(0,0, _width- 0.4f, _height/1.5f,Color.grey, defaultLineMaterial);
+        bottomPlot.CreateGrid(xConvolveGraph,YConvolveGraph, convolveGraphWidth, convolveGraphHeight,Color.grey, defaultLineMaterial);
 
         _waveC = new List<float>(STEPCOUNT*2);
 
@@ -128,7 +133,7 @@ public class Convolution : MonoBehaviour
         _func3 = lineContainer3.AddComponent<LineRenderer>();
         makeWave<Sine>(lineContainer3, plotLeftColor);
         lineContainer3.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
-        lineContainer3.transform.position = new Vector3((0),(0),0f);
+        lineContainer3.transform.position = new Vector3(xConvolveGraph,YConvolveGraph,0f);
 
         // function2 bottom
         lineContainer4 = new GameObject("Func4");
@@ -136,7 +141,7 @@ public class Convolution : MonoBehaviour
         _func4 = lineContainer4.AddComponent<LineRenderer>();
         makeWave<Boxcar>(lineContainer4, plotRightColor);
         lineContainer4.transform.localScale = new Vector3(-0.5f, 0.5f, 0f);
-        lineContainer4.transform.position = new Vector3((0),(0),0f);
+        lineContainer4.transform.position = new Vector3(xConvolveGraph,YConvolveGraph,0f);
 
         _redrawFlag = true;
         redrawGraphs();
