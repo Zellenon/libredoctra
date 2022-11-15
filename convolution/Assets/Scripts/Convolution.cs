@@ -53,6 +53,7 @@ public class Convolution : MonoBehaviour
     private UIDocument _doc;
 
     private AbstractWave _waveA, _waveB;
+    private List<float> _waveC = new List<float>(STEPCOUNT);
 
     private bool _redrawFlag;
 
@@ -86,6 +87,8 @@ public class Convolution : MonoBehaviour
         topRightPlot.CreateLGrid(xTopRightPlot, yTopRightPlot, topPlotsWidth, topPlotsHeight, Color.grey, defaultLineMaterial);
 
         bottomPlot.CreateGrid(0,0, _width- 0.4f, _height/1.5f,Color.grey, defaultLineMaterial);
+
+        _waveC = new List<float>(STEPCOUNT*2);
 
         _doc = GetComponent<UIDocument>();
         SetupButtonHandlers();
@@ -230,7 +233,7 @@ public class Convolution : MonoBehaviour
     private void ConvolveCallback(ChangeEvent<float> evt) {
         // print(evt.newValue);
         int offset = (int) evt.newValue;
-        lineContainer4.transform.position = new Vector3((offset/48.0f),(0.0f),0f); // why 48?
+        lineContainer4.transform.position = new Vector3((offset/24.0f),(0.0f),0f); // why 48?
         float multiplier = MAX_X / STEPCOUNT;
         float convsum = 0.0f;
         for (int i = 0; i <= offset; i++) {
@@ -312,10 +315,6 @@ public class Convolution : MonoBehaviour
     }
 
     public void makeWave<T>(GameObject lineObj, Color color, float xPos) where T: AbstractWave, new() {
-
-        
-
-
         AbstractWave wave;
         var lineRenderer = lineObj.GetComponent<LineRenderer>();
 
