@@ -1,3 +1,8 @@
 .Label {
     color: rgb(210, 210, 210);
 }
+
+.waveButton {
+    width: 40%;
+    height: 16%;
+}
