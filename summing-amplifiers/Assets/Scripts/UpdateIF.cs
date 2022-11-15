@@ -7,18 +7,25 @@ public class UpdateIF : MonoBehaviour
     private GameObject RF;
     private GameObject LO;
     private GameObject IF;
+    private GameObject DesiredIF;
     private float RFpositionX;
     private float RFScaleY;
     private float IFpositionX;
     private float IFScaleY;
     private float LOpositionX;
     private float LOScaleY;
+    private float DesiredIFpositionX;
+    private float DesiredIFScaleY;
     // Start is called before the first frame update
     void Start()
     {
         RF=GameObject.Find("RF");
         IF=GameObject.Find("ParentIF");
         LO=GameObject.Find("ParentLO");
+        DesiredIF=GameObject.Find("DesiredIF");
+
+        DesiredIFpositionX=DesiredIF.transform.position.x;
+        DesiredIFScaleY=DesiredIF.transform.localScale.y;
 
     }
 
@@ -32,13 +39,16 @@ public class UpdateIF : MonoBehaviour
         LOpositionX=LO.transform.position.x;
         LOScaleY=LO.transform.localScale.y;
 
-       IFpositionX= RFpositionX - LOpositionX;
+        IFpositionX= RFpositionX - LOpositionX;
+        IFScaleY= (RFScaleY*LOScaleY)/2;
 
-       IFScaleY= (RFScaleY*LOScaleY)/2;
 
         transform.position = new Vector3(IFpositionX, -3.51f,0);
         transform.localScale = new Vector2(0.304793f,IFScaleY);
 
+       if(DesiredIFpositionX==IFpositionX ){
+        Debug.Log("IF matched to Desired IF");
+       }
 
         
     }

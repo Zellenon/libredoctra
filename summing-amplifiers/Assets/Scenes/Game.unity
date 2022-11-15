@@ -3299,7 +3299,7 @@ GameObject:
   - component: {fileID: 2045876124}
   - component: {fileID: 2045876123}
   m_Layer: 0
-  m_Name: Desired_IF
+  m_Name: DesiredIF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3366,7 +3366,7 @@ RectTransform:
   m_GameObject: {fileID: 2045876122}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.304793, y: 3.161667, z: 0.71716}
+  m_LocalScale: {x: 0.304793, y: 4.6, z: 0.71716}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 591359804}
@@ -3375,7 +3375,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4.24, y: -1.91}
+  m_AnchoredPosition: {x: 1.25, y: -1.18}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2108871056
