@@ -53,7 +53,7 @@ public class Convolution : MonoBehaviour
     private UIDocument _doc;
 
     private AbstractWave _waveA, _waveB;
-    private List<float> _waveC = new List<float>(STEPCOUNT);
+    private float[] _waveC = new float[STEPCOUNT*2];
 
     private bool _redrawFlag;
 
@@ -93,7 +93,9 @@ public class Convolution : MonoBehaviour
 
         bottomPlot.CreateGrid(xConvolveGraph,YConvolveGraph, convolveGraphWidth, convolveGraphHeight,Color.grey, defaultLineMaterial);
 
-        _waveC = new List<float>(STEPCOUNT*2);
+        for (int i = 0; i < STEPCOUNT * 2; i++) {
+            _waveC[i] = 0.0f;
+        }
 
         _doc = GetComponent<UIDocument>();
         SetupButtonHandlers();
@@ -107,12 +109,15 @@ public class Convolution : MonoBehaviour
         _xscale = 1.1f / (2 * _width);
         _yscale = 0.2f;
 
+        _waveA = new Boxcar();
+        _waveB = new Triangle();
+
         // function 1 top
         lineContainer = new GameObject("Func1");
         lineContainer.transform.SetParent(transform, false);
         Color plotLeftColor = Color.red;
         _func1 = lineContainer.AddComponent<LineRenderer>();
-        makeWave<Sine>(lineContainer, plotLeftColor);
+        makeWave(lineContainer, plotLeftColor, _waveA);
 
         lineContainer.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
         lineContainer.transform.position = new Vector3((xTopLeftPlot),(yTopLeftPlot),0f);
@@ -123,7 +128,7 @@ public class Convolution : MonoBehaviour
         Color plotRightColor = Color.green;
         _func2 = lineContainer2.AddComponent<LineRenderer>();
         
-        makeWave<Boxcar>(lineContainer2, plotRightColor);
+        makeWave(lineContainer2, plotRightColor, _waveB);
         lineContainer2.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
         lineContainer2.transform.position = new Vector3((xTopRightPlot),(yTopRightPlot),0f);
 
@@ -131,7 +136,7 @@ public class Convolution : MonoBehaviour
         lineContainer3 = new GameObject("Func3");
         lineContainer3.transform.SetParent(transform, false);
         _func3 = lineContainer3.AddComponent<LineRenderer>();
-        makeWave<Sine>(lineContainer3, plotLeftColor);
+        makeWave(lineContainer3, plotLeftColor, _waveA);
         lineContainer3.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
         lineContainer3.transform.position = new Vector3(xConvolveGraph,YConvolveGraph,0f);
 
@@ -139,7 +144,7 @@ public class Convolution : MonoBehaviour
         lineContainer4 = new GameObject("Func4");
         lineContainer4.transform.SetParent(transform, false);
         _func4 = lineContainer4.AddComponent<LineRenderer>();
-        makeWave<Boxcar>(lineContainer4, plotRightColor);
+        makeWave(lineContainer4, plotRightColor, _waveB);
         lineContainer4.transform.localScale = new Vector3(-0.5f, 0.5f, 0f);
         lineContainer4.transform.position = new Vector3(xConvolveGraph,YConvolveGraph,0f);
 
@@ -313,8 +318,6 @@ public class Convolution : MonoBehaviour
 
         // Draw line in the result graph
     }
-
-    
 
     public void makeWave(GameObject lineObj, Color color, AbstractWave wave) {
         float xScaled = -_width/2;
