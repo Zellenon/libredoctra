@@ -238,6 +238,10 @@ public class Convolution : MonoBehaviour
             break;
         }
         _redrawFlag = true;
+
+        for (int i = 0; i < STEPCOUNT * 2; i++) {
+            _waveC[i] = 0.0f;
+        }
     }
 
     private void ConvolveCallback(ChangeEvent<float> evt) {
@@ -245,12 +249,17 @@ public class Convolution : MonoBehaviour
         int offset = (int) evt.newValue;
         lineContainer4.transform.position = new Vector3(xConvolveGraph+(offset/24.0f),(0.0f),0f); // why 48?
         float multiplier = MAX_X / STEPCOUNT;
-        float convsum = 0.0f;
-        for (int i = 0; i <= offset; i++) {
-            // print("Convolving " + _waveA.get(i* multiplier).ToString() + " with " + _waveB.get(i * multiplier).ToString() + " with offset " + offset.ToString());
-            convsum += _waveA.convolve(_waveB, offset, i * multiplier);
+        for (int T = 0; T <= offset; T++) {
+            float convsum = 0.0f;
+            for (int i = 0; i <= offset; i++) {
+                // print("Convolving " + _waveA.get(i* multiplier).ToString() + " with " + _waveB.get(i * multiplier).ToString() + " with offset " + offset.ToString());
+                convsum += _waveA.convolve(_waveB, offset, i * multiplier);
+            }
+            _waveC[T] = convsum;
+
+            if (T == offset) print(convsum);
         }
-        print(convsum);
+
     }
 
     public void SetWaveA<T>() where T: AbstractWave, new(){
