@@ -422,7 +422,7 @@ public class Convolution : MonoBehaviour
         lineRenderer.endWidth = 0.2f;
         lineRenderer.startColor = Color.magenta;
         lineRenderer.endColor = Color.magenta;
-
+        lineRenderer.positionCount = 2*STEPCOUNT;
 
         
         for (int i = 0; i < _waveC.Length; i++){
