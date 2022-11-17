@@ -152,6 +152,11 @@ public class Convolution : MonoBehaviour
         lineContainer4.transform.localScale = new Vector3(-0.5f, 0.5f, 0f);
         lineContainer4.transform.position = new Vector3(xConvolveGraph,YConvolveGraph,0f);
 
+        lineContainer5 = new GameObject("Func5 - Convolution");
+        lineContainer5.transform.SetParent(transform, false);
+        _func5 = lineContainer5.AddComponent<LineRenderer>();
+        lineContainer5.transform.position = new Vector3(xConvolveGraph,-3*_height/4,0f);
+
         _redrawFlag = true;
         redrawGraphs();
     }
@@ -329,6 +334,9 @@ public class Convolution : MonoBehaviour
         lineContainer4.AddComponent<LineRenderer>();
         makeWave(lineContainer4,Color.green, _waveB);
 
+        lineContainer5.AddComponent<LineRenderer>();
+        drawConvolution();
+
         // Draw line in the result graph
     }
 
@@ -398,6 +406,35 @@ public class Convolution : MonoBehaviour
     }
 
     public void drawConvolution(){
+
+        if (lineContainer5.GetComponent<MeshRenderer>() != null){
+            Destroy(lineContainer5.GetComponent<MeshRenderer>());
+            Destroy(lineContainer5.GetComponent<MeshFilter>());
+        }
+
+        _func5pts.Clear();
+
+        var lineRenderer = lineContainer5.GetComponent<LineRenderer>();
+
+        lineRenderer.material = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
+        lineRenderer.useWorldSpace = true;
+        lineRenderer.startWidth = 0.2f;
+        lineRenderer.endWidth = 0.2f;
+        lineRenderer.startColor = Color.magenta;
+        lineRenderer.endColor = Color.magenta;
+
+
+        
+        for (int i = 0; i < _waveC.Length; i++){
+            _func5pts.Add(new Vector3(i,_waveC[i],0.0f));
+        }
+
+
+        for (int i = 0; i < _func5pts.Count; i++)
+        {
+            lineRenderer.SetPosition(i, _func5pts[i]);
+        }
+        BakeLineDebuger(lineContainer5);
 
     }
 
