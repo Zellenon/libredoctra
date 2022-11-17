@@ -1,6 +1,7 @@
 // using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Complex = System.Numerics.Complex;
 using UnityEngine;
 using UnityEditor;
@@ -156,6 +157,7 @@ public class Convolution : MonoBehaviour
         lineContainer5.transform.SetParent(transform, false);
         _func5 = lineContainer5.AddComponent<LineRenderer>();
         lineContainer5.transform.position = new Vector3(xConvolveGraph,-3*_height/4,0f);
+        lineContainer5.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
 
         _redrawFlag = true;
         redrawGraphs();
@@ -265,9 +267,12 @@ public class Convolution : MonoBehaviour
                 convsum += _waveA.convolve(_waveB, offset, i * multiplier);
             }
             _waveC[T] = convsum;
+    
 
             if (T == offset) print(convsum);
         }
+        lineContainer5.AddComponent<LineRenderer>();
+        drawConvolution();
 
     }
 
@@ -425,12 +430,49 @@ public class Convolution : MonoBehaviour
         lineRenderer.endColor = Color.magenta;
         lineRenderer.positionCount = 2*STEPCOUNT;
 
-        
+        // Scale the X value down to a displayable size; in this case dividing the screen width by the stepcount
+        float incrementValue = _width/(2f*STEPCOUNT);
+        float xScaled = 0f;
+        var xList = new List<float>(2*STEPCOUNT);
+        for (int i = 0; i < 2*STEPCOUNT; ++i){
+
+            xList.Add(i*incrementValue);
+        }
+
+        // We also need to scale down our y values; but somtimes the max will be 1 and other times the max could be hundreds
+        //      we need to dynamically adjust the y value based on the largest value in _waveC
+
+        float yMaxValue = 5f;
+        if (_waveC.Max() != 0){
+            yMaxValue = _waveC.Max();
+        }
+        int yMaxIndex = _waveC.ToList().IndexOf(yMaxValue);
+
+        //looking at our displayed graphs we see that the max height looks to be about 5 units (top of the grey line) so we will take our
+        //      max and divide by yMaxValue/5 this means that the peak displayed value should never exceed the graph height.
+        float[] yValuesScaled = new float[STEPCOUNT*2];
+
+        // make our nicely scaled array with our  ugly _waveC array
         for (int i = 0; i < _waveC.Length; i++){
-            _func5pts.Add(new Vector3(i,_waveC[i],0.0f));
+            yValuesScaled[i] = (5f* _waveC[i]/yMaxValue);
+        }
+
+        //Add our scaled values to a vector array for the line renderer to iterate over
+        for (int i = 0; i < _waveC.Length; i++){
+            _func5pts.Add(new Vector3(xList[i],yValuesScaled[i],0.0f));
         }
 
 
+        /////////////////////////////           Debug stuff for me
+        Debug.LogFormat("Start--------------------------");
+        for (int i = 0; i < _waveC.Length; i++){
+            Debug.LogFormat(_waveC[i].ToString());
+        }
+        Debug.LogFormat("End-----------------------------");
+        //////////////////////////////////////////////////
+
+
+        //Iterate the line renderer 
         for (int i = 0; i < _func5pts.Count; i++)
         {
             lineRenderer.SetPosition(i, _func5pts[i]);
