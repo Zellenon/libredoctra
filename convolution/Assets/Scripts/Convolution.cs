@@ -262,9 +262,9 @@ public class Convolution : MonoBehaviour
         float multiplier = MAX_X / STEPCOUNT;
         for (int T = 0; T <= offset; T++) {
             float convsum = 0.0f;
-            for (int i = 0; i <= offset; i++) {
+            for (int i = 0; i <= T; i++) {
                 // print("Convolving " + _waveA.get(i* multiplier).ToString() + " with " + _waveB.get(i * multiplier).ToString() + " with offset " + offset.ToString());
-                convsum += _waveA.convolve(_waveB, offset, i * multiplier);
+                convsum += _waveA.convolve(_waveB, T*multiplier, i*multiplier );
             }
             _waveC[T] = convsum;
     
