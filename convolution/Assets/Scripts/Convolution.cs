@@ -13,7 +13,7 @@ public class Convolution : MonoBehaviour
     [SerializeField] private Material lineMaterial;
 
     [SerializeField] private TextMeshPro OriginLabel;
-    [SerializeField] private PlotObj topPlot, topRightPlot, bottomPlot;
+    [SerializeField] private PlotObj topLeftPlot, topRightPlot, bottomPlot,convPlot;
     // [SerializeField] private EquationText eqnText;
 
     private float xtlp, ytlp, wtlp, htlp,
@@ -38,11 +38,13 @@ public class Convolution : MonoBehaviour
     private List<Vector2> _func2pts = new List<Vector2>();
     private List<Vector2> _func3pts = new List<Vector2>();
     private List<Vector2> _func4pts = new List<Vector2>();
+    private List<Vector2> _func5pts = new List<Vector2>();
 
-    private GameObject lineContainer,lineContainer2,lineContainer3,lineContainer4;
+    //Container 1 is top left, 2 is top right, 3 is top left on the bottom graph, 4 is the inverted top right wave, 5 is the convolved wave
+    private GameObject lineContainer,lineContainer2,lineContainer3,lineContainer4,lineContainer5;
     public Transform _funct1position;
 
-    private LineRenderer _func1, _func2,_func3, _func4;
+    private LineRenderer _func1, _func2,_func3, _func4, _func5;
 
     // these variables will refer to the relative x position of the functions as they are being convolved together
     private float funct1xPos, funct2xPos;
@@ -87,11 +89,13 @@ public class Convolution : MonoBehaviour
         convolveGraphWidth = _width*0.8f;
         convolveGraphHeight = _height/1.5f;
 
-        topPlot.CreateLGrid(xTopLeftPlot, yTopLeftPlot, topPlotsWidth, topPlotsHeight, Color.grey, defaultLineMaterial);
+        topLeftPlot.CreateLGrid(xTopLeftPlot, yTopLeftPlot, topPlotsWidth, topPlotsHeight, Color.grey, defaultLineMaterial);
 
         topRightPlot.CreateLGrid(xTopRightPlot, yTopRightPlot, topPlotsWidth, topPlotsHeight, Color.grey, defaultLineMaterial);
 
         bottomPlot.CreateGrid(xConvolveGraph,YConvolveGraph, convolveGraphWidth, convolveGraphHeight,Color.grey, defaultLineMaterial);
+
+        convPlot.CreateGrid(xConvolveGraph,-3f*_height/4f, convolveGraphWidth, convolveGraphHeight, Color.grey, defaultLineMaterial);
 
         for (int i = 0; i < STEPCOUNT * 2; i++) {
             _waveC[i] = 0.0f;
@@ -391,6 +395,10 @@ public class Convolution : MonoBehaviour
             lineRenderer.SetPosition(i, pointsList[i]);
         }
         BakeLineDebuger(lineObj);
+    }
+
+    public void drawConvolution(){
+
     }
 
     private static T TrueGetComponent<T>(GameObject obj) where T: Component {
