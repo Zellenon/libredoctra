@@ -166,6 +166,7 @@ public class Convolution : MonoBehaviour
     {
         if (_redrawFlag) {
             redrawGraphs();
+            drawConvolution();
             _redrawFlag = false;
         }
     }
