@@ -166,8 +166,6 @@ public class Convolution : MonoBehaviour
     {
         if (_redrawFlag) {
             redrawGraphs();
-            lineContainer5.AddComponent<LineRenderer>();
-            drawConvolution();
             _redrawFlag = false;
         }
     }
@@ -336,8 +334,9 @@ public class Convolution : MonoBehaviour
         lineContainer4.AddComponent<LineRenderer>();
         makeWave(lineContainer4,Color.green, _waveB);
 
-        //lineContainer5.AddComponent<LineRenderer>();
-        //drawConvolution();
+        
+        lineContainer5.AddComponent<LineRenderer>();
+        drawConvolution();
 
         // Draw line in the result graph
     }
