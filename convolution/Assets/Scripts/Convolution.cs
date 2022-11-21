@@ -400,7 +400,7 @@ public class Convolution : MonoBehaviour
         lineRenderer.endColor = color;
 
         // The scaled value for which to increment the functions x value
-        float incrementValue = _width / STEPCOUNT;
+        float incrementValue = MAX_X / STEPCOUNT;
 
         //                    [Game Screen]
         ///////////////////////////////////////////////////////
@@ -472,7 +472,6 @@ public class Convolution : MonoBehaviour
         var xList = new List<float>(2 * STEPCOUNT);
         for (int i = 0; i < 2 * STEPCOUNT; ++i)
         {
-
             xList.Add(i * incrementValue);
         }
 
@@ -499,7 +498,8 @@ public class Convolution : MonoBehaviour
         //Add our scaled values to a vector array for the line renderer to iterate over
         for (int i = 0; i < _waveC.Length; i++)
         {
-            _func5pts.Add(new Vector3(xList[i], yValuesScaled[i], 0.0f));
+            if (i < _convolutionMask) _func5pts.Add(new Vector3(xList[i], yValuesScaled[i], 0.0f));
+            else _func5pts.Add(new Vector3(xList[i], 0.0f, 0.0f));
         }
 
         //Iterate the line renderer
