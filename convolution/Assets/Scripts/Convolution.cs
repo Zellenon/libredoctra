@@ -27,7 +27,7 @@ public class Convolution : MonoBehaviour
     private float _width, _height, _xscale, _yscale, xymargin;
 
     private const int STEPCOUNT = 200;
-    private const float MAX_X = 2.0f;
+    private const float MAX_X = 4.0f;
 
     private float xTopLeftPlot, yTopLeftPlot, xTopRightPlot, yTopRightPlot;
     private float topPlotsWidth, topPlotsHeight, xConvolveGraph, YConvolveGraph;

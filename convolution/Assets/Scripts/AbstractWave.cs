@@ -5,22 +5,15 @@ public class AbstractWave
 {
     protected float _amp;
     protected float _freq;
-    protected bool _isReversed;
 
     public AbstractWave()
     {
         _amp = 1;
         _freq = 1;
-        _isReversed = false;
     }
 
 
-    public virtual float get(float x) {return 0;}
-
-    public void isReversed(bool isReversed)
-    {
-        _isReversed = isReversed;
-    }
+    public virtual float get(float x) { return 0; }
 
     public void frequency(float freq)
     {
@@ -31,7 +24,8 @@ public class AbstractWave
         _amp = amp;
     }
 
-    public float convolve(AbstractWave other, float offset, float x) {
+    public float convolve(AbstractWave other, float offset, float x)
+    {
         return get(x) * other.get(offset - x);
     }
 
