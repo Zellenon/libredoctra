@@ -14,7 +14,7 @@ public class Convolution : MonoBehaviour
     [SerializeField] private Material lineMaterial;
 
     [SerializeField] private TextMeshPro OriginLabel;
-    [SerializeField] private PlotObj topLeftPlot, topRightPlot, bottomPlot,convPlot;
+    [SerializeField] private PlotObj topLeftPlot, topRightPlot, bottomPlot, convPlot;
     // [SerializeField] private EquationText eqnText;
 
     private float xtlp, ytlp, wtlp, htlp,
@@ -29,7 +29,7 @@ public class Convolution : MonoBehaviour
     private const int STEPCOUNT = 200;
     private const float MAX_X = 2.0f;
 
-    private float xTopLeftPlot, yTopLeftPlot, xTopRightPlot, yTopRightPlot, topPlotsWidth, topPlotsHeight,xConvolveGraph,YConvolveGraph, convolveGraphWidth, convolveGraphHeight;
+    private float xTopLeftPlot, yTopLeftPlot, xTopRightPlot, yTopRightPlot, topPlotsWidth, topPlotsHeight, xConvolveGraph, YConvolveGraph, convolveGraphWidth, convolveGraphHeight;
 
     private int Nfft, Nfreq;
     private float _Fs, _tmax;
@@ -42,10 +42,10 @@ public class Convolution : MonoBehaviour
     private List<Vector2> _func5pts = new List<Vector2>();
 
     //Container 1 is top left, 2 is top right, 3 is top left on the bottom graph, 4 is the inverted top right wave, 5 is the convolved wave
-    private GameObject lineContainer,lineContainer2,lineContainer3,lineContainer4,lineContainer5;
+    private GameObject lineContainer, lineContainer2, lineContainer3, lineContainer4, lineContainer5;
     public Transform _funct1position;
 
-    private LineRenderer _func1, _func2,_func3, _func4, _func5;
+    private LineRenderer _func1, _func2, _func3, _func4, _func5;
 
     // these variables will refer to the relative x position of the functions as they are being convolved together
     private float funct1xPos, funct2xPos;
@@ -56,7 +56,7 @@ public class Convolution : MonoBehaviour
     private UIDocument _doc;
 
     private AbstractWave _waveA, _waveB;
-    private float[] _waveC = new float[STEPCOUNT*2];
+    private float[] _waveC = new float[STEPCOUNT * 2];
 
     private bool _redrawFlag;
 
@@ -75,30 +75,31 @@ public class Convolution : MonoBehaviour
         xymargin = 0.5f;
 
         // Center points for the background grid topPlots
-        xTopLeftPlot = - _width ;
-        yTopLeftPlot =  _height / 2f;
-        
-        xTopRightPlot = 0+ xymargin;
-        yTopRightPlot =  _height / 2f;
+        xTopLeftPlot = -_width;
+        yTopLeftPlot = _height / 2f;
+
+        xTopRightPlot = 0 + xymargin;
+        yTopRightPlot = _height / 2f;
 
         // height and width of topplots
         topPlotsWidth = (_width / 2f) - 0.2f;
-        topPlotsHeight =  _height / 2f;
+        topPlotsHeight = _height / 2f;
 
-        xConvolveGraph = (-_width/4f) + xymargin;
+        xConvolveGraph = (-_width / 4f) + xymargin;
         YConvolveGraph = 0f;
-        convolveGraphWidth = _width*0.8f;
-        convolveGraphHeight = _height/1.5f;
+        convolveGraphWidth = _width * 0.8f;
+        convolveGraphHeight = _height / 1.5f;
 
         topLeftPlot.CreateLGrid(xTopLeftPlot, yTopLeftPlot, topPlotsWidth, topPlotsHeight, Color.grey, defaultLineMaterial);
 
         topRightPlot.CreateLGrid(xTopRightPlot, yTopRightPlot, topPlotsWidth, topPlotsHeight, Color.grey, defaultLineMaterial);
 
-        bottomPlot.CreateGrid(xConvolveGraph,YConvolveGraph, convolveGraphWidth, convolveGraphHeight,Color.grey, defaultLineMaterial);
+        bottomPlot.CreateGrid(xConvolveGraph, YConvolveGraph, convolveGraphWidth, convolveGraphHeight, Color.grey, defaultLineMaterial);
 
-        convPlot.CreateGrid(xConvolveGraph,-3f*_height/4f, convolveGraphWidth, convolveGraphHeight, Color.grey, defaultLineMaterial);
+        convPlot.CreateGrid(xConvolveGraph, -3f * _height / 4f, convolveGraphWidth, convolveGraphHeight, Color.grey, defaultLineMaterial);
 
-        for (int i = 0; i < STEPCOUNT * 2; i++) {
+        for (int i = 0; i < STEPCOUNT * 2; i++)
+        {
             _waveC[i] = 0.0f;
         }
 
@@ -125,17 +126,17 @@ public class Convolution : MonoBehaviour
         makeWave(lineContainer, plotLeftColor, _waveA);
 
         lineContainer.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
-        lineContainer.transform.position = new Vector3((xTopLeftPlot),(yTopLeftPlot),0f);
+        lineContainer.transform.position = new Vector3((xTopLeftPlot), (yTopLeftPlot), 0f);
 
         // function 2 top
         lineContainer2 = new GameObject("Func2");
         lineContainer2.transform.SetParent(transform, false);
         Color plotRightColor = Color.green;
         _func2 = lineContainer2.AddComponent<LineRenderer>();
-        
+
         makeWave(lineContainer2, plotRightColor, _waveB);
         lineContainer2.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
-        lineContainer2.transform.position = new Vector3((xTopRightPlot),(yTopRightPlot),0f);
+        lineContainer2.transform.position = new Vector3((xTopRightPlot), (yTopRightPlot), 0f);
 
         // function1 bottom
         lineContainer3 = new GameObject("Func3");
@@ -143,7 +144,7 @@ public class Convolution : MonoBehaviour
         _func3 = lineContainer3.AddComponent<LineRenderer>();
         makeWave(lineContainer3, plotLeftColor, _waveA);
         lineContainer3.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
-        lineContainer3.transform.position = new Vector3(xConvolveGraph,YConvolveGraph,0f);
+        lineContainer3.transform.position = new Vector3(xConvolveGraph, YConvolveGraph, 0f);
 
         // function2 bottom
         lineContainer4 = new GameObject("Func4");
@@ -151,12 +152,12 @@ public class Convolution : MonoBehaviour
         _func4 = lineContainer4.AddComponent<LineRenderer>();
         makeWave(lineContainer4, plotRightColor, _waveB);
         lineContainer4.transform.localScale = new Vector3(-0.5f, 0.5f, 0f);
-        lineContainer4.transform.position = new Vector3(xConvolveGraph,YConvolveGraph,0f);
+        lineContainer4.transform.position = new Vector3(xConvolveGraph, YConvolveGraph, 0f);
 
         lineContainer5 = new GameObject("Func5 - Convolution");
         lineContainer5.transform.SetParent(transform, false);
         _func5 = lineContainer5.AddComponent<LineRenderer>();
-        lineContainer5.transform.position = new Vector3(xConvolveGraph,-3*_height/4,0f);
+        lineContainer5.transform.position = new Vector3(xConvolveGraph, -3 * _height / 4, 0f);
         lineContainer5.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
 
         _redrawFlag = true;
@@ -166,7 +167,8 @@ public class Convolution : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_redrawFlag) {
+        if (_redrawFlag)
+        {
             redrawGraphs();
             _redrawFlag = false;
         }
@@ -189,110 +191,139 @@ public class Convolution : MonoBehaviour
         string waveType = button.name.Split("-")[0];
         string plotName = button.name.Split("-")[1];
 
-        bool isButtonA = plotName=="A";
+        bool isButtonA = plotName == "A";
 
-        if (lineContainer.GetComponent<MeshRenderer>() != null){
+        if (lineContainer.GetComponent<MeshRenderer>() != null)
+        {
             Destroy(lineContainer.GetComponent<MeshRenderer>());
             Destroy(lineContainer.GetComponent<MeshFilter>());
             Destroy(lineContainer3.GetComponent<MeshRenderer>());
             Destroy(lineContainer3.GetComponent<MeshFilter>());
         }
-        if (lineContainer2.GetComponent<MeshRenderer>() != null){
+        if (lineContainer2.GetComponent<MeshRenderer>() != null)
+        {
             Destroy(lineContainer2.GetComponent<MeshRenderer>());
             Destroy(lineContainer2.GetComponent<MeshFilter>());
             Destroy(lineContainer4.GetComponent<MeshRenderer>());
             Destroy(lineContainer4.GetComponent<MeshFilter>());
         }
 
-        switch(waveType){
-        case "Dirac":
-            if (isButtonA) {
-                SetWaveA<Dirac>();
-            } else {
-                SetWaveB<Dirac>();
-            }
-            break;
-        case "Sawtooth":
-            if (isButtonA) {
-                SetWaveA<Sawtooth>();
-            } else {
-                SetWaveB<Sawtooth>();
-            }
-            break;
-        case "Echo":
-            if (isButtonA) {
-                SetWaveA<Echo>();
-            } else {
-                SetWaveB<Echo>();
-            }
-            break;
-        case "Boxcar":
-            if (isButtonA) {
-                SetWaveA<Boxcar>();
-            } else {
-                SetWaveB<Boxcar>();
-            }
-            break;
-        case "Triangle":
-            if (isButtonA) {
-                SetWaveA<Triangle>();
-            } else {
-                SetWaveB<Triangle>();
-            }
-            break;
-        case "Sine":
-            if (isButtonA) {
-                SetWaveA<Sine>();
-            } else {
-                SetWaveB<Sine>();
-            }
-            break;
+        switch (waveType)
+        {
+            case "Dirac":
+                if (isButtonA)
+                {
+                    SetWaveA<Dirac>();
+                }
+                else
+                {
+                    SetWaveB<Dirac>();
+                }
+                break;
+            case "Sawtooth":
+                if (isButtonA)
+                {
+                    SetWaveA<Sawtooth>();
+                }
+                else
+                {
+                    SetWaveB<Sawtooth>();
+                }
+                break;
+            case "Echo":
+                if (isButtonA)
+                {
+                    SetWaveA<Echo>();
+                }
+                else
+                {
+                    SetWaveB<Echo>();
+                }
+                break;
+            case "Boxcar":
+                if (isButtonA)
+                {
+                    SetWaveA<Boxcar>();
+                }
+                else
+                {
+                    SetWaveB<Boxcar>();
+                }
+                break;
+            case "Triangle":
+                if (isButtonA)
+                {
+                    SetWaveA<Triangle>();
+                }
+                else
+                {
+                    SetWaveB<Triangle>();
+                }
+                break;
+            case "Sine":
+                if (isButtonA)
+                {
+                    SetWaveA<Sine>();
+                }
+                else
+                {
+                    SetWaveB<Sine>();
+                }
+                break;
         }
         _redrawFlag = true;
 
-        for (int i = 0; i < STEPCOUNT * 2; i++) {
+        for (int i = 0; i < STEPCOUNT * 2; i++)
+        {
             _waveC[i] = 0.0f;
         }
     }
 
-    private void ConvolveCallback(ChangeEvent<float> evt) {
+    private void ConvolveCallback(ChangeEvent<float> evt)
+    {
         // print(evt.newValue);
-        int offset = (int) evt.newValue;
-        lineContainer4.transform.position = new Vector3(xConvolveGraph+(offset/24.0f),(0.0f),0f); // why 48?
+        int offset = (int)evt.newValue;
+        lineContainer4.transform.position = new Vector3(xConvolveGraph + (offset / 24.0f), (0.0f), 0f); // why 48?
         float multiplier = MAX_X / STEPCOUNT;
-        for (int T = 0; T <= offset; T++) {
+        for (int T = 0; T <= offset; T++)
+        {
             float convsum = 0.0f;
-            for (int i = 0; i <= T; i++) {
+            for (int i = 0; i <= T; i++)
+            {
                 // print("Convolving " + _waveA.get(i* multiplier).ToString() + " with " + _waveB.get(i * multiplier).ToString() + " with offset " + offset.ToString());
-                convsum += _waveA.convolve(_waveB, T*multiplier, i*multiplier );
+                convsum += _waveA.convolve(_waveB, T * multiplier, i * multiplier);
             }
             _waveC[T] = convsum;
-    
 
-            if (T == offset) print(convsum);
+
+            // if (T == offset) print(convsum);
         }
         lineContainer5.AddComponent<LineRenderer>();
         drawConvolution();
 
     }
 
-    public void SetWaveA<T>() where T: AbstractWave, new(){
+    public void SetWaveA<T>() where T : AbstractWave, new()
+    {
         _waveA = new T();
         _waveA.frequency(1);
         _waveA.amplitude(1);
     }
 
-    public void SetWaveA(AbstractWave wave) {
+    public void SetWaveA(AbstractWave wave)
+    {
         _waveA = wave;
     }
 
-    public void SetWaveB<T>() where T: AbstractWave, new(){
+    public void SetWaveB<T>() where T : AbstractWave, new()
+    {
         _waveB = new T();
         _waveB.frequency(1);
         _waveB.amplitude(1);
     }
 
-    public void SetWaveB(AbstractWave wave) {
+    public void SetWaveB(AbstractWave wave)
+    {
         _waveB = wave;
     }
 
@@ -306,54 +337,58 @@ public class Convolution : MonoBehaviour
     public static void BakeLineDebuger(GameObject lineObj)
     {
         var lineRenderer = lineObj.GetComponent<LineRenderer>();
-        
+
         // Unity Shenanagins not properly universally adding components without help
         MeshFilter meshFilter = TrueGetComponent<MeshFilter>(lineObj);
 
         Mesh mesh = new Mesh();
         lineRenderer.BakeMesh(mesh);
         meshFilter.sharedMesh = mesh;
- 
+
         // Unity Shenanagins not properly universally adding components without help
         MeshRenderer meshRenderer = TrueGetComponent<MeshRenderer>(lineObj);
 
         meshRenderer.sharedMaterial = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
-        
+
         GameObject.Destroy(lineRenderer);
     }
 
-    public void redrawGraphs() {
+    public void redrawGraphs()
+    {
         // Draw graph of wave A
         if (_waveA == null) _waveA = new Boxcar();
         lineContainer.AddComponent<LineRenderer>();
-        makeWave(lineContainer,Color.red, _waveA);
+        makeWave(lineContainer, Color.red, _waveA);
 
         // Draw graph of wave B
         if (_waveB == null) _waveB = new Boxcar();
         lineContainer2.AddComponent<LineRenderer>();
-        makeWave(lineContainer2,Color.green, _waveB);
+        makeWave(lineContainer2, Color.green, _waveB);
 
         // Draw both lines in the mixing graph
         lineContainer3.AddComponent<LineRenderer>();
-        makeWave(lineContainer3,Color.red, _waveA);
+        makeWave(lineContainer3, Color.red, _waveA);
         lineContainer4.AddComponent<LineRenderer>();
-        makeWave(lineContainer4,Color.green, _waveB);
+        makeWave(lineContainer4, Color.green, _waveB);
 
-        
+
         lineContainer5.AddComponent<LineRenderer>();
         drawConvolution();
 
         // Draw line in the result graph
     }
 
-    public void makeWave(GameObject lineObj, Color color, AbstractWave wave) {
-        float xScaled = -_width/2;
+    public void makeWave(GameObject lineObj, Color color, AbstractWave wave)
+    {
+        float xScaled = -_width / 2;
         makeWave(lineObj, color, wave, xScaled);
     }
 
-    public void makeWave(GameObject lineObj, Color color, AbstractWave wave, float xPos) {
+    public void makeWave(GameObject lineObj, Color color, AbstractWave wave, float xPos)
+    {
 
-        if (lineObj.GetComponent<MeshRenderer>() != null){
+        if (lineObj.GetComponent<MeshRenderer>() != null)
+        {
             Destroy(lineObj.GetComponent<MeshRenderer>());
             Destroy(lineObj.GetComponent<MeshFilter>());
         }
@@ -368,7 +403,7 @@ public class Convolution : MonoBehaviour
         lineRenderer.endColor = color;
 
         // The scaled value for which to increment the functions x value
-        float incrementValue = _width/STEPCOUNT;
+        float incrementValue = _width / STEPCOUNT;
 
         //                    [Game Screen]
         ///////////////////////////////////////////////////////
@@ -390,9 +425,10 @@ public class Convolution : MonoBehaviour
         // A list to stor our new scaled xvalues
         var xList = new List<float>(STEPCOUNT);
 
-        for (int i = 0; i < STEPCOUNT; ++i){
+        for (int i = 0; i < STEPCOUNT; ++i)
+        {
 
-            xList.Add(i*incrementValue);
+            xList.Add(i * incrementValue);
         }
 
         // A list of Vecter2s to store both the xy points we want linerenderer to connect
@@ -400,8 +436,9 @@ public class Convolution : MonoBehaviour
         // passing string "str" in
         // switch statement
         lineRenderer.positionCount = STEPCOUNT;
-        for (int i = 0; i < STEPCOUNT; ++i){
-            pointsList.Add(new Vector3(xList[i],wave.get(xList[i]),0.0f));
+        for (int i = 0; i < STEPCOUNT; ++i)
+        {
+            pointsList.Add(new Vector3(xList[i], wave.get(xList[i]), 0.0f));
         }
 
         for (int i = 0; i < pointsList.Count; i++)
@@ -411,9 +448,11 @@ public class Convolution : MonoBehaviour
         BakeLineDebuger(lineObj);
     }
 
-    public void drawConvolution(){
+    public void drawConvolution()
+    {
 
-        if (lineContainer5.GetComponent<MeshRenderer>() != null){
+        if (lineContainer5.GetComponent<MeshRenderer>() != null)
+        {
             Destroy(lineContainer5.GetComponent<MeshRenderer>());
             Destroy(lineContainer5.GetComponent<MeshFilter>());
         }
@@ -428,51 +467,45 @@ public class Convolution : MonoBehaviour
         lineRenderer.endWidth = 0.2f;
         lineRenderer.startColor = Color.magenta;
         lineRenderer.endColor = Color.magenta;
-        lineRenderer.positionCount = 2*STEPCOUNT;
+        lineRenderer.positionCount = 2 * STEPCOUNT;
 
         // Scale the X value down to a displayable size; in this case dividing the screen width by the stepcount
-        float incrementValue = _width/(2f*STEPCOUNT);
+        float incrementValue = _width / (2f * STEPCOUNT);
         float xScaled = 0f;
-        var xList = new List<float>(2*STEPCOUNT);
-        for (int i = 0; i < 2*STEPCOUNT; ++i){
+        var xList = new List<float>(2 * STEPCOUNT);
+        for (int i = 0; i < 2 * STEPCOUNT; ++i)
+        {
 
-            xList.Add(i*incrementValue);
+            xList.Add(i * incrementValue);
         }
 
         // We also need to scale down our y values; but somtimes the max will be 1 and other times the max could be hundreds
         //      we need to dynamically adjust the y value based on the largest value in _waveC
 
         float yMaxValue = 5f;
-        if (_waveC.Max() != 0){
+        if (_waveC.Max() != 0)
+        {
             yMaxValue = _waveC.Max();
         }
         int yMaxIndex = _waveC.ToList().IndexOf(yMaxValue);
 
         //looking at our displayed graphs we see that the max height looks to be about 5 units (top of the grey line) so we will take our
         //      max and divide by yMaxValue/5 this means that the peak displayed value should never exceed the graph height.
-        float[] yValuesScaled = new float[STEPCOUNT*2];
+        float[] yValuesScaled = new float[STEPCOUNT * 2];
 
         // make our nicely scaled array with our  ugly _waveC array
-        for (int i = 0; i < _waveC.Length; i++){
-            yValuesScaled[i] = (5f* _waveC[i]/yMaxValue);
+        for (int i = 0; i < _waveC.Length; i++)
+        {
+            yValuesScaled[i] = (5f * _waveC[i] / yMaxValue);
         }
 
         //Add our scaled values to a vector array for the line renderer to iterate over
-        for (int i = 0; i < _waveC.Length; i++){
-            _func5pts.Add(new Vector3(xList[i],yValuesScaled[i],0.0f));
+        for (int i = 0; i < _waveC.Length; i++)
+        {
+            _func5pts.Add(new Vector3(xList[i], yValuesScaled[i], 0.0f));
         }
 
-
-        /////////////////////////////           Debug stuff for me
-        Debug.LogFormat("Start--------------------------");
-        for (int i = 0; i < _waveC.Length; i++){
-            Debug.LogFormat(_waveC[i].ToString());
-        }
-        Debug.LogFormat("End-----------------------------");
-        //////////////////////////////////////////////////
-
-
-        //Iterate the line renderer 
+        //Iterate the line renderer
         for (int i = 0; i < _func5pts.Count; i++)
         {
             lineRenderer.SetPosition(i, _func5pts[i]);
@@ -481,13 +514,16 @@ public class Convolution : MonoBehaviour
 
     }
 
-    private static T TrueGetComponent<T>(GameObject obj) where T: Component {
+    private static T TrueGetComponent<T>(GameObject obj) where T : Component
+    {
         T comp = obj.GetComponent<T>();
 
-        if (comp == null){
+        if (comp == null)
+        {
             comp = obj.AddComponent<T>();
         }
-        if (comp == null){
+        if (comp == null)
+        {
             comp = obj.GetComponent<T>();
         }
         return comp;
