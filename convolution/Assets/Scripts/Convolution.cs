@@ -59,6 +59,7 @@ public class Convolution : MonoBehaviour
 
     private AbstractWave _waveA, _waveB;
     private float[] _waveC = new float[STEPCOUNT * 2];
+    private float _convolutionMask;
 
     private bool _redrawFlag;
 
@@ -275,19 +276,8 @@ public class Convolution : MonoBehaviour
         }
         _redrawFlag = true;
 
-        for (int i = 0; i < STEPCOUNT * 2; i++)
-        {
-            _waveC[i] = 0.0f;
-        }
-    }
-
-    private void ConvolveCallback(ChangeEvent<float> evt)
-    {
-        // print(evt.newValue);
-        int offset = (int)evt.newValue;
-        lineContainer4.transform.position = new Vector3(xConvolveGraph + (offset / 24.0f), (0.0f), 0f); // why 48?
         float multiplier = MAX_X / STEPCOUNT;
-        for (int T = 0; T <= offset; T++)
+        for (int T = 0; T < STEPCOUNT * 2; T++)
         {
             float convsum = 0.0f;
             for (int i = 0; i <= T; i++)
@@ -296,10 +286,15 @@ public class Convolution : MonoBehaviour
                 convsum += _waveA.convolve(_waveB, T * multiplier, i * multiplier);
             }
             _waveC[T] = convsum;
-
-
-            // if (T == offset) print(convsum);
         }
+    }
+
+    private void ConvolveCallback(ChangeEvent<float> evt)
+    {
+        // print(evt.newValue);
+        int offset = (int)evt.newValue;
+        lineContainer4.transform.position = new Vector3(xConvolveGraph + (offset / 24.0f), (0.0f), 0f);
+        _convolutionMask = offset;
         lineContainer5.AddComponent<LineRenderer>();
         drawConvolution();
 
