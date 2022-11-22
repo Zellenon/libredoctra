@@ -30,6 +30,17 @@ public class PlotObj : MonoBehaviour
         lr.material = new Material(Shader.Find("Sprites/Default"));
         lr.widthMultiplier = 0.1f;
 
+        _height = Camera.main.orthographicSize;
+        _width = _height * Camera.main.aspect;
+
+        _height = _height - 0.5f;
+        _width = _width - 0.5f;
+        _xscale = 1.1f / (2 * _width);
+        _yscale = 0.2f;
+
+        Debug.LogFormat("_width: {0}, _height: {1}", _width, _height);
+
+        var xymargin = 0.5f;
     }
 
     // Start is called before the first frame update
