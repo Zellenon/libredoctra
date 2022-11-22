@@ -61,7 +61,8 @@ public class Convolution : MonoBehaviour
     private float[] _waveC = new float[STEPCOUNT * 2];
     private float _convolutionMask;
 
-    private bool _redrawFlag;
+    private bool _redrawWaveFlag;
+    private bool _redrawConvFlag;
 
     void Awake()
     {
@@ -163,18 +164,25 @@ public class Convolution : MonoBehaviour
         lineContainer5.transform.position = new Vector3(xConvolveGraph, -3 * _height / 4, 0f);
         lineContainer5.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
 
-        _redrawFlag = true;
-        redrawGraphs();
+        _redrawWaveFlag = true;
+        _redrawConvFlag = true;
+        //redrawGraphs();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_redrawFlag)
+        if (_redrawWaveFlag)
         {
             redrawGraphs();
-            _redrawFlag = false;
+            _redrawWaveFlag = false;
         }
+        if (_redrawConvFlag)
+        {
+            redrawConvGraph();
+            _redrawConvFlag = false;
+        }
+
     }
 
     private void SetupButtonHandlers()
@@ -274,7 +282,7 @@ public class Convolution : MonoBehaviour
                 }
                 break;
         }
-        _redrawFlag = true;
+        _redrawWaveFlag = true;
 
         float multiplier = MAX_X / STEPCOUNT;
         for (int T = 0; T < STEPCOUNT * 2; T++)
@@ -295,8 +303,8 @@ public class Convolution : MonoBehaviour
         int offset = (int)evt.newValue;
         lineContainer4.transform.position = new Vector3(xConvolveGraph + (offset / 24.0f), (0.0f), 0f);
         _convolutionMask = offset;
-        lineContainer5.AddComponent<LineRenderer>();
-        drawConvolution();
+        
+        _redrawConvFlag = true;
 
     }
 
@@ -367,12 +375,14 @@ public class Convolution : MonoBehaviour
         makeWave(lineContainer3, Color.red, _waveA);
         lineContainer4.AddComponent<LineRenderer>();
         makeWave(lineContainer4, Color.green, _waveB);
-
-
-        lineContainer5.AddComponent<LineRenderer>();
-        drawConvolution();
+        
+        
+    }
+    public void redrawConvGraph(){
 
         // Draw line in the result graph
+        lineContainer5.AddComponent<LineRenderer>();
+        drawConvolution();
     }
 
     public void makeWave(GameObject lineObj, Color color, AbstractWave wave)
@@ -447,12 +457,6 @@ public class Convolution : MonoBehaviour
 
     public void drawConvolution()
     {
-
-        if (lineContainer5.GetComponent<MeshRenderer>() != null)
-        {
-            Destroy(lineContainer5.GetComponent<MeshRenderer>());
-            Destroy(lineContainer5.GetComponent<MeshFilter>());
-        }
 
         _func5pts.Clear();
 
