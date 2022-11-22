@@ -302,8 +302,8 @@ public class Convolution : MonoBehaviour
         // print(evt.newValue);
         int offset = (int)evt.newValue;
         lineContainer4.transform.position = new Vector3(xConvolveGraph + (offset / 50.0f), (0.0f), 0f);
-        _convolutionMask = 2f*offset;
-        
+        _convolutionMask = 2f * offset;
+
         _redrawConvFlag = true;
 
     }
@@ -313,6 +313,7 @@ public class Convolution : MonoBehaviour
         _waveA = new T();
         _waveA.frequency(1);
         _waveA.amplitude(1);
+        _waveA.end(MAX_X);
     }
 
     public void SetWaveA(AbstractWave wave)
@@ -325,6 +326,7 @@ public class Convolution : MonoBehaviour
         _waveB = new T();
         _waveB.frequency(1);
         _waveB.amplitude(1);
+        _waveB.end(MAX_X);
     }
 
     public void SetWaveB(AbstractWave wave)
@@ -375,10 +377,11 @@ public class Convolution : MonoBehaviour
         makeWave(lineContainer3, Color.red, _waveA);
         lineContainer4.AddComponent<LineRenderer>();
         makeWave(lineContainer4, Color.green, _waveB);
-        
-        
+
+
     }
-    public void redrawConvGraph(){
+    public void redrawConvGraph()
+    {
 
         // Draw line in the result graph
         lineContainer5.AddComponent<LineRenderer>();
