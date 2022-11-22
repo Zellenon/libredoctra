@@ -301,8 +301,8 @@ public class Convolution : MonoBehaviour
     {
         // print(evt.newValue);
         int offset = (int)evt.newValue;
-        lineContainer4.transform.position = new Vector3(xConvolveGraph + (offset / 100.0f), (0.0f), 0f);
-        _convolutionMask = offset;
+        lineContainer4.transform.position = new Vector3(xConvolveGraph + (offset / 50.0f), (0.0f), 0f);
+        _convolutionMask = 2f*offset;
         
         _redrawConvFlag = true;
 
