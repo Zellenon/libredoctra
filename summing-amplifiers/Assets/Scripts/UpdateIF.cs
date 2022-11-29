@@ -62,10 +62,19 @@ public class UpdateIF : MonoBehaviour
       if(DesiredIFpositionX==IFpositionX ){
         Debug.Log("IF matched to Desired IF");
         explotionParticle.Play();
-        playerAudio.PlayOneShot(match_sound,5.0f);
-        particleSystemPlayed = true;
+        playerAudio.PlayOneShot(match_sound,9.0f);
+        StartCoroutine(StopParticleSystem(explotionParticle, 2));
+        
        }
        
     }
+    IEnumerator StopParticleSystem(ParticleSystem particleSystem, float time)
+ {
+     yield return new WaitForSeconds(time);
+     
+     particleSystem.Stop();
+ }
+      
+  
     
 }
