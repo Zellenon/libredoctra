@@ -16,7 +16,11 @@ public class UpdateIF : MonoBehaviour
     private float LOScaleY;
     private float DesiredIFpositionX;
     private float DesiredIFScaleY;
+    public ParticleSystem explotionParticle;
+    bool particleSystemPlayed = false;
     // Start is called before the first frame update
+    private AudioSource playerAudio;
+    public AudioClip match_sound;
     void Start()
     {
         RF=GameObject.Find("RF");
@@ -26,6 +30,7 @@ public class UpdateIF : MonoBehaviour
 
         DesiredIFpositionX=DesiredIF.transform.position.x;
         DesiredIFScaleY=DesiredIF.transform.localScale.y;
+        playerAudio=GetComponent<AudioSource>();
 
     }
 
@@ -45,11 +50,22 @@ public class UpdateIF : MonoBehaviour
 
         transform.position = new Vector3(IFpositionX, -3.51f,0);
         transform.localScale = new Vector2(0.304793f,IFScaleY);
-
-       if(DesiredIFpositionX==IFpositionX ){
-        Debug.Log("IF matched to Desired IF");
-       }
+        
+        match();
 
         
+        
+
     }
+
+    void match(){
+      if(DesiredIFpositionX==IFpositionX ){
+        Debug.Log("IF matched to Desired IF");
+        explotionParticle.Play();
+        playerAudio.PlayOneShot(match_sound,5.0f);
+        particleSystemPlayed = true;
+       }
+       
+    }
+    
 }
