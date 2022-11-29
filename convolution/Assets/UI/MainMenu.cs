@@ -7,17 +7,20 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     private UIDocument _doc;
-    private Button _randomButton;
-    private Button _customButton;
+    private Button _explorerButton;
+    private Button _continuousButton;
+    private Button _gameButton;
 
     private void Awake()
     {
         _doc = GetComponent<UIDocument>();
-        _randomButton = _doc.rootVisualElement.Q<Button>("Game1");
-        _customButton = _doc.rootVisualElement.Q<Button>("Game2");
+        _explorerButton = _doc.rootVisualElement.Q<Button>("Explorer");
+        _continuousButton = _doc.rootVisualElement.Q<Button>("Continuous");
+        _gameButton = _doc.rootVisualElement.Q<Button>("Game");
 
-        _randomButton.clicked += PlayGame;
-        _customButton.clicked += CustomGame;
+        _explorerButton.clicked += Explorer;
+        _continuousButton.clicked += ContinuousExplorer;
+        _gameButton.clicked += Game;
     }
 
     // Start is called before the first frame update
@@ -37,14 +40,19 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void PlayGame()
+    public void Explorer()
     {
-        SceneManager.LoadScene("ConvolutionTest");
+        SceneManager.LoadScene("ConvolutionExplorer");
     }
 
 
-    public void CustomGame()
+    public void ContinuousExplorer()
     {
-        SceneManager.LoadScene("CustomFuncApproxScene");
+        SceneManager.LoadScene("ConvolutionExplorer");
+    }
+
+    public void Game()
+    {
+        SceneManager.LoadScene("ConvolutionDrawing");
     }
 }
