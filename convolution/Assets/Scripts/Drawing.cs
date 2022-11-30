@@ -47,13 +47,15 @@ public class Drawing : MonoBehaviour
         _drawnPoints = new float[_conv.STEPCOUNT * 2];
         for (int i = 0; i < _conv.STEPCOUNT * 2; i++)
         {
-            _drawnPoints[i] = 0.0f;
+            _drawnPoints[i] = 5.0f;
         }
 
         _drawnObject = new GameObject("Drawn Line");
         _drawnObject.transform.SetParent(transform, false);
         _drawnLine = _drawnObject.AddComponent<LineRenderer>();
         drawWave(_drawnObject);
+        _drawnObject.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
+        _drawnObject.transform.position = new Vector3(30f, 30f, 0f);
 
         _redrawWaveFlag = true;
         redrawGraphs();
