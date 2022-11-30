@@ -22,6 +22,7 @@ public class UpdateIF : MonoBehaviour
     private float IFScaleY_temp;
     public ParticleSystem explotionParticle;
     bool particleSystemPlayed = false;
+    public GameObject matchedText;
     // Start is called before the first frame update
     private AudioSource playerAudio;
     public AudioClip match_sound;
@@ -30,7 +31,7 @@ public class UpdateIF : MonoBehaviour
     Vector3 pos;
     void Start()
     {
-        
+        matchedText=GameObject.Find("matched");
         RF=GameObject.Find("RF");
         IF=GameObject.Find("ParentIF");
         LO=GameObject.Find("ParentLO");
@@ -82,6 +83,7 @@ public class UpdateIF : MonoBehaviour
         Debug.Log("IF ");
         Debug.Log(IFScaleY);
         explotionParticle.Play();
+        matchedText.SetActive(true);
         playerAudio.PlayOneShot(match_sound,9.0f);
         StartCoroutine(StopParticleSystem(explotionParticle, 2));
         
