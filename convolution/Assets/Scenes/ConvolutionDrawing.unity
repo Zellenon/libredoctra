@@ -858,6 +858,7 @@ GameObject:
   - component: {fileID: 2062640186}
   - component: {fileID: 2062640185}
   - component: {fileID: 2062640187}
+  - component: {fileID: 2062640188}
   m_Layer: 0
   m_Name: Convolution
   m_TagString: Untagged
@@ -932,3 +933,15 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: dd5ca91146d98bbcbbf9192a60af3f7e, type: 3}
   m_SortingOrder: 0
+--- !u!114 &2062640188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062640184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cb7cd63fc861d219fa24dc7616c067, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

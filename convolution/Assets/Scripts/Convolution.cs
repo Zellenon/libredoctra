@@ -26,8 +26,8 @@ public class Convolution : MonoBehaviour
 
     private float _width, _height, _xscale, _yscale, xymargin;
 
-    private const int STEPCOUNT = 200;
-    private const float MAX_X = 4.0f;
+    public int STEPCOUNT;
+    public float MAX_X;
 
     private float xTopLeftPlot, yTopLeftPlot, xTopRightPlot, yTopRightPlot;
     private float topPlotsWidth, topPlotsHeight, xConvolveGraph, YConvolveGraph;
@@ -58,14 +58,19 @@ public class Convolution : MonoBehaviour
     private UIDocument _doc;
 
     private AbstractWave _waveA, _waveB;
-    private float[] _waveC = new float[STEPCOUNT * 2];
+    private float[] _waveC;
     private float _convolutionMask;
 
     private bool _redrawWaveFlag;
     private bool _redrawConvFlag;
 
+
     void Awake()
     {
+        STEPCOUNT = 200;
+        MAX_X = 4.0f;
+        _waveC = new float[STEPCOUNT * 2];
+
         _height = Camera.main.orthographicSize;
         _width = _height * Camera.main.aspect;
 
