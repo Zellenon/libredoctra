@@ -20,7 +20,7 @@ public class FreqPeak2 : MonoBehaviour
         //amp=wave.GetComponent<MultiplyWaves>().ampMul;
         freqSub=wave.GetComponent<MultiplyWaves>().freqSub;
         //freqSub=wave.GetComponent<MultiplyWaves>().freqSub;
-        transform.position = new Vector2(freqSub+7f, -2.634f);
+        transform.position = new Vector2(freqSub+7f, -2.35f);
         //void ShiftSliderUpdate(float value) {transform.localPosition = new Vector2(value,-3.49f);}
         
     }

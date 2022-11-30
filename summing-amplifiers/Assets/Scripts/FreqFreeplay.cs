@@ -18,7 +18,7 @@ public class FreqFreeplay : MonoBehaviour
     {
         freqAdd=wave.GetComponent<MultiplyWaves>().freqAdd;
         //freqSub=wave.GetComponent<MultiplyWaves>().freqSub;
-        transform.position = new Vector2(freqAdd+3.75f, -2.634f);
+        transform.position = new Vector2(freqAdd+3.75f, -2.35f);
         //void ShiftSliderUpdate(float value) {transform.localPosition = new Vector2(value,-3.49f);}
         
     }
