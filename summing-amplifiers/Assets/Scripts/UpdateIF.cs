@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using Random = UnityEngine.Random;
+//using System.Random;
 public class UpdateIF : MonoBehaviour
 {
     private GameObject RF;
@@ -23,12 +25,21 @@ public class UpdateIF : MonoBehaviour
     // Start is called before the first frame update
     private AudioSource playerAudio;
     public AudioClip match_sound;
+    float x;
+    
+    Vector3 pos;
     void Start()
     {
         RF=GameObject.Find("RF");
         IF=GameObject.Find("ParentIF");
         LO=GameObject.Find("ParentLO");
         DesiredIF=GameObject.Find("DesiredIF");
+        x = Random.Range(0, 5);
+      
+        pos = new Vector3(x, -1.18f, 0);
+        DesiredIF.transform.position = pos;
+        
+        
 
         DesiredIFpositionX=DesiredIF.transform.position.x;
         DesiredIFScaleY=DesiredIF.transform.localScale.y;
@@ -63,7 +74,7 @@ public class UpdateIF : MonoBehaviour
 
     void match(){
         IFScaleY_temp=IF.transform.localScale.y;
-      if((DesiredIFpositionX==IFpositionX) && (Math.Abs(DesiredIFScaleY-IFScaleY)<0.09)){
+      if((Math.Abs(DesiredIFpositionX-IFpositionX)<0.05) && (Math.Abs(DesiredIFScaleY-IFScaleY)<0.09)){
         Debug.Log("IF matched to Desired IF");
         Debug.Log("Desired IF ");
         Debug.Log(DesiredIFScaleY);
