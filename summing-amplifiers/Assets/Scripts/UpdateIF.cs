@@ -30,6 +30,7 @@ public class UpdateIF : MonoBehaviour
     Vector3 pos;
     void Start()
     {
+        
         RF=GameObject.Find("RF");
         IF=GameObject.Find("ParentIF");
         LO=GameObject.Find("ParentLO");
@@ -66,7 +67,7 @@ public class UpdateIF : MonoBehaviour
         transform.localScale = new Vector2(0.304793f,IFScaleY);
         
         match();
-
+       
         
         
 
@@ -83,6 +84,7 @@ public class UpdateIF : MonoBehaviour
         explotionParticle.Play();
         playerAudio.PlayOneShot(match_sound,9.0f);
         StartCoroutine(StopParticleSystem(explotionParticle, 2));
+        
         
        }
        
