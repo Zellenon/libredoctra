@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 public class UpdateIF : MonoBehaviour
 {
     private GameObject RF;
@@ -16,6 +17,7 @@ public class UpdateIF : MonoBehaviour
     private float LOScaleY;
     private float DesiredIFpositionX;
     private float DesiredIFScaleY;
+    private float IFScaleY_temp;
     public ParticleSystem explotionParticle;
     bool particleSystemPlayed = false;
     // Start is called before the first frame update
@@ -45,6 +47,7 @@ public class UpdateIF : MonoBehaviour
         LOScaleY=LO.transform.localScale.y;
 
         IFpositionX= RFpositionX - LOpositionX;
+        
         IFScaleY= (RFScaleY*LOScaleY)/2;
 
 
@@ -59,8 +62,13 @@ public class UpdateIF : MonoBehaviour
     }
 
     void match(){
-      if(DesiredIFpositionX==IFpositionX ){
+        IFScaleY_temp=IF.transform.localScale.y;
+      if((DesiredIFpositionX==IFpositionX) && (Math.Abs(DesiredIFScaleY-IFScaleY)<0.09)){
         Debug.Log("IF matched to Desired IF");
+        Debug.Log("Desired IF ");
+        Debug.Log(DesiredIFScaleY);
+        Debug.Log("IF ");
+        Debug.Log(IFScaleY);
         explotionParticle.Play();
         playerAudio.PlayOneShot(match_sound,9.0f);
         StartCoroutine(StopParticleSystem(explotionParticle, 2));
