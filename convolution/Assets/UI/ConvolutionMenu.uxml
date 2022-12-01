@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Sidebar.uss?fileID=7433441132597879392&amp;guid=bb1706e878a79098c8fec1f077e79b5c&amp;type=3#Sidebar" />
     <ui:VisualElement name="Window" style="width: 100%; height: 100%; flex-direction: row-reverse;">
-        <ui:VisualElement name="Sidebar" style="height: 100%; width: 20%; justify-content: space-around; background-color: rgb(58, 58, 58); align-items: stretch; -unity-text-align: upper-center;">
+        <ui:VisualElement name="Sidebar" style="height: 100%; width: 20%; justify-content: space-around; background-color: rgb(217, 217, 217); align-items: stretch; -unity-text-align: upper-center;">
             <ui:VisualElement name="Buttons" style="justify-content: space-between; flex-direction: row; flex-wrap: nowrap; align-items: center; width: 80%; flex-basis: 50%; -unity-text-align: upper-center;">
                 <ui:VisualElement name="NameCol" style="align-items: center; justify-content: space-between; flex-wrap: wrap; flex-direction: column; width: 100%; min-width: 10px; height: 50%;">
                     <ui:Label text="Dirac" display-tooltip-when-elided="true" />
