@@ -1,5 +1,5 @@
 .button {
-    font-size: 700%;
+    font-size: 600%;
     margin-left: 0;
     margin-right: 0;
     margin-top: 0;
@@ -8,16 +8,16 @@
     padding-right: 1%;
     padding-top: 1%;
     padding-bottom: 1%;
-    border-top-left-radius: 5%;
-    border-bottom-left-radius: 5%;
-    border-top-right-radius: 5%;
-    border-bottom-right-radius: 5%;
-    color: rgba(214, 214, 214, 255);
-    background-color: rgba(99, 98, 98, 255);
+    border-top-left-radius: 10%;
+    border-bottom-left-radius: 10%;
+    border-top-right-radius: 10%;
+    border-bottom-right-radius: 10%;
+    color: rgb(214, 214, 214);
+    background-color: rgb(99, 98, 98);
     -unity-font: none;
     -unity-text-align: middle-center;
-    -unity-font-style: bold;
+    -unity-font-style: normal;
     -unity-text-outline-width: 0;
-    -unity-text-outline-color: rgba(7, 7, 7, 255);
+    -unity-text-outline-color: rgb(7, 7, 7);
     text-shadow: 25px 5px 50px rgba(75, 72, 72, 0);
 }
