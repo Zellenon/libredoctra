@@ -20,11 +20,12 @@ public class Drawing : MonoBehaviour
 
     private bool _redrawWaveFlag;
 
-    private int STEPCOUNT;
+    private int STEPCOUNT = 200;
     private float MAX_X;
 
     void Awake()
     {
+        
         _doc = GetComponent<UIDocument>();
         _error_label = new Label("Error: 0%");
         _doc.rootVisualElement.Add(_error_label);
@@ -102,6 +103,7 @@ public class Drawing : MonoBehaviour
                 Debug.Log(mousePos);
                 _redrawWaveFlag = true;
             }
+            //_redrawWaveFlag = true;
         }
     }
 
@@ -137,7 +139,8 @@ public class Drawing : MonoBehaviour
             Destroy(lineObj.GetComponent<MeshFilter>());
         }
 
-        Color color = Color.grey + Color.blue;
+        //Color color = Color.grey + Color.blue;
+        Color color = Color.green;
 
         var lineRenderer = lineObj.GetComponent<LineRenderer>();
         lineRenderer.material = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
