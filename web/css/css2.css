@@ -1,0 +1,45 @@
+
+
+h1,h2,h3,h4{
+    font-family: Coiny;
+    text-decoration: none !important;
+}
+
+.centered-svg{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#background-video{
+    min-width: 1920px;
+}
+
+*{
+    position: relative;
+}
+
+.full-width{
+    width: 100%;
+}
+
+.alt-header{
+    border: #FF0 solid 2px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 100%;
+}
+
+
+
+a{
+    color: black !important;
+    text-decoration: none !important;
+}
+
+a:hover{
+    color: #FFCD00 !important;
+    text-decoration: underline !important;
+}
