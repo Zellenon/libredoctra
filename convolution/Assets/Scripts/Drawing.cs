@@ -56,7 +56,7 @@ public class Drawing : MonoBehaviour
         _drawnLine = _drawnObject.AddComponent<LineRenderer>();
         drawWave(_drawnObject);
         _drawnObject.transform.localScale = new Vector3(0.5f, 0.5f, 0f);
-        _drawnObject.transform.position = new Vector3(30f, 30f, 0f);
+        _drawnObject.transform.position = new Vector3(-_width / 4f, -3 * _height / 4, 0f);
 
         _redrawWaveFlag = true;
         redrawGraphs();
@@ -76,17 +76,27 @@ public class Drawing : MonoBehaviour
 
     void HandleInput()
     {
-        if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0)) // If we should actually do something
         {
-            int xmin = 68, xmax = 108, ymin = 47, ymax = 131;
+            int xmin = 41, xmax = 64, ymin = 17, ymax = 41;
+
+            // Get the mouse position
             Vector2 mousePos = Vector2.zero;
             ScreenToWorld(ref mousePos);
+
+            // If the user is clicking on the graph area
             if (mousePos.x <= xmax && mousePos.x >= xmin && mousePos.y <= ymax && mousePos.y >= ymin)
             {
+                // Which point on the graph are they changing?
                 int index = Mathf.RoundToInt(map(mousePos.x, xmin, xmax, 0, _conv.STEPCOUNT));
+                // graphmax should be the max value of the convolution - the max value of waveC
                 float graphmax = 5.0f; //TEMP, TODO: Change
+                // the value we should set that point to
                 float new_y = map(mousePos.y, ymin, ymax, 0, graphmax);
+                // actually change the value
                 _drawnPoints[index] = new_y;
+
+                // Ignore this for now
                 if (_last_x >= 0)
                 {
                     if (_last_x < index)
@@ -100,7 +110,6 @@ public class Drawing : MonoBehaviour
                     }
                 }
                 _last_x = index;
-                Debug.Log(mousePos);
                 _redrawWaveFlag = true;
             }
             //_redrawWaveFlag = true;
@@ -109,8 +118,8 @@ public class Drawing : MonoBehaviour
 
     void ScreenToWorld(ref Vector2 pos)
     {
-        pos.x = (Input.mousePosition.x - _width) * _xscale;
-        pos.y = (Input.mousePosition.y - _height) * _yscale;
+        pos.x = 100f * (Input.mousePosition.x) / Screen.width;
+        pos.y = 100f * (Input.mousePosition.y) / Screen.height;
     }
 
     Vector2 ToScreenCoords(Vector2 funccoords)
