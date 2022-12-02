@@ -122,12 +122,14 @@ public class Drawing : MonoBehaviour
         pos.y = 100f * (Input.mousePosition.y) / Screen.height;
     }
 
+    // Gives world coords between 0 and 100
     Vector2 ToScreenCoords(Vector2 funccoords)
     {
         return (new Vector3(-_width + funccoords.x / _xscale,
                             funccoords.y / _yscale));
     }
 
+    // Map val from input range to output range
     float map(float val, float in_min, float in_max, float out_min, float out_max)
     {
         return Mathf.Lerp(out_min, out_max, Mathf.InverseLerp(in_min, in_max, val));
