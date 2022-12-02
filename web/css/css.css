@@ -1,0 +1,62 @@
+
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+
+.centered-svg{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1,h2,h3,h4{
+    font-family: Coiny;
+    text-decoration: none !important;
+}
+
+#background-video{
+    min-width: 1920px;
+}
+
+*{
+    position: relative;
+}
+
+body{
+    overflow: hidden;
+    scrollbar-width: 0px;
+}
+
+.fancy{
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+    text-align: center;
+    color: white;
+}
+
+.but-ton{
+    position: absolute;
+    top: 250px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    color: white;
+    text-align: center;
+}
+
+
+a{
+    color: black !important;
+    text-decoration: none !important;
+}
+
+a:hover{
+    color: #FFCD00 !important;
+    text-decoration: underline !important;
+    text-decoration-color: #000;
+}
