@@ -11,12 +11,15 @@ public class UpdateIF : MonoBehaviour
     private GameObject LO;
     private GameObject IF;
     private GameObject DesiredIF;
+    private GameObject Image;
     private float RFpositionX;
     private float RFScaleY;
     private float IFpositionX;
     private float IFScaleY;
     private float LOpositionX;
     private float LOScaleY;
+     private float ImagePositionX;
+    private float ImageScaleY;
     private float DesiredIFpositionX;
     private float DesiredIFScaleY;
     private float IFScaleY_temp;
@@ -27,22 +30,22 @@ public class UpdateIF : MonoBehaviour
     private AudioSource playerAudio;
     public AudioClip match_sound;
     float x;
-    
     Vector3 pos;
+    
     void Start()
     {
-        matchedText=GameObject.Find("matched");
+        
+        
         RF=GameObject.Find("RF");
         IF=GameObject.Find("ParentIF");
         LO=GameObject.Find("ParentLO");
+        Image=GameObject.Find("Parent_Image");
         DesiredIF=GameObject.Find("DesiredIF");
         x = Random.Range(0, 5);
       
         pos = new Vector3(x, -1.18f, 0);
         DesiredIF.transform.position = pos;
         
-        
-
         DesiredIFpositionX=DesiredIF.transform.position.x;
         DesiredIFScaleY=DesiredIF.transform.localScale.y;
         playerAudio=GetComponent<AudioSource>();
@@ -60,16 +63,20 @@ public class UpdateIF : MonoBehaviour
         LOScaleY=LO.transform.localScale.y;
 
         IFpositionX= RFpositionX - LOpositionX;
+        ImagePositionX= RFpositionX + LOpositionX;
         
         IFScaleY= (RFScaleY*LOScaleY)/2;
+        ImageScaleY= (RFScaleY*LOScaleY)/2;
 
 
-        transform.position = new Vector3(IFpositionX, -3.51f,0);
-        transform.localScale = new Vector2(0.304793f,IFScaleY);
+        IF.transform.position = new Vector3(IFpositionX, -3.51f,0);
+        IF.transform.localScale = new Vector2(0.304793f,IFScaleY);
+
+        Image.transform.position = new Vector3(ImagePositionX, -3.51f,0);
+        Image.transform.localScale = new Vector2(0.304793f,ImageScaleY);
         
         match();
        
-        
         
 
     }
@@ -86,6 +93,8 @@ public class UpdateIF : MonoBehaviour
         matchedText.SetActive(true);
         playerAudio.PlayOneShot(match_sound,9.0f);
         StartCoroutine(StopParticleSystem(explotionParticle, 2));
+        
+        
         
         
        }
