@@ -6,10 +6,13 @@ public class dogJump : MonoBehaviour
 {
     public Rigidbody dogRb;
     public GameObject matchedText;
+    public GameObject dog;
     // Start is called before the first frame update
     void Start()
     {
-        dogRb=GetComponent<Rigidbody>();
+        //dogRb=GetComponent<Rigidbody>();
+       //dog=GameObject.Find("dog");
+       matchedText=GameObject.Find("matched");
     }
 
     // Update is called once per frame
@@ -21,7 +24,7 @@ public class dogJump : MonoBehaviour
     void jump(){
         if(matchedText.activeSelf){
               
-      dogRb.AddForce(transform.up*1000);
+         dog.SetActive(true);
         }
       
     }

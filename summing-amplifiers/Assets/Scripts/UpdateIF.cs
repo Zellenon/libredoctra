@@ -41,7 +41,7 @@ public class UpdateIF : MonoBehaviour
         LO=GameObject.Find("ParentLO");
         Image=GameObject.Find("Parent_Image");
         DesiredIF=GameObject.Find("DesiredIF");
-        x = Random.Range(0, 5);
+        x = Random.Range(-2, 5);
       
         pos = new Vector3(x, -1.18f, 0);
         DesiredIF.transform.position = pos;

@@ -41,6 +41,8 @@ public class Output : MonoBehaviour
 
     void Start()
     {
+        float ymax1 = 5f;//Camera.main.orthographicSize;
+        float xmax1 = 3f;//ymax * Screen.width / Screen.height;
         float ymax = 4f;//Camera.main.orthographicSize;
         float xmax = 3f;//ymax * Screen.width / Screen.height;
         Debug.LogFormat("xmax: {0}, ymax: {1}", xmax, ymax);
@@ -50,8 +52,8 @@ public class Output : MonoBehaviour
 
         x01 = 6; 
         y01 = 1.5f / 3f * ymax - 0.3f;//0.05f / 3f * ymax - 0.3f;
-        w1 = xmax - xymargin; 
-        h1 = ymax / 3f - xymargin;
+        w1 = xmax1 - xymargin; 
+        h1 = ymax1 / 3f - xymargin;
 
         x02 = 6; 
         y02 = -2f / 3f * ymax - 0.3f;
