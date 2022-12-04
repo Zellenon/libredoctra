@@ -24,13 +24,13 @@ public class MainMenu_old : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("PlayGame");
+        SceneManager.LoadScene("Game");
     }
 
 
-    public void SinewaveFFT()
+    public void FreePlay()
     {
-        SceneManager.LoadScene("SinewaveFFT");
+        SceneManager.LoadScene("MixerFreePlay");
     }
 
 
