@@ -23,6 +23,8 @@ public class Drawing : MonoBehaviour
     private int STEPCOUNT = 200;
     private float MAX_X;
 
+    private bool newAttemptLine = true;
+
     void Awake()
     {
         
@@ -59,19 +61,20 @@ public class Drawing : MonoBehaviour
         _drawnObject.transform.position = new Vector3(-_width / 4f, -3 * _height / 4, 0f);
 
         _redrawWaveFlag = true;
+        newAttemptLine = true;
         redrawGraphs();
     }
 
     // Update is called once per frame
     void Update()
     {
-        HandleInput();
+        
         if (_redrawWaveFlag)
         {
             redrawGraphs();
             _redrawWaveFlag = false;
         }
-
+        HandleInput();
     }
 
     void HandleInput()
@@ -150,8 +153,8 @@ public class Drawing : MonoBehaviour
             Destroy(lineObj.GetComponent<MeshFilter>());
         }
 
-        //Color color = Color.grey + Color.blue;
-        Color color = Color.green;
+        Color color = Color.grey + Color.blue;
+        //Color color = Color.green;
 
         var lineRenderer = lineObj.GetComponent<LineRenderer>();
         lineRenderer.material = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
@@ -172,7 +175,8 @@ public class Drawing : MonoBehaviour
         lineRenderer.positionCount = STEPCOUNT;
         for (int i = 0; i < STEPCOUNT; ++i)
         {
-            pointsList.Add(new Vector3(i, _drawnPoints[i], 0.0f));
+            //pointsList.Add(new Vector3(i, _drawnPoints[i], 0.0f));
+            pointsList.Add(new Vector3(i* 0.02f, _drawnPoints[i], 0.0f));
         }
 
         for (int i = 0; i < pointsList.Count; i++)
