@@ -66,24 +66,40 @@ public class Drawing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetMouseButtonDown(0) ) // If mouse initially clicked
-        {
-            
 
-           CreateLine();
+        int xmin = 41, xmax = 64, ymin = 17, ymax = 41;
 
-            
-        }
-        if (Input.GetMouseButton(0) ) // If mouse is being held add more points
-        {
-           
-            Vector2 tempMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (Vector2.Distance(tempMousePos, mousePos[mousePos.Count - 1]) > .1f){
-                UpdateLine(tempMousePos);
+        // Get the mouse position
+        Vector2 tempPos = Vector2.zero;
+        ScreenToWorld(ref tempPos);
+
+
+
+        if (tempPos.x <= xmax && tempPos.x >= xmin && tempPos.y <= ymax && tempPos.y >= ymin)
+            {
+            if (Input.GetMouseButtonDown(0) ) // If mouse initially clicked
+            {
+                
+
+            CreateLine();
+
+                
             }
+            if (Input.GetMouseButton(0) ) // If mouse is being held add more points
+            {
             
+                Vector2 tempMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                if (Vector2.Distance(tempMousePos, mousePos[mousePos.Count - 1]) > .1f){
+                    UpdateLine(tempMousePos);
+                }
+                
+            }
         }
+    }
+    void ScreenToWorld(ref Vector2 pos)
+    {
+        pos.x = 100f * (Input.mousePosition.x) / Screen.width;
+        pos.y = 100f * (Input.mousePosition.y) / Screen.height;
     }
 
     void HandleInput()
