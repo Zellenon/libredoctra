@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEngine.UIElements;
 using TMPro;
 
-public class Convolution : MonoBehaviour
+public class DemoConv : MonoBehaviour
 {
     [SerializeField] private Material defaultLineMaterial;
     [SerializeField] private Material lineMaterial;
@@ -26,21 +26,13 @@ public class Convolution : MonoBehaviour
 
     private float _width, _height, _xscale, _yscale, xymargin;
 
-    public int STEPCOUNT;
-    public float MAX_X;
+    private const int STEPCOUNT = 200;
+    private const float MAX_X = 4.0f;
 
     private float xTopLeftPlot, yTopLeftPlot, xTopRightPlot, yTopRightPlot;
     private float topPlotsWidth, topPlotsHeight, xConvolveGraph, YConvolveGraph;
     private float convolveGraphWidth, convolveGraphHeight;
-
-    private int Nfft, Nfreq;
-    private float _Fs, _tmax;
-    public float _mag, _freq, _phase;
-
-    private List<Vector2> _func1pts = new List<Vector2>();
-    private List<Vector2> _func2pts = new List<Vector2>();
-    private List<Vector2> _func3pts = new List<Vector2>();
-    private List<Vector2> _func4pts = new List<Vector2>();
+    
     private List<Vector2> _func5pts = new List<Vector2>();
 
     //Container 1 is top left, 2 is top right, 3 is top left on the bottom graph, 4 is the inverted top right wave, 5 is the convolved wave
@@ -58,19 +50,14 @@ public class Convolution : MonoBehaviour
     private UIDocument _doc;
 
     private AbstractWave _waveA, _waveB;
-    private float[] _waveC;
+    private float[] _waveC = new float[STEPCOUNT * 2];
     private float _convolutionMask;
 
     private bool _redrawWaveFlag;
     private bool _redrawConvFlag;
 
-
     void Awake()
     {
-        STEPCOUNT = 200;
-        MAX_X = 4.0f;
-        _waveC = new float[STEPCOUNT * 2];
-
         _height = Camera.main.orthographicSize;
         _width = _height * Camera.main.aspect;
 

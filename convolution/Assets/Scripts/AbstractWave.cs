@@ -1,39 +1,41 @@
 using System;
 using UnityEngine;
-using System;
 
-public class AbstractWave : MonoBehaviour
+public class AbstractWave
 {
     protected float _amp;
     protected float _freq;
-    protected bool _isReversed;
+    protected float _end;
 
     public AbstractWave()
     {
         _amp = 1;
         _freq = 1;
-        _isReversed = false;
+        _end = 1;
     }
 
 
-    public virtual float get(float x) {return 0;}
+    public float get(float x) { if (x < _end) return value(x); else return 0; }
 
-    public void isReversed(bool isReversed)
-    {
-        _isReversed = isReversed;
-    }
+    public virtual float value(float x) { return 0; }
 
     public void frequency(float freq)
     {
         _freq = freq;
     }
-    public void amplitute(float amp)
+    public void amplitude(float amp)
     {
         _amp = amp;
     }
 
-    public float convolve(AbstractWave other, float offset, float x) {
-        return this.get(x) * other.get(offset-x);
+    public void end(float end)
+    {
+        _end = end;
+    }
+
+    public float convolve(AbstractWave other, float offset, float x)
+    {
+        return get(x) * other.get(offset - x);
     }
 
 }
