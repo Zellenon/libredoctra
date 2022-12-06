@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['sinewave2_0',['SineWave2',['../classSineWave2.html',1,'']]],
-  ['sinewavefft_1',['SinewaveFFT',['../classSinewaveFFT.html',1,'']]],
-  ['sourceinput_2',['SourceInput',['../classSourceInput.html',1,'']]]
+  ['ques1_5fresult_0',['Ques1_result',['../classQues1__result.html',1,'']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>LD: AbstractWave Class Reference</title>
+<title>Libre Doctra: AbstractWave Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">LD
+   <div id="projectname">Libre Doctra
    </div>
   </td>
  </tr>
@@ -76,29 +76,45 @@ $(function() {
   <div class="headertitle"><div class="title">AbstractWave Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>The <a class="el" href="classAbstractWave.html" title="The AbstractWave is the parent class for all wave classes used in graphs to represent simple,...">AbstractWave</a> is the parent class for all wave classes used in graphs to represent simple, mathematically-defined functions.  
+ <a href="classAbstractWave.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for AbstractWave:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classAbstractWave.png" alt=""/>
- </div></div>
+  <img src="classAbstractWave.png" usemap="#AbstractWave_map" alt=""/>
+  <map id="AbstractWave_map" name="AbstractWave_map">
+<area href="classBoxcar.html" title="A wave that creates a Boxcar Signal." alt="Boxcar" shape="rect" coords="0,56,91,80"/>
+<area href="classDirac.html" title="A Mathematically-accurate analogue to the Dirac Delta." alt="Dirac" shape="rect" coords="101,56,192,80"/>
+<area href="classEcho.html" alt="Echo" shape="rect" coords="202,56,293,80"/>
+<area href="classSawtooth.html" alt="Sawtooth" shape="rect" coords="303,56,394,80"/>
+<area href="classSine.html" alt="Sine" shape="rect" coords="404,56,495,80"/>
+<area href="classTriangle.html" alt="Triangle" shape="rect" coords="505,56,596,80"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a554cb2f1df60c98c928ee3d17625f7f9"><td class="memItemLeft" align="right" valign="top"><a id="a554cb2f1df60c98c928ee3d17625f7f9" name="a554cb2f1df60c98c928ee3d17625f7f9"></a>
-virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> (float x)</td></tr>
-<tr class="separator:a554cb2f1df60c98c928ee3d17625f7f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5ad11442ece792825825cb2146bfc2c"><td class="memItemLeft" align="right" valign="top"><a id="ab5ad11442ece792825825cb2146bfc2c" name="ab5ad11442ece792825825cb2146bfc2c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>isReversed</b> (bool isReversed)</td></tr>
-<tr class="separator:ab5ad11442ece792825825cb2146bfc2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bc3374dfe57bbb24c32d2b12e1e91e6"><td class="memItemLeft" align="right" valign="top"><a id="a1bc3374dfe57bbb24c32d2b12e1e91e6" name="a1bc3374dfe57bbb24c32d2b12e1e91e6"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> (float x)</td></tr>
+<tr class="memdesc:a1bc3374dfe57bbb24c32d2b12e1e91e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the function at the given x position, unless x is greater than _end. <br /></td></tr>
+<tr class="separator:a1bc3374dfe57bbb24c32d2b12e1e91e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a096a8f164dec04dd5a7a727270b6fba0"><td class="memItemLeft" align="right" valign="top"><a id="a096a8f164dec04dd5a7a727270b6fba0" name="a096a8f164dec04dd5a7a727270b6fba0"></a>
+virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>value</b> (float x)</td></tr>
+<tr class="separator:a096a8f164dec04dd5a7a727270b6fba0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1e73904a85292fe27b25f49989b12db"><td class="memItemLeft" align="right" valign="top"><a id="ae1e73904a85292fe27b25f49989b12db" name="ae1e73904a85292fe27b25f49989b12db"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>frequency</b> (float freq)</td></tr>
 <tr class="separator:ae1e73904a85292fe27b25f49989b12db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0020a8d0652b49705388cdc394ff5f13"><td class="memItemLeft" align="right" valign="top"><a id="a0020a8d0652b49705388cdc394ff5f13" name="a0020a8d0652b49705388cdc394ff5f13"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>amplitute</b> (float amp)</td></tr>
-<tr class="separator:a0020a8d0652b49705388cdc394ff5f13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a426d8bca65090c606cf49ee33eb63033"><td class="memItemLeft" align="right" valign="top"><a id="a426d8bca65090c606cf49ee33eb63033" name="a426d8bca65090c606cf49ee33eb63033"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>amplitude</b> (float amp)</td></tr>
+<tr class="separator:a426d8bca65090c606cf49ee33eb63033"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a407026fae363ca90e612010b81584ba2"><td class="memItemLeft" align="right" valign="top"><a id="a407026fae363ca90e612010b81584ba2" name="a407026fae363ca90e612010b81584ba2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> (float end)</td></tr>
+<tr class="separator:a407026fae363ca90e612010b81584ba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b37054c2bc64c3aa0483b33c6b2774b"><td class="memItemLeft" align="right" valign="top"><a id="a5b37054c2bc64c3aa0483b33c6b2774b" name="a5b37054c2bc64c3aa0483b33c6b2774b"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>convolve</b> (<a class="el" href="classAbstractWave.html">AbstractWave</a> other, float offset, float x)</td></tr>
+<tr class="memdesc:a5b37054c2bc64c3aa0483b33c6b2774b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convolve this wave with another wave. <br /></td></tr>
 <tr class="separator:a5b37054c2bc64c3aa0483b33c6b2774b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -109,11 +125,14 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>_amp</b></td></tr>
 <tr class="memitem:ae5404c967ae4201af8e956837da5603b"><td class="memItemLeft" align="right" valign="top"><a id="ae5404c967ae4201af8e956837da5603b" name="ae5404c967ae4201af8e956837da5603b"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>_freq</b></td></tr>
 <tr class="separator:ae5404c967ae4201af8e956837da5603b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b0d5b047c0e0831fb4ed4c2e096a70c"><td class="memItemLeft" align="right" valign="top"><a id="a4b0d5b047c0e0831fb4ed4c2e096a70c" name="a4b0d5b047c0e0831fb4ed4c2e096a70c"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>_isReversed</b></td></tr>
-<tr class="separator:a4b0d5b047c0e0831fb4ed4c2e096a70c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e36dd11a0ca3f512ec0960366c610ba"><td class="memItemLeft" align="right" valign="top"><a id="a9e36dd11a0ca3f512ec0960366c610ba" name="a9e36dd11a0ca3f512ec0960366c610ba"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>_end</b></td></tr>
+<tr class="memdesc:a9e36dd11a0ca3f512ec0960366c610ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">If <a class="el" href="classAbstractWave.html#a1bc3374dfe57bbb24c32d2b12e1e91e6" title="Get the value of the function at the given x position, unless x is greater than _end.">get()</a> is called for a value higher than _end, 0 is returned. <br /></td></tr>
+<tr class="separator:a9e36dd11a0ca3f512ec0960366c610ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="classAbstractWave.html" title="The AbstractWave is the parent class for all wave classes used in graphs to represent simple,...">AbstractWave</a> is the parent class for all wave classes used in graphs to represent simple, mathematically-defined functions. </p>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>convolution/Assets/Scripts/AbstractWave.cs</li>
 </ul>
 </div><!-- contents -->

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+/// A component that allows the user to draw the values to a float array and compare to an AbstractWave
 public class Drawing : MonoBehaviour
 {
     private Convolution _conv;
@@ -25,7 +26,7 @@ public class Drawing : MonoBehaviour
 
     void Awake()
     {
-        
+
         _doc = GetComponent<UIDocument>();
         _error_label = new Label("Error: 0%");
         _doc.rootVisualElement.Add(_error_label);

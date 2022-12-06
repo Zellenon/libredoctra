@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['textmatched_0',['textMatched',['../classtextMatched.html',1,'']]]
+  ['restart_0',['restart',['../classrestart.html',1,'']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['freqfreeplay_0',['FreqFreeplay',['../classFreqFreeplay.html',1,'']]]
+  ['echo_0',['Echo',['../classEcho.html',1,'']]],
+  ['equationtext_1',['EquationText',['../classEquationText.html',1,'']]]
 ];

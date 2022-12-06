@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ques1_5fresult_0',['Ques1_result',['../classQues1__result.html',1,'']]]
+  ['output_0',['Output',['../classOutput.html',1,'']]]
 ];

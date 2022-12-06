@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+// A modification of the Dirac Delta with a second impulse that has half the height at x=1
 public class Echo : AbstractWave
 {
 

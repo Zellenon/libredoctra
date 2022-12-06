@@ -8,6 +8,7 @@ using UnityEditor;
 using UnityEngine.UIElements;
 using TMPro;
 
+/// A component that convolves two AbstractWaves together with an interactive UI
 public class Convolution : MonoBehaviour
 {
     [SerializeField] private Material defaultLineMaterial;
@@ -26,7 +27,9 @@ public class Convolution : MonoBehaviour
 
     private float _width, _height, _xscale, _yscale, xymargin;
 
+    /// The number of distinct points in each of the convolved graphs
     public int STEPCOUNT;
+    /// The maximum x value of each convolved signal
     public float MAX_X;
 
     private float xTopLeftPlot, yTopLeftPlot, xTopRightPlot, yTopRightPlot;

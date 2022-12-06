@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['output_0',['Output',['../classOutput.html',1,'']]]
+  ['localoscillator_0',['LocalOscillator',['../classLocalOscillator.html',1,'']]]
 ];

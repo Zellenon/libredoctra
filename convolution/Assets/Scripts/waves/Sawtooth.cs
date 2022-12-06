@@ -5,7 +5,8 @@ public class Sawtooth : AbstractWave
 {
 
     public override float value(float
-   i) {
+   i)
+    {
         return ((i / _freq) % 1) * _amp;
     }
 }

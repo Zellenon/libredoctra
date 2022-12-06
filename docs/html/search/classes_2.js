@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['dogjump_0',['dogJump',['../classdogJump.html',1,'']]],
-  ['draganddropmanipulator_1',['DragAndDropManipulator',['../classDragAndDropManipulator.html',1,'']]],
-  ['draganddropwindow_2',['DragAndDropWindow',['../classDragAndDropWindow.html',1,'']]]
+  ['convolution_0',['Convolution',['../classConvolution.html',1,'']]],
+  ['customfuncselector_1',['CustomFuncSelector',['../classCustomFuncSelector.html',1,'']]]
 ];
