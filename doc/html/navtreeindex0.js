@@ -1,0 +1,19 @@
+var NAVTREEINDEX0 =
+{
+"_abstract_wave_8cs_source.html":[0,0,0,0,0,1],
+"_boxcar_8cs_source.html":[0,0,0,0,0,0,0],
+"_convolution_8cs_source.html":[0,0,0,0,0,2],
+"_dirac_8cs_source.html":[0,0,0,0,0,0,1],
+"_echo_8cs_source.html":[0,0,0,0,0,0,2],
+"_plot_obj_8cs_source.html":[0,0,0,0,0,3],
+"_sawtooth_8cs_source.html":[0,0,0,0,0,0,3],
+"_sine_8cs_source.html":[0,0,0,0,0,0,4],
+"dir_b0eabb9cc7cec00cef301030304792ea.html":[0,0,0,0,0],
+"dir_b7bc969d0055378c2be6c53ad2c723f2.html":[0,0,0,0],
+"dir_ef14390638285f6a70a55d7b12ad0daa.html":[0,0,0],
+"dir_f1ee78ef4eff26714920d6dda508ab95.html":[0,0,0,0,0,0],
+"files.html":[0,0],
+"index.html":[],
+"pages.html":[],
+"wave_8cs_source.html":[0,0,0,0,0,4]
+};
