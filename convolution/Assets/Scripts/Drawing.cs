@@ -173,7 +173,7 @@ public class Drawing : MonoBehaviour
         lineRenderer.positionCount = STEPCOUNT;
         for (int i = 0; i < STEPCOUNT; ++i)
         {
-            pointsList.Add(new Vector3(i, _drawnPoints[i], 0.0f));
+            pointsList.Add(new Vector3(i * 0.043f+2, _drawnPoints[i], 0.0f));
         }
 
         for (int i = 0; i < pointsList.Count; i++)
