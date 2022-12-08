@@ -1,0 +1,111 @@
+\hypertarget{classConvolution}{}\doxysection{Convolution Class Reference}
+\label{classConvolution}\index{Convolution@{Convolution}}
+
+
+A component that convolves two Abstract\+Waves together with an interactive UI.  
+
+
+Inheritance diagram for Convolution\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classConvolution}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classConvolution_a891eeb9fce17a204de2fcb2dc31d0ef7}{Set\+Wave\+A$<$ T $>$}} ()
+\item 
+\mbox{\Hypertarget{classConvolution_a197422251f2f7dc5a054c353c755efa9}\label{classConvolution_a197422251f2f7dc5a054c353c755efa9}} 
+void {\bfseries Set\+WaveA} (\mbox{\hyperlink{classAbstractWave}{Abstract\+Wave}} \mbox{\hyperlink{classwave}{wave}})
+\item 
+void \mbox{\hyperlink{classConvolution_a3bbdebeac5568caec8410882096eb06b}{Set\+Wave\+B$<$ T $>$}} ()
+\item 
+\mbox{\Hypertarget{classConvolution_a416b1d1f16eac7440d8700f4d1fc08f8}\label{classConvolution_a416b1d1f16eac7440d8700f4d1fc08f8}} 
+void {\bfseries Set\+WaveB} (\mbox{\hyperlink{classAbstractWave}{Abstract\+Wave}} \mbox{\hyperlink{classwave}{wave}})
+\item 
+\mbox{\Hypertarget{classConvolution_a8b45c04e77189a57cf56c07a1782e8f6}\label{classConvolution_a8b45c04e77189a57cf56c07a1782e8f6}} 
+void {\bfseries redraw\+Graphs} ()
+\item 
+\mbox{\Hypertarget{classConvolution_aab282dcf1ec6d57ef60b1aafb6c4d246}\label{classConvolution_aab282dcf1ec6d57ef60b1aafb6c4d246}} 
+void {\bfseries redraw\+Conv\+Graph} ()
+\item 
+\mbox{\Hypertarget{classConvolution_a1fe6fad8cf2c94d76594c2ae5009f01b}\label{classConvolution_a1fe6fad8cf2c94d76594c2ae5009f01b}} 
+void {\bfseries make\+Wave} (Game\+Object line\+Obj, Color color, \mbox{\hyperlink{classAbstractWave}{Abstract\+Wave}} \mbox{\hyperlink{classwave}{wave}})
+\item 
+\mbox{\Hypertarget{classConvolution_aedc6ed05ead385bf24dad8230d4cf93f}\label{classConvolution_aedc6ed05ead385bf24dad8230d4cf93f}} 
+void {\bfseries make\+Wave} (Game\+Object line\+Obj, Color color, \mbox{\hyperlink{classAbstractWave}{Abstract\+Wave}} \mbox{\hyperlink{classwave}{wave}}, float x\+Pos)
+\item 
+\mbox{\Hypertarget{classConvolution_a72ef5df3c9e0146d086d96ba3d8ec5bb}\label{classConvolution_a72ef5df3c9e0146d086d96ba3d8ec5bb}} 
+void {\bfseries draw\+Convolution} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classConvolution_a85858e624d4d084a4777bb43d9c46bd2}\label{classConvolution_a85858e624d4d084a4777bb43d9c46bd2}} 
+static void {\bfseries Bake\+Line\+Debuger} (Game\+Object line\+Obj)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classConvolution_ae4311569007432d090fbabe969856de1}\label{classConvolution_ae4311569007432d090fbabe969856de1}} 
+float {\bfseries \+\_\+funct1mag}
+\item 
+\mbox{\Hypertarget{classConvolution_a2bb361c850354cd3fa02c3a89b421f31}\label{classConvolution_a2bb361c850354cd3fa02c3a89b421f31}} 
+float {\bfseries \+\_\+funct1freq}
+\item 
+\mbox{\Hypertarget{classConvolution_aef5a621d7db145cc40eb00763b2344c5}\label{classConvolution_aef5a621d7db145cc40eb00763b2344c5}} 
+float {\bfseries \+\_\+funct2mag}
+\item 
+\mbox{\Hypertarget{classConvolution_aae141025fcbbae169dff7ddc79477ae2}\label{classConvolution_aae141025fcbbae169dff7ddc79477ae2}} 
+float {\bfseries \+\_\+funct2freq}
+\item 
+\mbox{\Hypertarget{classConvolution_a2397e2cf31ce8d3eb4170ef9496a0f72}\label{classConvolution_a2397e2cf31ce8d3eb4170ef9496a0f72}} 
+int {\bfseries STEPCOUNT}
+\begin{DoxyCompactList}\small\item\em The number of distinct points in each of the convolved graphs. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classConvolution_a18229e763b9acec6e42bf3ef0ad77757}\label{classConvolution_a18229e763b9acec6e42bf3ef0ad77757}} 
+float {\bfseries MAX\+\_\+X}
+\begin{DoxyCompactList}\small\item\em The maximum x value of each convolved signal. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classConvolution_aa42c1e480fbeb3bf91a649c542ffd3c0}\label{classConvolution_aa42c1e480fbeb3bf91a649c542ffd3c0}} 
+float {\bfseries \+\_\+mag}
+\item 
+\mbox{\Hypertarget{classConvolution_a330a594fa73f36baf8fadbb15863b97d}\label{classConvolution_a330a594fa73f36baf8fadbb15863b97d}} 
+float {\bfseries \+\_\+freq}
+\item 
+\mbox{\Hypertarget{classConvolution_acc4727b371835fdb9f02b83153d70593}\label{classConvolution_acc4727b371835fdb9f02b83153d70593}} 
+float {\bfseries \+\_\+phase}
+\item 
+\mbox{\Hypertarget{classConvolution_af84005192884c711d6359e834fef13df}\label{classConvolution_af84005192884c711d6359e834fef13df}} 
+Transform {\bfseries \+\_\+funct1position}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A component that convolves two Abstract\+Waves together with an interactive UI. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classConvolution_a891eeb9fce17a204de2fcb2dc31d0ef7}\label{classConvolution_a891eeb9fce17a204de2fcb2dc31d0ef7}} 
+\index{Convolution@{Convolution}!SetWaveA$<$ T $>$@{SetWaveA$<$ T $>$}}
+\index{SetWaveA$<$ T $>$@{SetWaveA$<$ T $>$}!Convolution@{Convolution}}
+\doxysubsubsection{\texorpdfstring{SetWaveA$<$ T $>$()}{SetWaveA< T >()}}
+{\footnotesize\ttfamily void Convolution.\+Set\+WaveA$<$ T $>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em \mbox{\hyperlink{classAbstractWave}{Abstract\+Wave}}}]\item[{\em T} : {\em new()}]\end{description}
+\end{Desc}
+\mbox{\Hypertarget{classConvolution_a3bbdebeac5568caec8410882096eb06b}\label{classConvolution_a3bbdebeac5568caec8410882096eb06b}} 
+\index{Convolution@{Convolution}!SetWaveB$<$ T $>$@{SetWaveB$<$ T $>$}}
+\index{SetWaveB$<$ T $>$@{SetWaveB$<$ T $>$}!Convolution@{Convolution}}
+\doxysubsubsection{\texorpdfstring{SetWaveB$<$ T $>$()}{SetWaveB< T >()}}
+{\footnotesize\ttfamily void Convolution.\+Set\+WaveB$<$ T $>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em \mbox{\hyperlink{classAbstractWave}{Abstract\+Wave}}}]\item[{\em T} : {\em new()}]\end{description}
+\end{Desc}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+convolution/\+Assets/\+Scripts/Convolution.\+cs\end{DoxyCompactItemize}
