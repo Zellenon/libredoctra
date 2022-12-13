@@ -13,6 +13,14 @@
     "sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
     crossorigin="anonymous">
     <title>Mixer</title>
+    <style>
+
+        #boxshadow {
+            border: 3px solid #e6db11;
+            box-shadow: -7px -30px #e6db11;
+            border-radius: 50mm;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -22,8 +30,6 @@
                     <svg xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     width="136" height="85" viewbox="0 0 136 85">
-                    
-                        
                     <rect id=
                     "libre-doctra-low-resolution-logo-color-on-transparent-background_1_"
                     data-name=
@@ -108,7 +114,7 @@
             <h3>Source</h3></a>
         </div>
         <div class="col-1 text-center">
-            <a href="docs/index.html">
+            <a href="../docs/html/annotated.html">
             <h3>Documentation</h3></a>
         </div>
         <div class="col-1 text-center">
@@ -125,75 +131,69 @@
         <tspan x="24.82" y="116">
             Mixer
         </tspan>
-        
     </text></svg> <img src="images/svg.png" alt="" class=
     "full-width">
-    
-       
+    <div class="mt-4 text-center col-6 offset-2"><br>
+    <br>
+    <br>
+    <div id="boxshadow">
+        <h1>What is a mixer?</h1><br>
+        <p>In electronics, a mixer is a circuit which receives two
+        input signals and outputs new signals at the sum and
+        difference frequencies.<br>
+        Mixers are widely used in communications systems, cellular
+        base stations, military radar, or any case in which
+        frequency shifting is required. There are a multitude of
+        mixer topologies that can be used depending on the
+        engineer's needs. Mixers are able to achieve these results
+        due to one of two mechanisms. The first is taking advantage
+        of nonlinearities in the circuit and using the
+        intermodulation products to create the desired and
+        undesired frequencies. The second method, which is largely
+        preferred, utilizes the local oscillator (LO) to turn on
+        and off specific elements of the circuit. This is the
+        preferred method because it produces fewer spurious signals
+        and provides higher linearity for the output signals.</p>
+    </div><br>
+    <br>
+    <br>
+    <img src="images/mixer.png" alt=""></div>
+    <div class="row mt-4">
         <div class="mt-4 text-center col-6 offset-2">
+            <h1>Simulation</h1><br>
+            <iframe src="https://i.simmer.io/@RupB/finalmixer"
+            style="width:1000px;height:700px"></iframe><br>
             <br>
             <br>
             <br>
             <div id="boxshadow">
-                <h1>What is a mixer?</h1><br>
-                <p>In electronics, a mixer is a circuit which receives two input signals and outputs new signals at the sum and difference frequencies.<br>
-                    Mixers are widely used in communications systems, cellular base stations, military radar, or any case in which frequency shifting is required. There are a multitude of mixer topologies that can be used depending on the engineer's needs. Mixers are able to achieve these results due to one of two mechanisms. The first is taking advantage of nonlinearities in the circuit and using the intermodulation products to create the desired and undesired frequencies. The second method, which is largely preferred, utilizes the local oscillator (LO) to turn on and off specific elements of the circuit. This is the preferred method because it produces fewer spurious signals and provides higher linearity for the output signals.</p>
-            </div>
-            <br><br><br>
-            <img src="images/mixer.png" alt="" >
-            
-        </div>
-    </div>
-    <div class="row mt-4">
-        <div class="mt-4 text-center col-6 offset-2">
-            <h1>Simulation</h1><br>
-            <iframe src="https://i.simmer.io/@RupB/finalmixer" style="width:1000px;height:700px"></iframe>
-            <br>
-           <br>
-           <br>
-           <br>
-            <div id="boxshadow" >
                 <h1>Welcome to the Mixer Simulation</h1>
-                
-              
-            
-            <p>
-
-                You can try the MixerFreePlay to explore how a mixer works.
-                You can change the manitude, frequency and phase of the incoming signals and observe how the
-                output is changing alogside. 
+                <p>You can try the MixerFreePlay to explore how a
+                mixer works. You can change the manitude, frequency
+                and phase of the incoming signals and observe how
+                the output is changing alogside.<br>
                 <br>
-                <br>
-                In the Play Game section, you can play a mixer game.
-                You are given a default radio frequency(RF), 1 intermediate signal, 1 image signal and 1 deried 
-                RF signal. You can change the Local oscillator signal magnitude and frequency by using the sliders. 
-                Your target is to match the IF signal with the given desired IF signal. When you achieve that, a text box will pop up to indicate that. You can restart the game and the desired RF position will 
-                change randomly. 
-                <br>
-                <strong class="half_highlight" style="color: royalblue; font-size: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Best of luck!</strong>
-
-            </p>
+                In the Play Game section, you can play a mixer
+                game. You are given a default radio frequency(RF),
+                1 intermediate signal, 1 image signal and 1 deried
+                RF signal. You can change the Local oscillator
+                signal magnitude and frequency by using the
+                sliders. Your target is to match the IF signal with
+                the given desired IF signal. When you achieve that,
+                a text box will pop up to indicate that. You can
+                restart the game and the desired RF position will
+                change randomly.<br>
+                <strong class="half_highlight" style=
+                "color: royalblue; font-size: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
+                Best of luck!</strong></p>
+            </div>
         </div>
-        </div>
-       
     </div>
-    <div>
-        
-    </div>
-    
-    
+    <div></div>
     <script src=
     "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity=
     "sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
-    <style>
-        #boxshadow {
-            border: 3px solid #e6db11;
-            box-shadow: -7px -30px #e6db11;
-            border-radius: 50mm;
-        }
-    </style>
-    
 </body>
 </html>
